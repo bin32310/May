@@ -14,14 +14,22 @@
 
 	
 	<div id="board_list"> <!-- list_section -->
-		<c:forEach var="bl" items="${boardList}">
-			<div class="list_section">
-				<a href="../board/read?bo_num=${bl.bo_num}">
-					<input type="text" value="${bl.bo_title }" name="bo_title" disabled="disabled">
-					<input type="text" value="${bl.bo_write }" name="bo_write" disabled="disabled">
-				</a>
-			</div>
-		</c:forEach> 
+		<table border="1">
+			<th>번호</th>
+			<th>제목</th>
+			<th>글쓴이</th>
+			<c:forEach var="bl" items="${boardList}">
+				<div class="list_section">
+					<a href="../board/read?bo_num=${bl.bo_num}">
+						<tr>
+							<td colspan="2">${bl.bo_num }</td>
+							<td colspan="6">${bl.bo_title }</td>
+							<td colspan="2">${bl.bo_write }</td>
+						</tr>
+					</a>
+				</div>
+			</c:forEach> 
+		</table>
 	</div><!-- list_section -->
 
 
