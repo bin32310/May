@@ -24,7 +24,7 @@ public class BoardServiceImpl {
 	
 	// 메인 화면
 	
-	// 유저 게시판 리스트
+	// 전체 글 목록 조회
 	public List<BoardVO> boardList(){
 		logger.debug("boardList() 호출");
 		return bdao.boardList();

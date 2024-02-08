@@ -1,4 +1,5 @@
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ include file="../include/userHeader.jsp" %>
 
 <!-- 	
@@ -17,14 +18,14 @@
 		<table border="1">
 			<th>번호</th>
 			<th>제목</th>
-			<th>글쓴이</th>
+			<!-- <th>글쓴이</th> -->
 			<c:forEach var="bl" items="${boardList}">
 				<div class="list_section">
 					<a href="../board/read?bo_num=${bl.bo_num}">
 						<tr>
 							<td colspan="2">${bl.bo_num }</td>
 							<td colspan="6">${bl.bo_title }</td>
-							<td colspan="2">${bl.bo_write }</td>
+							<%-- <td colspan="2">${bl.bo_writer }</td> --%>
 						</tr>
 					</a>
 				</div>

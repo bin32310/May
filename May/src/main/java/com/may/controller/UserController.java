@@ -1,5 +1,7 @@
 package com.may.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.may.domain.BoardVO;
 import com.may.domain.UserVO;
 import com.may.service.BoardServiceImpl;
 import com.may.service.UserServiceImpl;
@@ -34,8 +37,10 @@ public class UserController {
 	@RequestMapping(value = "/userMain", method = RequestMethod.GET)
 	public String userMainGET(HttpSession session, Model model) {
 		logger.debug(" userMainGET()호출");
-		// 글목록 불러오기
-		//model.addAttribute("boardList", bService.boardList());
+		
+		// 전체 글 목록 불러오기
+		List<BoardVO> boardVO = bService.boardList();
+		model.addAttribute("boardList", bService.boardList());
 		return "/user/userMain";
 	}
 	
