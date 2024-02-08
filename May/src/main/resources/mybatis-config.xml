@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<!-- mybatis-config.xml mybatis 설정 정보 -->
+ <configuration>
+ 
+ 	<typeAliases><!-- mapper에서 패키지 이름 제거가능 -->
+ 		<package name="com.may.domain"/>
+ 	</typeAliases>
+ 	
+ </configuration> 

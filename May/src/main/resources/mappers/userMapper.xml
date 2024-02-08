@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- UserMapper.xml -->
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.mayeye.mapper.UserMapper">
+  
+  <resultMap type="com.may.domain.UserVO" id="userMap">
+  	<result property="us_id" column="us_id"/>
+  	<result property="us_pw" column="us_pw"/>
+  	<result property="us_name" column="us_name"/>
+  	<result property="us_nickname" column="us_nickname"/>
+  	<result property="us_tel" column="us_tel"/>
+  	<result property="us_state" column="us_state"/>
+  </resultMap>
+  
+   	<!-- 현재 시스템 시간 -->
+  	<select id="getTime" resultType="string">
+      	select now() 
+  	</select>
+  
+  	<!-- 유저 -->
+  
+ 	<!-- 회원가입 -->
+   	<insert id="userJoin">
+      	insert into us(us_id,us_pw,us_name,us_nickname,us_tel) 
+      	values(#{us_id},#{us_pw},#{us_name},#{us_nickname},#{us_tel})
+   	</insert>
+
+   	<!-- 로그인 -->
+   	<select id="userLogin" resultType="UserVO">
+      	select * from us 
+      	where us_id=#{us_id} and us_pw=#{us_pw}
+   	</select> 
+
+
+   	<!-- 회원정보 조회 -->
+<!--    	<select id="userInfo" resultType="UserVO">
+      	select * from us 
+      	where us_id=#{us_id}
+   	</select> -->
+
+
+   	<!-- 회원정보 수정 -->
+   	<update id="userInfoUpdate">
+      	update us  
+      	set us_id=#{us_id},us_pw=#{us_pw},us_name=#{us_name},us_tel=#{us_tel},us_nickname=#{us_nickname} 
+		where us_id=#{us_id}
+   	</update>
+
+
+	<!-- 탈퇴시 비밀번호 확인 -->
+	<select id="pwCheck2">
+		select * from us 
+	   	where us_id=#{us_id} and us_pw=#{us_pw}
+	</select>
+
+   <!-- 회원 탈퇴 처리 -->
+   <update id="userDelete">
+      update us set us_state = "탈퇴"
+      where us_id=#{us_id} and us_pw=#{us_pw}
+   </update>
+    
+  
+  
+  </mapper>

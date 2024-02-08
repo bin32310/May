@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- BoardMapper.xml -->
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  	<mapper namespace="com.mayeye.mapper.BoardMapper">
+  
+   
+	<!-- 글 전체 목록(메인) -->
+ 	<select id="boardList" resultType="BoardVO">
+		select * from board
+	</select> 
+	
+	<!-- 글 쓰기 -->
+	<insert id="boWrite">
+		insert into board(bo_title, bo_content, us_id) 
+		values(#{bo_title}, #{bo_content}, #{us_id})
+	</insert>
+  
+  </mapper>
