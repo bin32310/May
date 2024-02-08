@@ -1,49 +1,40 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>userMain</title>
 
-</head>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<body>
+<%@ include file="../include/userHeader.jsp" %>
 
 <!-- 	
 		<h1> /user/userMain.jsp</h1>
 		<h1> 유저 메인페이지</h1>
 -->
 
-		<c:if test="${empty us_id }">
-				<a href="../user/userLogin">로그인</a>
-				<a href="../user/userJoin">회원가입</a>
-				<input type="hidden" value="${us_id }" id="session_us_id">
-		</c:if>
-		<c:if test="${!empty us_id && !us_id.equals(admin)}">
-				<a href="../board/boWrite">글쓰기</a>
-				<a id="us_logout_btn">로그아웃</a>
-		</c:if>
-		<c:if test="${!empty us_id && us_id.equals(admin)}">
-				<a href="../admin/adminMain">관리페이지</a>
-		</c:if>
-				
 
+
+		<c:if test="${!empty us_id && !us_id.equals(admin)}">
+				<a href="../board/boWrite">글 쓰기</a>
+		</c:if>
 
 	
 	<div id="board_list"> <!-- list_section -->
-		<c:forEach var="bl" items="${boardList}">
-			<div class="list_section">
-				<a href="../board/read?bo_num=${bl.bo_num}">
-					<input type="text" value="${bl.bo_title }" name="bo_title" disabled="disabled">
-					<input type="text" value="${bl.bo_write }" name="bo_write" disabled="disabled">
-				</a>
-			</div>
-		</c:forEach> 
+		<table border="1">
+			<th>번호</th>
+			<th>제목</th>
+			<th>글쓴이</th>
+			<c:forEach var="bl" items="${boardList}">
+				<div class="list_section">
+					<a href="../board/read?bo_num=${bl.bo_num}">
+						<tr>
+							<td colspan="2">${bl.bo_num }</td>
+							<td colspan="6">${bl.bo_title }</td>
+							<td colspan="2">${bl.bo_write }</td>
+						</tr>
+					</a>
+				</div>
+			</c:forEach> 
+		</table>
 	</div><!-- list_section -->
 
-	
+
+<%@ include file="../include/userFooter.jsp" %>	
+
 <script type="text/javascript">
 
 $(document).ready(function(){
