@@ -19,7 +19,7 @@
                 <div class="col-md-6">
                     <h5 class="mb-4">Get In Touch</h5>
                     <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, Daejeon, Korea</p>
-                    <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                    <p><i class="fa fa-phone-alt me-3"></i>010 0000 0000</p>
                     <p><i class="fa fa-envelope me-3"></i>dbs730100@mayeye.net</p>
                 </div>
  

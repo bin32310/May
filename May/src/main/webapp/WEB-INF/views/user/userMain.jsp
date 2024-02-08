@@ -9,7 +9,7 @@
 
 
 		<c:if test="${!empty us_id && !us_id.equals(admin)}">
-				<a href="../board/boWrite">글쓰기</a>
+				<a href="../board/boWrite">글 쓰기</a>
 		</c:if>
 
 	
