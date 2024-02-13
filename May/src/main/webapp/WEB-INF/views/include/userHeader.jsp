@@ -111,9 +111,6 @@
   padding: 15px;
   border-bottom: 1px solid #e5e5e5;
 }
-.modal-header .close {
-  margin-top: -2px;
-}
 .modal-title {
   margin: 0;
   line-height: 1.42857143;

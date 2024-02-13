@@ -23,7 +23,6 @@
 					<input type="text" id="bo_view" name=""bo_view"" value="${boRead.bo_view }">		
 					<hr>
 					<textarea rows="5" cols="10" id="bo_content" name="bo_content">${boRead.bo_content }</textarea> <br>
-					<input type="file" name="uploadFile" multiple> <br>
 					<div id="button_section">
 					<c:if test="${us_id.equals(boRead.us_id)}">
 						<input type="button" id="modify" value="수정하기">
@@ -35,21 +34,19 @@
 			</fieldset>
 		</div>
 	</div>
+	
 <!-- 글 삭제하기 버튼 클릭시 Modal -->
 <div id="deleteModal" class="modal fade" role="dialog">
 	<!-- <div class="modal-dialog modal-lg"> -->
-	<div class="modal-dialog ">
-
+	<div class="modal-dialog">
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">글을 삭제 하시겠습니까?</h4>
 			</div>
-
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal" id="deleteModalYes">네</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">아니오</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" id="deleteModalNo">아니오</button>
 			</div>
 		</div>
 	</div>
@@ -64,6 +61,7 @@ $(document).ready(function(){
 	// 삭제하기 버튼 클릭 시
 	$('#delete').click(function(){
 		$('#deleteModal').modal("show");
+
 	}); // #delete.click
 	
 	$('#deleteModalYes').click(function(){
@@ -87,6 +85,10 @@ $(document).ready(function(){
 			} // success 끝	
 		}); // ajax 끝
 	}); //#deleteModalYes.click
+	
+	$('#deleteModalNo').click(function(){
+		$('#deleteModal').modal("hide");		
+	});
 	
 });	// $(document) 끝	
 		
