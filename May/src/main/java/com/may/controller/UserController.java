@@ -37,9 +37,11 @@ public class UserController {
 	@RequestMapping(value = "/userMain", method = RequestMethod.GET)
 	public String userMainGET(HttpSession session, Model model) {
 		logger.debug(" userMainGET()호출");
-		
+		logger.info("test@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		// 전체 글 목록 불러오기
 		List<BoardVO> boardVO = bService.boardList();
+		logger.info("test : " + boardVO);
+		System.out.println("boardVO : " + boardVO);
 		model.addAttribute("boardList", bService.boardList());
 		return "/user/userMain";
 	}

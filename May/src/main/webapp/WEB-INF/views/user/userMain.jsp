@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ include file="../include/userHeader.jsp" %>
 
 <!-- 	
@@ -8,33 +9,30 @@
 -->
 
 
+	
 
 		<c:if test="${!empty us_id && !us_id.equals(admin)}">
 				<a href="../board/boWrite">글 쓰기</a>
 		</c:if>
-
-	
-	<div id="board_list"> <!-- list_section -->
-		<table border="1">
-			<th>번호</th>
-			<th>제목</th>
-			<!-- <th>글쓴이</th> -->
-			<c:forEach var="bl" items="${boardList}">
-				<div class="list_section">
-					<a href="../board/read?bo_num=${bl.bo_num}">
-						<tr>
-							<td colspan="2">${bl.bo_num }</td>
-							<td colspan="6">${bl.bo_title }</td>
-							<%-- <td colspan="2">${bl.bo_writer }</td> --%>
-						</tr>
-					</a>
-				</div>
-			</c:forEach> 
-		</table>
-	</div><!-- list_section -->
-
-
-<%@ include file="../include/userFooter.jsp" %>	
+		<div id="board_list"> <!-- list_section -->
+			<table border='1'>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>글쓴이</th>
+					<th>조회수</th>
+				</tr>
+				<c:forEach var="bl" items="${boardList}">
+					<tr>
+						<td> ${bl.bo_num }</td>
+						<td><a href="../board/boRead?bo_num=${bl.bo_num}"> ${bl.bo_title }</a></td>
+						<td> ${bl.userVO.us_nickname }</td>
+						<td> ${bl.bo_view }</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div><!-- list_section -->
+<%@ include file="../include/userFooter.jsp" %>
 
 <script type="text/javascript">
 

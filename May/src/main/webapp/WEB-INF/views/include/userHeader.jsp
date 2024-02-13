@@ -36,16 +36,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <body>
 
-	<div id="board_list"> <!-- list_section -->
-		<c:forEach var="bl" items="${boardList}">
-			<div class="list_section">
-				<a href="../board/read?bo_num=${bl.bo_num}">
-					<input type="text" value="${bl.bo_title }" name="bo_title" disabled="disabled">
-					<input type="text" value="${bl.bo_write }" name="bo_write" disabled="disabled">
-				</a>
-			</div>
-		</c:forEach> 
-	</div><!-- list_section -->
+	
     <!-- Spinner Start -->
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -57,7 +48,7 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 px-4 px-lg-5">
         <a href="index.html" class="navbar-brand d-flex align-items-center">
-            <h2 class="m-0 text-primary"><img class="img-fluid me-2" src="img/icon-1.png" alt=""
+            <h2 class="m-0 text-primary"><img class="img-fluid me-2" src="../resources/img/icon-1.png" alt=""
                     style="width: 45px;">May</h2>
         </a>
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -112,7 +103,7 @@
                     <a href="" class="btn btn-primary py-3 px-4 animated slideInDown">Explore More</a>
                 </div>
                 <div class="col-lg-6 animated fadeIn">
-                    <img class="img-fluid animated pulse infinite" style="animation-duration: 3s;" src="img/hero-1.png"
+                    <img class="img-fluid animated pulse infinite" style="animation-duration: 3s;" src="../resources/img/hero-1.png"
                         alt="">
                 </div>
             </div>

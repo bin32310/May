@@ -1,8 +1,11 @@
 package com.may.domain;
 
+import org.apache.ibatis.type.Alias;
+
 import lombok.Data;
 
 @Data
+@Alias("UserVO")
 public class UserVO {
 	
 	// user 회원

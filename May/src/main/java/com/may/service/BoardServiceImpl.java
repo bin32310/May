@@ -35,6 +35,18 @@ public class BoardServiceImpl {
 	public int boWrite(BoardVO boardVO) {
 		logger.debug("boWrite(BoardVO boardVO) 호출 ");
 		return 	bdao.boWrite(boardVO);
-		
 	}
+	
+	// 글읽기
+	public BoardVO boRead(Integer bo_num) {
+		logger.debug("boRead(Integer bo_num) 호출 ");
+		return 	bdao.boRead(bo_num);
+	}
+	
+	// 글삭제
+	public int boDelete(Integer bo_num) {
+		logger.debug("boDelete(Integer bo_num) 호출 ");
+		return 	bdao.boDelete(bo_num);
+	}
+	
 }
