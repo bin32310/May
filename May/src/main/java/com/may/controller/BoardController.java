@@ -54,11 +54,12 @@ public class BoardController {
 	// 글 수정
 	
 	
-	// 글 삭제 PUT
-	@RequestMapping(value = "boDelete", method = RequestMethod.PUT)
-	public int boDeletePUT(Integer bo_num) {
-		logger.debug("boDeletePUT(Integer bo_num)호출");
-		System.out.print(bo_num);
+	// 글 삭제 POST
+	@ResponseBody
+	@RequestMapping(value = "boDelete", method = RequestMethod.POST)
+	public int boDeletePOST(Integer bo_num) {
+		logger.debug("boDeletePOST(Integer bo_num)호출");
+		System.out.println("boDelete : " + bo_num);
 		return  bService.boDelete(bo_num);
 	}
 	
