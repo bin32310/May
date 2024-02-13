@@ -6,17 +6,56 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   	<mapper namespace="com.mayeye.mapper.BoardMapper">
+  	
+  	<resultMap type="com.may.domain.UserVO" id="UserVO">
+  		<result property="us_id" column="us_id"/>
+  		<result property="us_pw" column="us_pw"/>
+  		<result property="us_name" column="us_name"/>
+  		<result property="us_nickname" column="us_nickname"/>
+  		<result property="us_tel" column="us_tel"/>
+  		<result property="us_state" column="us_state"/>
+  	</resultMap>
+  	
+  	<resultMap type="com.may.domain.BoardVO" id="BoardVO">
+  		<result property="bo_num" column="bo_num"/>
+  		<result property="us_id" column="us_id"/>
+  		<result property="bo_title" column="bo_title"/>
+  		<result property="bo_content" column="bo_content"/>
+  		<result property="bo_view" column="bo_view"/>
+  		<result property="bo_img" column="bo_img"/>
+  		<result property="bo_state" column="bo_state"/>
+  		<collection property="userVO" resultMap="UserVO"/>
+  	</resultMap>
+  	
   
    
 	<!-- 글 전체 목록(메인) -->
- 	<select id="boardList" resultType="BoardVO">
-		select * from board
+ 	<select id="boardList" resultMap="BoardVO">
+		select b.*, u.us_nickname 
+		from board b join us u 
+		on b.us_id = u.us_id 
+		where b.bo_state = "등록" 
+		order by b.bo_num desc 
 	</select> 
 	
-	<!-- 글 쓰기 -->
+	<!-- 글쓰기 -->
 	<insert id="boWrite">
 		insert into board(bo_title, bo_content, us_id) 
 		values(#{bo_title}, #{bo_content}, #{us_id})
 	</insert>
+	
+	<!-- 글읽기 -->
+	<select id="boRead" resultMap="BoardVO">
+		select * 
+		from board  b join us u  
+		on b.us_id = u.us_id 
+		where b.bo_num = #{bo_num}
+	</select>
+	
+	<!-- 글삭제 -->
+	<update id="boDelete">
+		update board set bo_state="삭제" 
+		where bo_num=#{bo_num}
+	</update>
   
   </mapper>

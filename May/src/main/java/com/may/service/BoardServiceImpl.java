@@ -24,7 +24,7 @@ public class BoardServiceImpl {
 	
 	// 메인 화면
 	
-	// 유저 게시판 리스트
+	// 전체 글 목록 조회
 	public List<BoardVO> boardList(){
 		logger.debug("boardList() 호출");
 		return bdao.boardList();
@@ -35,6 +35,18 @@ public class BoardServiceImpl {
 	public int boWrite(BoardVO boardVO) {
 		logger.debug("boWrite(BoardVO boardVO) 호출 ");
 		return 	bdao.boWrite(boardVO);
-		
 	}
+	
+	// 글읽기
+	public BoardVO boRead(Integer bo_num) {
+		logger.debug("boRead(Integer bo_num) 호출 ");
+		return 	bdao.boRead(bo_num);
+	}
+	
+	// 글삭제
+	public int boDelete(Integer bo_num) {
+		logger.debug("boDelete(Integer bo_num) 호출 ");
+		return 	bdao.boDelete(bo_num);
+	}
+	
 }

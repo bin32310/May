@@ -6,7 +6,7 @@
         <div class="container py-5">
             <div class="row g-5">
                 <div class="col-md-6">
-                    <h1 class="text-primary mb-4"><img class="../resources/img-fluid me-2" src="../resources/img/icon-1.png" alt=""
+                    <h1 class="text-primary mb-4"><img class="img-fluid me-2" src="../resources/img/icon-1.png" alt=""
                             style="width: 45px;">May</h1>
                     <h5 class="mb-4">Follow Us</h5>
                     <div class="d-flex">

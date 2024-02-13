@@ -1,11 +1,14 @@
 package com.may.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,13 +27,13 @@ public class BoardController {
 	private BoardServiceImpl bService;
 	
 	// http://localhost:8080/board/boWrite
-	//글쓰기 페이지로 이동
+	//글쓰기 GET
 	@RequestMapping(value = "boWrite", method = RequestMethod.GET)
 	public void boWriteGET() {
 		logger.debug("boWriteGET()호출");
 	}
 	
-	// 글쓰기 
+	// 글쓰기 POST
 	@ResponseBody
 	@RequestMapping(value = "boWrite", method = RequestMethod.POST)
 	public int boWritePOST(BoardVO boardVO, HttpSession session) {
@@ -40,10 +43,24 @@ public class BoardController {
 		return bService.boWrite(boardVO);
 	}
 	
+	// 글 읽기 GET
+	@RequestMapping(value = "boRead", method = RequestMethod.GET)
+	public void boReadGET(Integer bo_num, Model model) {
+		logger.debug("boReadGET(Integer bo_num)호출");
+		System.out.print(bo_num);
+		model.addAttribute("boRead", bService.boRead(bo_num));
+	}
+	
 	// 글 수정
 	
 	
-	// 글 삭제
+	// 글 삭제 PUT
+	@RequestMapping(value = "boDelete", method = RequestMethod.PUT)
+	public int boDeletePUT(Integer bo_num) {
+		logger.debug("boDeletePUT(Integer bo_num)호출");
+		System.out.print(bo_num);
+		return  bService.boDelete(bo_num);
+	}
 	
 	
 	

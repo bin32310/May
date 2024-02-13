@@ -40,5 +40,17 @@ public class BoardDAOImpl {
 		return sqlSession.insert(NAMESPACE + ".boWrite", boardVO);
 	}
 	
+	// 글읽기
+	public BoardVO boRead(Integer bo_num) {
+		logger.debug("boRead(Integer bo_num) 호출 ");
+		return 	sqlSession.selectOne(NAMESPACE + ".boRead", bo_num)  ;
+	}
+	
+	// 글삭제
+	public int boDelete(Integer bo_num) {
+		logger.debug("boDelete(Integer bo_num) 호출 ");
+		return 	sqlSession.update(NAMESPACE + ".boDelete", bo_num)  ;
+	}
+	
 	
 }
