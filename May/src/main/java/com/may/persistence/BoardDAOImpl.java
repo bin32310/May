@@ -52,5 +52,10 @@ public class BoardDAOImpl {
 		return 	sqlSession.update(NAMESPACE + ".boDelete", bo_num)  ;
 	}
 	
+	// 글수정
+	public int boModify(BoardVO boardVO) {
+		logger.debug("boModify(BoardVO boardVO) 호출 ");
+		return 	sqlSession.update(NAMESPACE + ".boModify", boardVO)  ;
+	}
 	
 }

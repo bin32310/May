@@ -94,10 +94,11 @@ public class UserController {
    // 로그아웃 처리
    @ResponseBody
    @RequestMapping(value = "/userLogout", method = RequestMethod.GET)
-   public void userLogoutGET(HttpSession session) {
+   public int userLogoutGET(HttpSession session) {
       logger.debug("userLogoutGET()호출 ");
       // 세션정보 초기화
       session.invalidate();
+      return 1;
    }
 
 }

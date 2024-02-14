@@ -49,4 +49,10 @@ public class BoardServiceImpl {
 		return 	bdao.boDelete(bo_num);
 	}
 	
+	// 글수정
+	public int boModify(BoardVO boardVO) {
+		logger.debug("boModify(BoardVO boardVO) 호출 ");
+		return 	bdao.boModify(boardVO);
+	}
+	
 }
