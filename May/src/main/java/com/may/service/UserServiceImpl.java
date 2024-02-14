@@ -30,6 +30,18 @@ public class UserServiceImpl {
 		return udao.userJoin(joinVO);
 	}
 	
+	// 회원가입 - user id(email) 중복체크
+	public String userIdCheck(String us_id) {
+		logger.debug("ServiceImpl : userIdCheck(String us_id) 호출"); 
+		return udao.userIdCheck(us_id);
+	}
+	
+   // 회원가입 - user tel 중복체크
+	public String userTelCheck(String us_tel) {
+		logger.debug("ServiceImpl : userTelCheck(String us_tel) 호출"); 
+		return udao.userTelCheck(us_tel);
+	}
+	
 	// 로그인 
 	public UserVO userLogin(UserVO loginVO) {
 		logger.debug("ServiceImpl : userLogin(UserVO loginVO)호출");
