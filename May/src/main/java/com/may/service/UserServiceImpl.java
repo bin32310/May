@@ -30,7 +30,7 @@ public class UserServiceImpl {
 		return udao.userJoin(joinVO);
 	}
 	
-	// 회원가입 - user id(email) 중복체크
+	// 회원가입 - user id 중복체크
 	public String userIdCheck(String us_id) {
 		logger.debug("ServiceImpl : userIdCheck(String us_id) 호출"); 
 		return udao.userIdCheck(us_id);

@@ -4,23 +4,15 @@
 <%@ include file="../include/userHeader.jsp" %>
 <style>
 
-.id_check{
+/* 아이디/전화번호 유효성 체크 */
+.id_check , .tel_check{
 	display : none;
 }
-#id_ok{
+#id_ok, #tel_ok{
 	color:GREEN;
 }
-#id_no{
+#id_no, #tel_no{
 	color:RED;
-}
-.tel_check{
-	display : none;
-}
-#tel_ok{
-	color:#008000;
-}
-#tel_no{
-	color:#6A82FB;
 }
 
 	
@@ -70,15 +62,22 @@ $(document).ready(function(){
 				alert("아이디 중복체크 에러");
 			},
 			success : function(data){
-				
+				console.log("받아온 데이터 : " + data);
 				if(data == "가능"){ // 사용가능한 아이디
 					$('#id_ok').css("display","block");
 					$('#id_no').css("display","none");
+					$('#us_pw').focus();
+				}else if(data == "입력"){	// 아이디 입력 안함
+					console.log("두번째");
+					$('#id_ok').css("display","none");
+					$('#id_no').text('아이디를 입력해주세요.');
+					$('#id_no').css("display","block");
 				}
 				else{ // 사용불가능한 아이디
+					console.log("세번째");
 					$('#id_ok').css("display","none");
+					$('#id_no').text('사용할 수 없는 아이디입니다.');
 					$('#id_no').css("display","block");
-					$('#us_id').focus();
 				}	
 			} // success 끝	
 		}); // ajax 끝
@@ -93,19 +92,25 @@ $(document).ready(function(){
 			url : "../user/userTelCheck",
 			data : {"us_tel" : us_tel},
 			dataType : "text",
-			error: function(){
+			error:function(){
 				alert("전화번호 중복체크 에러");
 			},
 			success : function(data){
-				console.log("전화번호 중복체크 완료");
+				console.log("받아온 데이터 : " + data);
 				if(data == "가능"){ // 전화번호 사용가능
 					$('#tel_ok').css("display","block");
 					$('#tel_no').css("display","none");
-				}else{ // 전화번호 사용불가
+				}else if(data = "입력"){	
+					console.log('tel두번째');
 					$('#tel_ok').css("display","none");
 					$('#tel_no').css("display","block");
-					alert('전화번호를 다시 입력해주세요.');
-					$('#us_tel').focus();
+					$('#tel_no').text('전화번호를 입력해주세요.');
+				}
+				else{ // 전화번호 사용불가
+					console.log('tel세번째');
+					$('#tel_ok').css("display","none");
+					$('#tel_no').css("display","block");
+					$('#tel_no').text('사용할 수 없는 전화번호입니다.');
 				}	
 			} // success 끝	
 		}); // ajax 끝
@@ -141,7 +146,7 @@ function backTo(){
 				<input type="text" id="us_name" name="us_name" placeholder="이름"> <br> 
 				<input type="text" id="us_nickname" name="us_nickname" placeholder="닉네임"> <br> 
 				
-				<input type="tel" id="us_tel" name="us_tel" placeholder="휴대폰번호">
+				<input type="text" id="us_tel" name="us_tel" placeholder="휴대폰번호">
 				<span class="tel_check" id="tel_ok"> 사용가능한 번호입니다.</span>
 				<span class="tel_check" id="tel_no"> 이미 존재하는 전화번호입니다.</span><br><br> 
 				

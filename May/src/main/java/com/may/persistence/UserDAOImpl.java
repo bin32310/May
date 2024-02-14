@@ -39,7 +39,7 @@ public class UserDAOImpl {
       return sqlSession.insert(NAMESPACE + ".userJoin", joinVO);
    }
    
-   // 회원가입 - user id(email) 중복체크
+   // 회원가입 - user id 중복체크
    public String userIdCheck(String us_id) {
 	   logger.debug("DAOImpl : userIdCheck(String us_id)호출");
 	   return sqlSession.selectOne(NAMESPACE + ".userIdCheck", us_id);

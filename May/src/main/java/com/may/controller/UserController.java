@@ -36,7 +36,6 @@ public class UserController {
 	@RequestMapping(value = "/userMain", method = RequestMethod.GET)
 	public String userMainGET(HttpSession session, Model model) {
 		logger.debug(" userMainGET()호출");
-		logger.info("test@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		// 전체 글 목록 불러오기
 		List<BoardVO> boardVO = bService.boardList();
 		logger.info("test : " + boardVO);
@@ -61,20 +60,26 @@ public class UserController {
 		return uService.userJoin(userVO);
 	}
 	
-	// user id(email) 중복 체크
+	// user id 중복 체크
 	@ResponseBody
 	@RequestMapping(value="userIdCheck", method = RequestMethod.POST, produces = "application/text;charset=utf8")
 	public String userIdCheckPOST(String us_id) {
 		logger.debug("userIdCheckPOST(String us_id)호출");
-		logger.debug("받아온 us_id : " + us_id);
-		String result = uService.userIdCheck(us_id);
-		logger.debug("result : " + result);
-		if(result == null || result.equals("")){ //중복 아이디 없음
-			logger.debug("if문");
-			result = "가능";
+		String result = "입력";
+		if(us_id == null || us_id.equals("")){ // 아이디 입력안함
+			logger.debug("입력 ? : " + result);
+		}else{
+			result = uService.userIdCheck(us_id);
+			logger.debug("result 값 체크 : " + result);
+			if(result == null || result.equals("")){ //중복 아이디 없음
+				result = "가능";
+				logger.debug("가능 ? : " + result);
+			}else { // 중복 아이디 있음
+				
+			}
 		}
-		logger.debug("result2 : " + result);
 		return result;
+		
 	}
 	
 	// user tel 중복 체크
@@ -82,7 +87,16 @@ public class UserController {
 	@RequestMapping(value="userTelCheck", method = RequestMethod.POST)
 	public String userTelCheckPOST(String us_tel) {
 		logger.debug("userTelCheck(String us_tel)호출");
-		return uService.userTelCheck(us_tel);
+		if(us_tel == null || us_tel.equals("")) { // 전화번호 입력안함
+			return "입력";
+		}else {
+			String result = uService.userTelCheck(us_tel);
+			if(result == null || result.equals("")){ //중복 전화번호 없음
+				result = "가능";
+			}
+			logger.debug("result2 : " +  result);
+			return result;
+		}
 	}
 	
 	// 로그인 페이지로 이동(login-GET)
