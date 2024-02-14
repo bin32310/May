@@ -67,36 +67,32 @@ public class UserController {
 		logger.debug("userIdCheckPOST(String us_id)호출");
 		String result = "입력";
 		if(us_id == null || us_id.equals("")){ // 아이디 입력안함
-			logger.debug("입력 ? : " + result);
 		}else{
 			result = uService.userIdCheck(us_id);
-			logger.debug("result 값 체크 : " + result);
 			if(result == null || result.equals("")){ //중복 아이디 없음
 				result = "가능";
-				logger.debug("가능 ? : " + result);
-			}else { // 중복 아이디 있음
-				
 			}
 		}
 		return result;
-		
 	}
 	
 	// user tel 중복 체크
 	@ResponseBody
-	@RequestMapping(value="userTelCheck", method = RequestMethod.POST)
+	@RequestMapping(value="userTelCheck", method = RequestMethod.POST, produces = "application/text;charset=utf8")
 	public String userTelCheckPOST(String us_tel) {
 		logger.debug("userTelCheck(String us_tel)호출");
+		String result = "입력";
 		if(us_tel == null || us_tel.equals("")) { // 전화번호 입력안함
 			return "입력";
 		}else {
-			String result = uService.userTelCheck(us_tel);
+			result = uService.userTelCheck(us_tel);
+			logger.debug("result1 : " +  result);
 			if(result == null || result.equals("")){ //중복 전화번호 없음
 				result = "가능";
 			}
 			logger.debug("result2 : " +  result);
-			return result;
 		}
+		return result;
 	}
 	
 	// 로그인 페이지로 이동(login-GET)
