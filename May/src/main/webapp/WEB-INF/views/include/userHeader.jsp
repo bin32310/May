@@ -171,7 +171,32 @@
   opacity: 0;
 }
 </style>
+<script type="text/javascript">
 
+$(document).ready(function(){
+	
+	$('#us_logout_btn').click(function(){
+		href="../user/userLogout"
+		$.ajax({
+			type : "post",
+			url : "../user/userLogin",
+			dataType : "JSON",
+			error: function(){
+				alert("로그아웃 에러");
+			},
+			success : function(data){
+				if(data == 1){
+					alert("로그아웃 완료");
+					location.replace("/user/userMain");
+				}else{
+					alert("다시 시도해주세요.");
+				}
+			} // success 끝	
+		}); // ajax 끝
+		
+	}); // #us_logout_btn.click 끝
+});
+</script>
 <body>
 
 	
@@ -185,9 +210,11 @@
 
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 px-4 px-lg-5">
-        <a href="index.html" class="navbar-brand d-flex align-items-center">
-            <h2 class="m-0 text-primary"><img class="img-fluid me-2" src="../resources/img/icon-1.png" alt=""
-                    style="width: 45px;">May</h2>
+        <a href="../user/userMain" class="navbar-brand d-flex align-items-center">
+            <h2 class="m-0 text-primary">
+            	<img class="img-fluid me-2" src="../resources/img/icon-1.png" alt=""
+            		 style="width: 45px;"> May
+        	</h2>
         </a>
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
@@ -215,7 +242,7 @@
 					<a href="../user/userJoin">회원가입</a>&ensp;
 				</c:if>
 				<c:if test="${!empty us_id && !us_id.equals(admin)}">
-					<a id="us_logout_btn">내정보</a>&ensp;
+					<a href="../user/userMypage">내정보</a>&ensp;
 				</c:if>
 				<c:if test="${!empty us_id && us_id.equals(admin)}">
 					<a href="../admin/adminMain">관리페이지</a>&ensp;
@@ -234,9 +261,9 @@
         <div class="container py-5">
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6">
-                    <h1 class="display-4 mb-3 animated slideInDown">Make Better Life With Trusted CryptoCoin</h1>
+                    <h1 class="display-4 mb-3 animated slideInDown">Welcome to the May</h1>
                     <p class="animated slideInDown">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu
-                        diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo
+                        diam amet diam et eos. Clita erat ipsum et lorem et sit, sed  stet lorem sit clita duo justo
                         magna dolore erat</p>
                     <a href="" class="btn btn-primary py-3 px-4 animated slideInDown">Explore More</a>
                 </div>

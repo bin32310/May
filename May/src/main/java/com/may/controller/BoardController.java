@@ -51,9 +51,6 @@ public class BoardController {
 		model.addAttribute("boRead", bService.boRead(bo_num));
 	}
 	
-	// 글 수정
-	
-	
 	// 글 삭제 POST
 	@ResponseBody
 	@RequestMapping(value = "boDelete", method = RequestMethod.POST)
@@ -61,6 +58,15 @@ public class BoardController {
 		logger.debug("boDeletePOST(Integer bo_num)호출");
 		System.out.println("boDelete : " + bo_num);
 		return  bService.boDelete(bo_num);
+	}
+	
+	// 글 수정 POST
+	@ResponseBody
+	@RequestMapping(value = "boModify", method = RequestMethod.POST)
+	public int boModifyPOST(BoardVO boardVO) {
+		logger.debug("boModifyPOST(BoardVO boardVO)호출");
+		System.out.println("boModify : " + boardVO);
+		return  bService.boModify(boardVO);
 	}
 	
 	
