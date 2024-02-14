@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.may.domain.BoardVO;
-import com.may.domain.UserVO;
 import com.may.service.BoardServiceImpl;
 
 @Controller
@@ -47,7 +46,6 @@ public class BoardController {
 	@RequestMapping(value = "boRead", method = RequestMethod.GET)
 	public void boReadGET(Integer bo_num, Model model) {
 		logger.debug("boReadGET(Integer bo_num)호출");
-		System.out.print(bo_num);
 		model.addAttribute("boRead", bService.boRead(bo_num));
 	}
 	
@@ -56,7 +54,6 @@ public class BoardController {
 	@RequestMapping(value = "boDelete", method = RequestMethod.POST)
 	public int boDeletePOST(Integer bo_num) {
 		logger.debug("boDeletePOST(Integer bo_num)호출");
-		System.out.println("boDelete : " + bo_num);
 		return  bService.boDelete(bo_num);
 	}
 	
@@ -65,7 +62,6 @@ public class BoardController {
 	@RequestMapping(value = "boModify", method = RequestMethod.POST)
 	public int boModifyPOST(BoardVO boardVO) {
 		logger.debug("boModifyPOST(BoardVO boardVO)호출");
-		System.out.println("boModify : " + boardVO);
 		return  bService.boModify(boardVO);
 	}
 	

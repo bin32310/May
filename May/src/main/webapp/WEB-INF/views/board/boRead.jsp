@@ -16,7 +16,7 @@
 }
 
 </style>
-<c:if test="${empty us_id || us_id.equals(null)}">
+<c:if test="${empty us_id}">
 	${"<script>alert('로그인이 필요합니다.');location.href='../user/userLogin';</script>" }
 </c:if>
 <c:if test="${boRead.bo_state.equals('삭제')}">

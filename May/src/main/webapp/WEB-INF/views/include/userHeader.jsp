@@ -15,7 +15,7 @@
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500&family=Roboto:wght@500;700&display=swap"
         rel="stylesheet">
 
@@ -32,8 +32,20 @@
 
     <!-- Template Stylesheet -->
     <link href="../resources/css/style.css" rel="stylesheet">
+    
+        <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../resources/lib/wow/wow.min.js"></script>
+    <script src="../resources/lib/easing/easing.min.js"></script>
+    <script src="../resources/lib/waypoints/waypoints.min.js"></script>
+    <script src="../resources/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../resources/lib/counterup/counterup.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="../resources/js/main.js"></script>
+    
 </head>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style type="text/css">
 
 /* Modal 모달 */
@@ -170,34 +182,34 @@
   filter: alpha(opacity=0);
   opacity: 0;
 }
-</style>
-<script type="text/javascript">
 
+/* Modal 끝 */
+</style>
+<body>
+<script type="text/javascript">
 $(document).ready(function(){
 	
+	// 로그아웃 버튼 클릭
 	$('#us_logout_btn').click(function(){
-		href="../user/userLogout"
+		
 		$.ajax({
 			type : "post",
-			url : "../user/userLogin",
+			url : "../user/userLogout",
 			dataType : "JSON",
 			error: function(){
 				alert("로그아웃 에러");
 			},
 			success : function(data){
-				if(data == 1){
 					alert("로그아웃 완료");
-					location.replace("/user/userMain");
-				}else{
-					alert("다시 시도해주세요.");
-				}
+					location.reload();
+
 			} // success 끝	
 		}); // ajax 끝
 		
 	}); // #us_logout_btn.click 끝
-});
+}); // documnet  끝
 </script>
-<body>
+
 
 	
     <!-- Spinner Start -->
@@ -210,12 +222,12 @@ $(document).ready(function(){
 
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 px-4 px-lg-5">
-        <a href="../user/userMain" class="navbar-brand d-flex align-items-center">
-            <h2 class="m-0 text-primary">
-            	<img class="img-fluid me-2" src="../resources/img/icon-1.png" alt=""
-            		 style="width: 45px;"> May
-        	</h2>
-        </a>
+        	<a href="../user/userMain" class="navbar-brand d-flex align-items-center">
+        
+            	<img class="img-fluid me-2" src="../resources/img/icon-1.png" style="width:45px;">
+            		 <h2 class="m-0 text-primary">May	</h2>
+       
+        	</a>
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -248,7 +260,7 @@ $(document).ready(function(){
 					<a href="../admin/adminMain">관리페이지</a>&ensp;
 				</c:if>
 				<c:if test="${!empty us_id}">
-					<a id="us_logout_btn">로그아웃</a>&ensp;
+					<a href="" id="us_logout_btn">로그아웃</a>&ensp;
 				</c:if>
             </div>
         </div>

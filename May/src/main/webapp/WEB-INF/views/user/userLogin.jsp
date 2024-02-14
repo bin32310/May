@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>userLogin</title>
-</head>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<body>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ include file="../include/userHeader.jsp" %>
+    
+<c:if test="${ not empty us_id}">
+	${"<script>alert('잘못된 접근입니다.');location.href='../user/userMain';</script>" }
+</c:if>
 <!-- 	
 		<h1> /user/userLogin.jsp</h1>
 		<h1> 유저 로그인페이지</h1>
@@ -31,7 +28,7 @@
 			<input type="button" id="back" value="돌아가기" onclick="back();">
 		</div>
 	</div>
-
+<%@ include file="../include/userFooter.jsp" %>
 <script type="text/javascript">
 $(document).ready(function(){
 	

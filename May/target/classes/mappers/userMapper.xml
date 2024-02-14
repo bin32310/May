@@ -28,7 +28,19 @@
       	insert into us(us_id,us_pw,us_name,us_nickname,us_tel) 
       	values(#{us_id},#{us_pw},#{us_name},#{us_nickname},#{us_tel})
    	</insert>
+   	
+   	<!-- 회원가입 - userId 중복 확인 -->
+   	<select id="userIdCheck" resultType="String">
+   		select us_id from us 
+   		where us_id=#{us_id} 
+   	</select>
 
+   	<!-- 회원가입 - userTel 중복 확인 -->
+   	<select id="userTelCheck" resultType="String">
+   		select us_tel from us 
+   		where us_tel=#{us_tel} 
+   	</select>
+   	
    	<!-- 로그인 -->
    	<select id="userLogin" resultType="UserVO">
       	select * from us 

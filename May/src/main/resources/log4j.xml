@@ -11,13 +11,13 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.mayeye.controller">
+	<logger name="com.may.controller">
 		<level value="debug" />
 	</logger>
-	<logger name="com.mayeye.persistence">
+	<logger name="com.may.persistence">
 		<level value="debug" />
 	</logger>
-	<logger name="com.mayeye.service">
+	<logger name="com.may.service">
 		<level value="debug" />
 	</logger>
 	

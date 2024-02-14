@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -37,11 +36,9 @@ public class UserController {
 	@RequestMapping(value = "/userMain", method = RequestMethod.GET)
 	public String userMainGET(HttpSession session, Model model) {
 		logger.debug(" userMainGET()호출");
-		logger.info("test@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		// 전체 글 목록 불러오기
 		List<BoardVO> boardVO = bService.boardList();
 		logger.info("test : " + boardVO);
-		System.out.println("boardVO : " + boardVO);
 		model.addAttribute("boardList", bService.boardList());
 		return "/user/userMain";
 	}
@@ -61,6 +58,41 @@ public class UserController {
 		logger.debug("userJoinPOST(UserVO userVO)호출");
 		logger.debug("회원가입 정보 userVO : " + userVO);
 		return uService.userJoin(userVO);
+	}
+	
+	// user id 중복 체크
+	@ResponseBody
+	@RequestMapping(value="userIdCheck", method = RequestMethod.POST, produces = "application/text;charset=utf8")
+	public String userIdCheckPOST(String us_id) {
+		logger.debug("userIdCheckPOST(String us_id)호출");
+		String result = "입력";
+		if(us_id == null || us_id.equals("")){ // 아이디 입력안함
+		}else{
+			result = uService.userIdCheck(us_id);
+			if(result == null || result.equals("")){ //중복 아이디 없음
+				result = "가능";
+			}
+		}
+		return result;
+	}
+	
+	// user tel 중복 체크
+	@ResponseBody
+	@RequestMapping(value="userTelCheck", method = RequestMethod.POST, produces = "application/text;charset=utf8")
+	public String userTelCheckPOST(String us_tel) {
+		logger.debug("userTelCheck(String us_tel)호출");
+		String result = "입력";
+		if(us_tel == null || us_tel.equals("")) { // 전화번호 입력안함
+			return "입력";
+		}else {
+			result = uService.userTelCheck(us_tel);
+			logger.debug("result1 : " +  result);
+			if(result == null || result.equals("")){ //중복 전화번호 없음
+				result = "가능";
+			}
+			logger.debug("result2 : " +  result);
+		}
+		return result;
 	}
 	
 	// 로그인 페이지로 이동(login-GET)
@@ -93,9 +125,9 @@ public class UserController {
 
    // 로그아웃 처리
    @ResponseBody
-   @RequestMapping(value = "/userLogout", method = RequestMethod.GET)
-   public int userLogoutGET(HttpSession session) {
-      logger.debug("userLogoutGET()호출 ");
+   @RequestMapping(value = "/userLogout", method = RequestMethod.POST)
+   public int userLogoutPOST(HttpSession session) {
+      logger.debug("userLogoutPOST()호출 ");
       // 세션정보 초기화
       session.invalidate();
       return 1;
