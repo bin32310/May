@@ -106,7 +106,7 @@ public class UserController {
    // 로그인 시도(login-post)
 	@ResponseBody
 	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
-	public int userLoginPOST(UserVO loginVO, HttpSession session, RedirectAttributes rttr){
+	public int userLoginPOST(UserVO loginVO, HttpSession session){
 		logger.debug("userLoginPOST()호출");
 
 		// 로그인
@@ -132,5 +132,25 @@ public class UserController {
       session.invalidate();
       return 1;
    }
+   
+	// 내정보 페이지로 이동(Mypage-GET)
+	// http://localhost:8080/user/userMypage
+	@RequestMapping(value = "/userMypage", method = RequestMethod.GET)
+	public void userMypageGET(HttpSession session, Model model) {
+		logger.debug("userMypageGET()호출");
+		// 세션 - 아이디
+		String us_id = (String) session.getAttribute("us_id");
+		model.addAttribute("userInfo", uService.userInfo(us_id));
+  }
+	
+	// 비밀번호 변경(userPwModify-POST)
+	@ResponseBody
+	@RequestMapping(value = "/userPwModify", method = RequestMethod.POST)
+	public void userPwModifyPOST(HttpSession session, Model model) {
+		logger.debug("userPwModifyPOST()호출");
+		// 세션 - 아이디
+		String us_id = (String) session.getAttribute("us_id");
+		model.addAttribute("userInfo", uService.userInfo(us_id));
+	}
 
 }

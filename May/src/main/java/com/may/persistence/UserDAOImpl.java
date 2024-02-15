@@ -59,7 +59,7 @@ public class UserDAOImpl {
    
    // 회원 정보 조회(내정보)
    public UserVO userInfo(String us_id) {
-      logger.debug("DAOImpl : getUser(String us_id) 호출 ");
+      logger.debug("DAOImpl : userInfo(String us_id) 호출 ");
       return sqlSession.selectOne(NAMESPACE + ".userInfo",us_id);
    }
 

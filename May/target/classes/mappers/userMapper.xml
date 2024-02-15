@@ -44,34 +44,38 @@
    	<!-- 로그인 -->
    	<select id="userLogin" resultType="UserVO">
       	select * from us 
-      	where us_id=#{us_id} and us_pw=#{us_pw}
+      	where us_id=#{us_id} and us_pw=#{us_pw} and us_state="정상"
    	</select> 
 
-
    	<!-- 회원정보 조회 -->
-<!--    	<select id="userInfo" resultType="UserVO">
+   	<select id="userInfo" resultType="UserVO">
       	select * from us 
       	where us_id=#{us_id}
-   	</select> -->
-
+   	</select>
 
    	<!-- 회원정보 수정 -->
-   	<update id="userInfoUpdate">
-      	update us  
-      	set us_id=#{us_id},us_pw=#{us_pw},us_name=#{us_name},us_tel=#{us_tel},us_nickname=#{us_nickname} 
+   	<update id="userInfoModify">
+      	update us 
+      	set us_nickname=#{us_nickname} 
+		where us_id=#{us_id}
+   	</update>
+   	
+ 	<!-- 비밀번호 체크 -->
+   	<select id="userPwCheck" resultType="String">
+      	select us_pw from us 
+      	where us_id=#{us_id}
+   	</select>
+   	
+   	<!-- 비밀번호 변경 -->
+   	<update id="userPwModify">
+      	update us 
+      	set us_pw=#{us_pw} 
 		where us_id=#{us_id}
    	</update>
 
-
-	<!-- 탈퇴시 비밀번호 확인 -->
-	<select id="pwCheck2">
-		select * from us 
-	   	where us_id=#{us_id} and us_pw=#{us_pw}
-	</select>
-
    <!-- 회원 탈퇴 처리 -->
    <update id="userDelete">
-      update us set us_state = "탈퇴"
+      update us set us_state = "탈퇴" 
       where us_id=#{us_id} and us_pw=#{us_pw}
    </update>
     

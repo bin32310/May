@@ -25,6 +25,7 @@
 
 	<div>
 		<div>
+			<h1>${boRead.bo_num }번째 글 </h1>
 			<fieldset>
 				<form action="" id="boRead_form" name="boRead_form" method="post">
 					<input type="text" id="bo_title" name="bo_title" value="${boRead.bo_title }" disabled="disabled">		

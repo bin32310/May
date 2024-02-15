@@ -15,10 +15,45 @@
 	color:RED;
 }
 
-	
-	
-	
 </style>
+
+<c:if test="${ not empty us_id}">
+	${"<script>alert('잘못된 접근입니다.');location.href='../user/userMain';</script>" }
+</c:if>
+<!-- 	
+		<h1> /user/userJoin.jsp</h1>
+		<h1> 유저 회원가입 페이지</h1>
+-->
+	<h1> 회원가입 </h1>
+	<div>
+		<div>
+			<form action="" id="us_join_form" name="us_join_form" method="POST" onsubmit="joinCheck();">
+				<input type="text" id="us_id" name="us_id" placeholder="아이디" required="required">
+				<span class="id_check" id="id_ok"> 사용 가능한 아이디입니다.</span>
+				<span class="id_check" id="id_no"> 사용 불가능한 아이디입니다.</span> <br>	
+				
+				<input type="password" id="us_pw" name="us_pw" placeholder="비밀번호" required="required"> <br>  
+				<span class="pw_check" id="pw_ok"> 사용 가능한 비밀번호입니다.</span>
+				<span class="pw_check" id="pw_no"> 사용할 수 없는 비밀번호입니다.</span>
+				
+				<input type="password" id="us_pw_check" name="us_pw_check" placeholder="비밀번호 확인" required="required" onkeyup="pwCheck();"> <br> 
+				<span class="pw_check" id="pwCk_no"> 비밀번호와 다릅니다.</span>
+				
+				<input type="text" id="us_name" name="us_name" placeholder="이름" required="required"> <br> 
+				
+				<input type="text" id="us_nickname" name="us_nickname" placeholder="닉네임" required="required" onkeyup="nicknameCheck();"> <br> 
+				<span class="nick_check" id="nick_no"> 닉네임은 8자 이하만 가능합니다.</span>
+				
+				<input type="text" id="us_tel" name="us_tel" placeholder="휴대폰번호" required="required">
+				<span class="tel_check" id="tel_ok"> 사용가능한 번호입니다.</span>
+				<span class="tel_check" id="tel_no"> 이미 존재하는 전화번호입니다.</span><br><br> 
+				
+				<input type="button" id="us_join_btn" value="회원가입">
+				<input type="button" id="back" value="돌아가기" onclick="backTo();">
+			</form>
+		</div>
+	</div>
+<%@ include file="../include/userFooter.jsp" %>
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -132,7 +167,6 @@ function nicknameCheck(){
 	}else{
 		$('#nick_no').css("display","none");
 	}
-	
 }
 
 function joinCheck(){
@@ -147,43 +181,5 @@ function backTo(){
 }
 
 </script>
-<c:if test="${ not empty us_id}">
-	${"<script>alert('잘못된 접근입니다.');location.href='../user/userMain';</script>" }
-</c:if>
-<!-- 	
-		<h1> /user/userJoin.jsp</h1>
-		<h1> 유저 회원가입 페이지</h1>
--->
-	<h1> 회원가입 </h1>
-	<div>
-		<div>
-			<form action="" id="us_join_form" name="us_join_form" method="POST" onsubmit="joinCheck();">
-				<input type="text" id="us_id" name="us_id" placeholder="아이디" required="required" onf>
-				<span class="id_check" id="id_ok"> 사용 가능한 아이디입니다.</span>
-				<span class="id_check" id="id_no"> 사용 불가능한 아이디입니다.</span> <br>	
-				
-				<input type="password" id="us_pw" name="us_pw" placeholder="비밀번호" required="required"> <br>  
-				<span class="pw_check" id="pw_ok"> 사용 가능한 비밀번호입니다.</span>
-				<span class="pw_check" id="pw_no"> 사용할 수 없는 비밀번호입니다.</span>
-				
-				<input type="password" id="us_pw_check" name="us_pw_check" placeholder="비밀번호 확인" required="required" onkeyup="pwCheck();"> <br> 
-				<span class="pw_check" id="pwCk_no"> 비밀번호와 다릅니다.</span>
-				
-				<input type="text" id="us_name" name="us_name" placeholder="이름" required="required"> <br> 
-				
-				<input type="text" id="us_nickname" name="us_nickname" placeholder="닉네임" required="required" onkeyup="nicknameCheck();"> <br> 
-				<span class="nick_check" id="nick_no"> 닉네임은 8자 이하만 가능합니다.</span>
-				
-				<input type="text" id="us_tel" name="us_tel" placeholder="휴대폰번호" required="required">
-				<span class="tel_check" id="tel_ok"> 사용가능한 번호입니다.</span>
-				<span class="tel_check" id="tel_no"> 이미 존재하는 전화번호입니다.</span><br><br> 
-				
-				<input type="button" id="us_join_btn" value="회원가입">
-				<input type="button" id="back" value="돌아가기" onclick="backTo();">
-			</form>
-		</div>
-	</div>
-<%@ include file="../include/userFooter.jsp" %>
-
 </body>
 </html>

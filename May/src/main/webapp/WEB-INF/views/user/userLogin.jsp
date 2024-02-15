@@ -13,6 +13,7 @@
 
 	<div>
 		<div>
+			<h1> 로그인 </h1>
 			<fieldset>
 				<form action="" id="us_login_form" name="us_login_form" method="post">
 					<input type="text" id="us_id" name="us_id" placeholder="아이디" required="required">		
