@@ -5,7 +5,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  	<mapper namespace="com.mayeye.mapper.BoardMapper">
+  	<mapper namespace="com.may.mapper.BoardMapper">
   	
   	<resultMap type="com.may.domain.UserVO" id="UserVO">
   		<result property="us_id" column="us_id"/>
@@ -52,6 +52,12 @@
 		where b.bo_num = #{bo_num}
 	</select>
 	
+	<!-- 글 조회수 증가 -->
+	<update id="boViewUp">
+		update board set bo_view = bo_view + 1  
+		where bo_num=#{bo_num}
+	</update>
+	
 	<!-- 글삭제 -->
 	<update id="boDelete">
 		update board set bo_state="삭제" 
@@ -59,7 +65,7 @@
 	</update>
 
 	<!-- 글수정 -->
-	<update id="boModify">
+	<update id="boUpdate">
 		update board set bo_title=#{bo_title}, bo_content=#{bo_content}  
 		where bo_num=#{bo_num}
 	</update>

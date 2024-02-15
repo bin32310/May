@@ -2,16 +2,37 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ include file="../include/userHeader.jsp" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>userLogin</title>
-</head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
-<body>
+<style>
+.bowrite_section{
+	width: 50%;
+	margin-left: 25%;
+	margin-right: 25%;
+	text-align: center;
+}
 
+.write_section{
+	padding: 10px;
+}
+
+.board_title{
+	width : 50%;
+	height: 40px;
+}
+
+.board_content{
+	width : 50%;
+	resize: none;
+}
+
+.btn_blue, .btn_gray{
+	width : 25%;
+	height: 40px;
+}
+
+
+</style>
 <!-- 	
 		<h1> /board/boWrite.jsp</h1>
 		<h1> 유저 글쓰기</h1>
@@ -22,20 +43,19 @@
 </c:if>
 
 	<div>
-		<div>
-			<h1> 글 작성 </h1>
-			<fieldset>
+		<br><hr><br><br>
+		<div class ="bowrite_section">
+			<div class="write_section">
+				<h1> 글 작성 </h1>
 				<form action="" id="boWrite_form" name="boWrite_form" method="post">
-					<input type="text" id="bo_title" name="bo_title" placeholder="글제목" required="required">		
-					<hr>
-					<textarea rows="5" cols="10" id="bo_content" name="bo_content" placeholder="내용" required="required"></textarea> <br>
-					<input type="file" name="uploadFile" multiple> <br>
+					<input type="text" id="bo_title" class="board_title" name="bo_title" placeholder="글제목" required="required"><br><br>	
+					<textarea rows="5" id="bo_content" calss="board_content" name="bo_content" placeholder="내용" required="required"></textarea><br><br>
 					<div id="button_section">
-						<input type="button" id="upload" value="등록하기">
-						<input type="button" id="back" value="돌아가기" onclick="back();">
+						<input type="button" id="upload" class="btn_blue" value="등록하기">
+						<input type="button" id="back"  class="btn_gray" value="돌아가기" onclick="backTo();">
 					</div>			
 				</form>
-			</fieldset>
+			</div>
 		</div>
 	</div>
 <%@ include file="../include/userFooter.jsp" %>
@@ -84,7 +104,7 @@ $(document).ready(function(){
 		
 	
 //뒤로가기 
-function back(){
+function backTo(){
 	history.back(); 
 }
 

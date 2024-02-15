@@ -25,7 +25,7 @@ public class BoardDAOImpl {
 	@Inject
 	private SqlSession sqlSession;
 	
-	private static final String NAMESPACE = "com.mayeye.mapper.BoardMapper";
+	private static final String NAMESPACE = "com.may.mapper.BoardMapper";
 	
 	// 전체 글 목록 조회
 	public List<BoardVO> boardList(){
@@ -46,6 +46,13 @@ public class BoardDAOImpl {
 		return 	sqlSession.selectOne(NAMESPACE + ".boRead", bo_num)  ;
 	}
 	
+	// 글 조회수 증가
+	public int boViewUp(Integer bo_num) {
+		logger.debug("boViewUp(Integer bo_num) 호출 ");
+		return sqlSession.update(NAMESPACE + ".boViewUp", bo_num)  ;
+	}
+	
+	
 	// 글삭제
 	public int boDelete(Integer bo_num) {
 		logger.debug("boDelete(Integer bo_num) 호출 ");
@@ -53,9 +60,9 @@ public class BoardDAOImpl {
 	}
 	
 	// 글수정
-	public int boModify(BoardVO boardVO) {
-		logger.debug("boModify(BoardVO boardVO) 호출 ");
-		return 	sqlSession.update(NAMESPACE + ".boModify", boardVO)  ;
+	public int boUpdate(BoardVO boardVO) {
+		logger.debug("boUpdate(BoardVO boardVO) 호출 ");
+		return 	sqlSession.update(NAMESPACE + ".boUpdate", boardVO)  ;
 	}
 	
 }

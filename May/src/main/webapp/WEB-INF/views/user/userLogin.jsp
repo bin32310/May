@@ -2,7 +2,31 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ include file="../include/userHeader.jsp" %>
-    
+<style>
+
+.userLogin{
+	width: 50%;
+	margin-left: 25%;
+	margin-right: 25%;
+	text-align: center;
+}
+
+.btn_blue{
+	width : 50%;
+	height: 60px;
+}
+
+.login_id, .login_pw{
+	width : 50%;
+	height: 60px;
+}
+
+.login_section{
+	padding: 10px;
+}
+
+</style>    
+
 <c:if test="${ not empty us_id}">
 	${"<script>alert('잘못된 접근입니다.');location.href='../user/userMain';</script>" }
 </c:if>
@@ -12,21 +36,21 @@
 -->
 
 	<div>
-		<div>
-			<h1> 로그인 </h1>
-			<fieldset>
+		<br><hr><br><br>
+		<div class="userLogin">
+			<div class="login_section">
+				<h1> 로그인 </h1><br>
 				<form action="" id="us_login_form" name="us_login_form" method="post">
-					<input type="text" id="us_id" name="us_id" placeholder="아이디" required="required">		
-					<input type="password" id="us_pw" name="us_pw" placeholder="비밀번호" required="required">  
-					<input type="button" id="login" value="로그인">
+					<input type="text" id="us_id" class="login_id" name="us_id" placeholder="아이디" required="required"> <br>		
+					<input type="password" id="us_pw" class="login_pw" name="us_pw" placeholder="비밀번호" required="required"> <br><br>  
+					<input type="button" id="login" class="btn_blue" value="로그인">
 				</form>
-			</fieldset>
-		</div>
-		<div>
-			<input type="button" value="회원가입" onclick="location.href='/user/userJoin';"> | 
-			<input type="button" value="아이디찾기" onclick="location.href='/user/userFindId';"> |
-			<input type="button" value="비밀번호찾기" onclick="location.href='/user/userFindPw';"> |
-			<input type="button" id="back" value="돌아가기" onclick="back();">
+			</div>
+			<div>
+				<a href="userJoin" >회원가입</a> | 
+				<a href="userFindId" >아이디찾기</a> |
+				<a href="../user/userFindPw" >비밀번호찾기</a>
+			</div>
 		</div>
 	</div>
 <%@ include file="../include/userFooter.jsp" %>
@@ -57,11 +81,7 @@ $(document).ready(function(){
 	
 	
 });			
-		
-//뒤로가기 
-function back(){
-	history.back(); 
-}	
+
 
 
 </script>

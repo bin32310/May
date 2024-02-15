@@ -15,7 +15,7 @@
 	color:RED;
 }
 
-#us_modify_check{
+#us_update_check{
 	display: none;
 }
 
@@ -33,31 +33,32 @@
 		<h1> /user/userMypage.jsp</h1>
 		<h1> 유저 내정보 페이지</h1>
 -->
-	<h1> 내정보 </h1>
 	<div>
+		<br><hr><br><br>
 		<div >
 			<form action="" id="us_info_form" name="us_info_form" method="POST" onsubmit="joinCheck();">
+				<h1> 내정보 </h1>
 				<div class="text_area"> 아이디 </div> <input type="text" id="us_id" name="us_id" value="${userInfo.us_id }" required="required" disabled="disabled"> <br><br>
 				<div class="text_area"> 이름 </div> <input type="text" id="us_name" name="us_name" value="${userInfo.us_name }" required="required" disabled="disabled"> <br><br>
 				<div class="text_area"> 닉네임 </div> <input type="text" id="us_nickname" name="us_nickname" value="${userInfo.us_nickname }" required="required" disabled="disabled" onkeyup="nicknameCheck();"> <br><br> 
 				<div class="text_area"> 전화번호 </div> <input type="text" id="us_tel" name="us_tel" value="${userInfo.us_tel }" required="required" disabled="disabled"> <br><br>
-				<input type="button" id="us_pw_modify" value="비밀번호 변경">  
-				<input type="button" id="us_modify" value="수정하기">
-				<input type="button" id="us_modify_check" value="수정완료">
+				<input type="button" id="us_pw_update" value="비밀번호 변경">  
+				<input type="button" id="us_update" value="수정하기">
+				<input type="button" id="us_update_check" value="수정완료">
 				<input type="button" id="us_delete" value="탈퇴하기">
 			</form>
 		</div>
 	</div>
 	
 <!-- 비밀번호 변경 버튼 클릭시 Modal -->
-<div id="pw_modify_Modal" class="modal fade" role="dialog">
+<div id="pw_update_Modal" class="modal fade" role="dialog">
 	<div class="modal-dialog ">
 
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title">비밀번호 변경</h4>
-				<form action="" id="us_info_form" name="us_info_form" method="POST" onsubmit="joinCheck();">
+				<form action="" id="us_pw_update_form" name="us_pw_update_form" method="POST" onsubmit="pwUpdateCheck();">
 					<input type="password" id="us_pw" name="us_pw" placeholder="현재 비밀번호" required="required">
 					<input type="password" id="us_pw_new" name="us_pw_new" placeholder="새 비밀번호" required="required">
 					<input type="password" id="us_pw_new_check" name="us_pw_new_check" placeholder="새비밀번호 확인" required="required">
@@ -65,8 +66,8 @@
 			</div>
 
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal" id="pwModefyModalYes">변경</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal" id="pwModifyModalNo">취소</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" id="pwUpdateModalYes">변경</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal" id="pwUpdateModalNo">취소</button>
 			</div>
 		</div>
 	</div>
@@ -78,17 +79,19 @@
 $(document).ready(function(){
 
 	// 수정하기
-	$('#us_modify').click(function(){
-		$('#us_modify').css("display","none");
-		$('#us_modify_check').css("display","block");
+	$('#us_update').click(function(){
+		$('#us_update').css("display","none");
+		$('#us_pw_update').css("display","none");
+		$('#us_delete').css("display","none");
+		$('#us_update_check').css("display","block");
 		$('#us_nickname').attr("disabled",false);
 	});
 	
 	// 수정완료
-	$('#us_modify_check').click(function(){
+	$('#us_update_check').click(function(){
 			$.ajax({       
 				type : "post",
-				url : "/user/userMypageModify",
+				url : "/user/userMypageUpdate",
 				data : $("#us_info_form").serialize(),
 				dataType : "JSON",
 				error: function(){
@@ -106,8 +109,8 @@ $(document).ready(function(){
 	}); // #us_join_btn
 	
 	// 비밀번호 변경 
-	$('#us_pw_modify').click(function(){
-		$('#pw_modify_Modal').modal("show");
+	$('#us_pw_update').click(function(){
+		$('#pw_update_Modal').modal("show");
 	});
 	
 	// 비밀번호 변경시 현재 비밀번호 확인
@@ -115,7 +118,7 @@ $(document).ready(function(){
 		var us_pw = $('#us_pw').val();
 		$.ajax({
 			type : "post",
-			url : "/user/userPwModifyCheck",
+			url : "/user/userPwUpdateCheck",
 			data : {"us_pw" : us_pw},
 			dataType : "JSON",
 			error: function(){
@@ -132,11 +135,11 @@ $(document).ready(function(){
 	});
 	
 	// 비밀번호 변경 Yes
-	$('#pwModifyModalYes').click(function(){
+	$('#pwUpdateModalYes').click(function(){
 		var us_pw_new = $('#us_pw_new').val();
 		$.ajax({
 			type : "post",
-			url : "/user/userPwModify",
+			url : "/user/userPwUpdate",
 			data : {"us_pw" : us_pw_new},
 			dataType : "JSON",
 			error: function(){
@@ -155,8 +158,8 @@ $(document).ready(function(){
 	}); //#deleteModalYes.click
 	
 	// 비밀번호 변경 No
-	$('#pwModifyModalNo').click(function(){
-		$('#pw_modify_Modal').modal("hide");		
+	$('#pwUpdateModalNo').click(function(){
+		$('#pw_update_Modal').modal("hide");		
 	});
 	
 	

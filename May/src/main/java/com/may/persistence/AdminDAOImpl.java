@@ -26,7 +26,7 @@ public class AdminDAOImpl {
 	@Inject
 	private SqlSession sqlSession;
 	
-	private static final String NAMESPACE = "com.mayeye.mapper.AdminMapper";
+	private static final String NAMESPACE = "com.may.mapper.AdminMapper";
 	
 	// 공지사항 전체 글 목록 조회
 	public List<NoticeVO> noticeList(){

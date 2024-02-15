@@ -23,13 +23,13 @@ public class UserDAOImpl {
 	@Inject
 	private SqlSession sqlSession;
 	
-	private static final String NAMESPACE = "com.mayeye.mapper.UserMapper";
+	private static final String NAMESPACE = "com.may.mapper.UserMapper";
 	
 	// 현재시간 
 	public String getTime() {
       //디비연결
       SqlSession sqlSession = sqlFactory.openSession();
-      String time = sqlSession.selectOne("com.mayeye.mapper.userMapper.getTime");
+      String time = sqlSession.selectOne("com.may.mapper.userMapper.getTime");
       return time;
    }
    

@@ -43,6 +43,12 @@ public class BoardServiceImpl {
 		return 	bdao.boRead(bo_num);
 	}
 	
+	// 글 조회수 증가
+	public int boViewUp(Integer bo_num) {
+		logger.debug("boViewUp(Integer bo_num) 호출 ");
+		return 	bdao.boViewUp(bo_num);
+	}
+	
 	// 글삭제
 	public int boDelete(Integer bo_num) {
 		logger.debug("boDelete(Integer bo_num) 호출 ");
@@ -50,9 +56,9 @@ public class BoardServiceImpl {
 	}
 	
 	// 글수정
-	public int boModify(BoardVO boardVO) {
-		logger.debug("boModify(BoardVO boardVO) 호출 ");
-		return 	bdao.boModify(boardVO);
+	public int boUpdate(BoardVO boardVO) {
+		logger.debug("boUpdate(BoardVO boardVO) 호출 ");
+		return 	bdao.boUpdate(boardVO);
 	}
 	
 }

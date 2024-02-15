@@ -14,6 +14,25 @@
 #id_no, #pw_no, #pwCk_no, #nick_no, #tel_no{
 	color:RED;
 }
+.userJoin_section{
+	width: 50%;
+	margin-left: 25%;
+	margin-right: 25%;
+	text-align: center;
+}
+.join_section{
+	padding: 10px;
+}
+
+.login_input{
+	width : 50%;
+	height: 60px;
+}
+
+.btn_blue, .btn_gray{
+	width : 25%;
+	height: 40px;
+}
 
 </style>
 
@@ -24,33 +43,36 @@
 		<h1> /user/userJoin.jsp</h1>
 		<h1> 유저 회원가입 페이지</h1>
 -->
-	<h1> 회원가입 </h1>
 	<div>
-		<div>
-			<form action="" id="us_join_form" name="us_join_form" method="POST" onsubmit="joinCheck();">
-				<input type="text" id="us_id" name="us_id" placeholder="아이디" required="required">
-				<span class="id_check" id="id_ok"> 사용 가능한 아이디입니다.</span>
-				<span class="id_check" id="id_no"> 사용 불가능한 아이디입니다.</span> <br>	
-				
-				<input type="password" id="us_pw" name="us_pw" placeholder="비밀번호" required="required"> <br>  
-				<span class="pw_check" id="pw_ok"> 사용 가능한 비밀번호입니다.</span>
-				<span class="pw_check" id="pw_no"> 사용할 수 없는 비밀번호입니다.</span>
-				
-				<input type="password" id="us_pw_check" name="us_pw_check" placeholder="비밀번호 확인" required="required" onkeyup="pwCheck();"> <br> 
-				<span class="pw_check" id="pwCk_no"> 비밀번호와 다릅니다.</span>
-				
-				<input type="text" id="us_name" name="us_name" placeholder="이름" required="required"> <br> 
-				
-				<input type="text" id="us_nickname" name="us_nickname" placeholder="닉네임" required="required" onkeyup="nicknameCheck();"> <br> 
-				<span class="nick_check" id="nick_no"> 닉네임은 8자 이하만 가능합니다.</span>
-				
-				<input type="text" id="us_tel" name="us_tel" placeholder="휴대폰번호" required="required">
-				<span class="tel_check" id="tel_ok"> 사용가능한 번호입니다.</span>
-				<span class="tel_check" id="tel_no"> 이미 존재하는 전화번호입니다.</span><br><br> 
-				
-				<input type="button" id="us_join_btn" value="회원가입">
-				<input type="button" id="back" value="돌아가기" onclick="backTo();">
-			</form>
+		<br><hr><br><br>
+		<div class="userJoin_section">
+			<div class="join_section">
+				<h1> 회원가입 </h1><br>
+				<form action="" id="us_join_form" name="us_join_form" method="POST" onsubmit="joinCheck();">
+					<input type="text" id="us_id" class="login_input" name="us_id" placeholder="아이디" required="required">
+					<span class="id_check" id="id_ok"> 사용 가능한 아이디입니다.</span>
+					<span class="id_check" id="id_no"> 사용 불가능한 아이디입니다.</span> <br>	
+					
+					<input type="password" id="us_pw" class="login_input" name="us_pw" placeholder="비밀번호" required="required"> <br>  
+					<span class="pw_check" id="pw_ok"> 사용 가능한 비밀번호입니다.</span>
+					<span class="pw_check" id="pw_no"> 사용할 수 없는 비밀번호입니다.</span>
+					
+					<input type="password" id="us_pw_check" class="login_input" name="us_pw_check" placeholder="비밀번호 확인" required="required" onkeyup="pwCheck();"> <br> 
+					<span class="pw_check" id="pwCk_no"> 비밀번호와 다릅니다.</span>
+					
+					<input type="text" id="us_name" class="login_input" name="us_name" placeholder="이름" required="required"> <br> 
+					
+					<input type="text" id="us_nickname" class="login_input" name="us_nickname" placeholder="닉네임" required="required" onkeyup="nicknameCheck();"> <br> 
+					<span class="nick_check" id="nick_no"> 닉네임은 8자 이하만 가능합니다.</span>
+					
+					<input type="text" id="us_tel" class="login_input" name="us_tel" placeholder="휴대폰번호" required="required">
+					<span class="tel_check" id="tel_ok"> 사용가능한 번호입니다.</span>
+					<span class="tel_check" id="tel_no"> 이미 존재하는 전화번호입니다.</span><br><br> 
+					
+					<input type="button" id="us_join_btn" class="btn_blue" value="회원가입">
+					<input type="button" id="back" class="btn_gray" value="돌아가기" onclick="backTo();">
+				</form>
+			</div>
 		</div>
 	</div>
 <%@ include file="../include/userFooter.jsp" %>
@@ -63,10 +85,10 @@ $(document).ready(function(){
 	
 	// 회원가입
 	$('#us_join_btn').click(function(){
-		if(true){
+		
 			$.ajax({       
 				type : "post",
-				url : "/user/userJoinCheck",
+				url : "/user/userJoin",
 				data : $("#us_join_form").serialize(),
 				dataType : "JSON",
 				error: function(){
@@ -81,7 +103,6 @@ $(document).ready(function(){
 					}	
 				} // success 끝	
 			}); // ajax 끝
-		} // if
 	}); // #us_join_btn
 	
 	// 아이디 중복체크

@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.may.domain.BoardVO;
 import com.may.domain.UserVO;
@@ -143,11 +142,11 @@ public class UserController {
 		model.addAttribute("userInfo", uService.userInfo(us_id));
   }
 	
-	// 비밀번호 변경(userPwModify-POST)
+	// 비밀번호 변경(userPwUpdate-POST)
 	@ResponseBody
-	@RequestMapping(value = "/userPwModify", method = RequestMethod.POST)
-	public void userPwModifyPOST(HttpSession session, Model model) {
-		logger.debug("userPwModifyPOST()호출");
+	@RequestMapping(value = "/userPwUpdate", method = RequestMethod.POST)
+	public void userPwUpdatePOST(HttpSession session, Model model) {
+		logger.debug("userPwUpdatePOST()호출");
 		// 세션 - 아이디
 		String us_id = (String) session.getAttribute("us_id");
 		model.addAttribute("userInfo", uService.userInfo(us_id));

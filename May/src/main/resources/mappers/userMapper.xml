@@ -5,7 +5,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-  <mapper namespace="com.mayeye.mapper.UserMapper">
+  <mapper namespace="com.may.mapper.UserMapper">
   
   <resultMap type="com.may.domain.UserVO" id="userMap">
   	<result property="us_id" column="us_id"/>
@@ -54,7 +54,7 @@
    	</select>
 
    	<!-- 회원정보 수정 -->
-   	<update id="userInfoModify">
+   	<update id="userInfoUpdate">
       	update us 
       	set us_nickname=#{us_nickname} 
 		where us_id=#{us_id}
@@ -67,7 +67,7 @@
    	</select>
    	
    	<!-- 비밀번호 변경 -->
-   	<update id="userPwModify">
+   	<update id="userPwUpdate">
       	update us 
       	set us_pw=#{us_pw} 
 		where us_id=#{us_id}
