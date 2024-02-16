@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.may.domain.BoardVO;
+import com.may.domain.Criteria;
 import com.may.persistence.BoardDAOImpl;
 
 @Service(value="boardService")
@@ -25,9 +26,15 @@ public class BoardServiceImpl {
 	// 메인 화면
 	
 	// 전체 글 목록 조회
-	public List<BoardVO> boardList(){
-		logger.debug("boardList() 호출");
-		return bdao.boardList();
+	public List<BoardVO> boardList(Criteria cri) throws Exception{
+		logger.debug("boardList(Criteria cri) 호출");
+		return bdao.boardList(cri);
+	}
+	
+	// 전체 글 수 조회
+	public int boardCount(Criteria cri) throws Exception {
+		logger.debug("service : boardCount() 호출 ");
+		return bdao.boardCount(cri);
 	}
 	
 	

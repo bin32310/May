@@ -16,6 +16,13 @@ table td .tb_view{
 	text-align: center;
 }
 
+.pagination {
+	
+	padding-left: 50%;
+	padding-right: 0;
+	text-align: right;
+}
+
 </style>
 <!-- 	
 		<h1> /user/userMain.jsp</h1>
@@ -62,6 +69,26 @@ table td .tb_view{
 				</c:forEach>
 			</table>
 		</div><!-- list_section -->
+		<!-- 페이지 번호 -->
+		<div class="board_clearfix">
+			<ul class="pagination pagination-sm no-margin pull-right">
+				<c:if test="${pageVO.prev == true }">
+					<li><a href="userMain?page=${pageVO.startPage-1 }">«</a></li>
+					&nbsp
+				</c:if>
+				
+				<c:forEach var="i" begin="${pageVO.startPage }" end="${pageVO.endPage }" step="1">
+					&nbsp&nbsp
+					<li ${pageVO.cri.page == i? 'class="active"':'' }><a href="userMain?page=${i }">${i }</a></li>
+					&nbsp&nbsp
+				</c:forEach>
+				
+				<c:if test="${pageVO.next == true }">
+					&nbsp
+					<li><a href="userMain?page=${pageVO.endPage+1 }">»</a></li>
+				</c:if>
+			</ul>
+		</div>
 	</div>
 <%@ include file="../include/userFooter.jsp" %>
 

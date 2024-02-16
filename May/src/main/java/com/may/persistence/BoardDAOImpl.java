@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.may.domain.BoardVO;
+import com.may.domain.Criteria;
 
 @Repository(value="boardDAO")
 public class BoardDAOImpl {
@@ -28,9 +29,15 @@ public class BoardDAOImpl {
 	private static final String NAMESPACE = "com.may.mapper.BoardMapper";
 	
 	// 전체 글 목록 조회
-	public List<BoardVO> boardList(){
-		logger.debug("DAOImpl : boardList() 호출");
-		return sqlSession.selectList(NAMESPACE + ".boardList");
+	public List<BoardVO> boardList(Criteria cri)  throws Exception {
+		logger.debug("DAOImpl : boardList(Criteria cri) 호출");
+		return sqlSession.selectList(NAMESPACE + ".boardList", cri);
+	}
+	
+	// 전체 글 수 조회
+	public int boardCount(Criteria cri) throws Exception {
+		logger.debug(" DAO : boardCount(Criteria cri) 호출");
+		return sqlSession.selectOne(NAMESPACE + ".boardCount",cri);
 	}
 	
 	// 글쓰기
