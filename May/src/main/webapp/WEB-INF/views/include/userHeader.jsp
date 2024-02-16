@@ -48,142 +48,205 @@
 </head>
 <style type="text/css">
 
+/* yes or no button*/
+.btn_blue{
+ 	display:inline-block;
+  	width:100px;
+	background-color: #007bff;
+	color: white;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid transparent; 
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+
+}
+
+
+.btn_red {
+ 	display:inline-block;
+  	width:100px;
+	background-color : red;
+	color: white;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid transparent; 
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+
+}
+
+.btn_gray {
+ 	display:inline-block;
+  	width:100px;
+	background-color : gray;
+	color: white;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid transparent; 
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+
+}
+
+
 /* Modal 모달 */
 
-.modal-open {
-  overflow: hidden;
-}
 .modal {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1050;
-  display: none;
-  overflow: hidden;
-  -webkit-overflow-scrolling: touch;
-  outline: 0;
-}
-.modal.fade .modal-dialog {
-  -webkit-transition: -webkit-transform .3s ease-out;
-       -o-transition:      -o-transform .3s ease-out;
-          transition:         transform .3s ease-out;
-  -webkit-transform: translate(0, -25%);
-      -ms-transform: translate(0, -25%);
-       -o-transform: translate(0, -25%);
-          transform: translate(0, -25%);
-}
-.modal.in .modal-dialog {
-  -webkit-transform: translate(0, 0);
-      -ms-transform: translate(0, 0);
-       -o-transform: translate(0, 0);
-          transform: translate(0, 0);
-}
-.modal-open .modal {
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-.modal-dialog {
-  position: relative;
-  width: auto;
-  margin: 10px;
-}
-.modal-content {
-  position: relative;
-  background-color: #fff;
-  -webkit-background-clip: padding-box;
-          background-clip: padding-box;
-  border: 1px solid #999;
-  border: 1px solid rgba(0, 0, 0, .2);
-  border-radius: 6px;
-  outline: 0;
-  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
-          box-shadow: 0 3px 9px rgba(0, 0, 0, .5);
-}
-.modal-backdrop {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1040;
-  background-color: #000;
-}
-.modal-backdrop.fade {
-  filter: alpha(opacity=0);
-  opacity: 0;
-}
-.modal-backdrop.in {
-  filter: alpha(opacity=50);
-  opacity: .5;
-}
-.modal-header {
-  min-height: 16.42857143px;
-  padding: 15px;
-  border-bottom: 1px solid #e5e5e5;
-}
-.modal-title {
-  margin: 0;
-  line-height: 1.42857143;
-}
-.modal-body {
-  position: relative;
-  padding: 15px;
-}
-.modal-footer {
-  padding: 15px;
-  text-align: right;
-  border-top: 1px solid #e5e5e5;
-}
-.modal-footer .btn + .btn {
-  margin-bottom: 0;
-  margin-left: 5px;
-}
-.modal-footer .btn-group .btn + .btn {
-  margin-left: -1px;
-}
-.modal-footer .btn-block + .btn-block {
-  margin-left: 0;
-}
-.modal-scrollbar-measure {
-  position: absolute;
-  top: -9999px;
-  width: 50px;
-  height: 50px;
-  overflow: scroll;
-}
-@media (min-width: 768px) {
-  .modal-dialog {
-    width: 600px;
-    margin: 30px auto;
-  }
-  .modal-content {
-    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, .5);
-  }
-  .modal-sm {
-    width: 300px;
-  }
-}
-@media (min-width: 992px) {
-  .modal-lg {
-    width: 900px;
-  }
-}
-.tooltip {
-  position: absolute;
-  z-index: 1070;
-  display: block;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 12px;
-  font-weight: normal;
-  line-height: 1.4;
-  filter: alpha(opacity=0);
-  opacity: 0;
+	display:none;
+  	position:fixed;
+  	width:100%;
+  	height:100%;
+  	top : 0;
+  	right :0;
+  	bottom:0;
+  	left:0;
+  	z-index:1050;
 }
 
-/* Modal 끝 */
+.modal h2 {
+  	margin:0;   
+}
+
+.modal_header{
+  	min-height: 16.42857143px;
+  	padding-bottom : 15px;
+  	border-bottom: 1px solid #e5e5e5;
+  	text-align: center;
+}
+
+.modal_footer{
+	padding-top : 15px;
+  	text-align: right;
+  	border-top: 1px solid #e5e5e5;
+}
+
+.modal-footer .btn + .btn {
+  	margin-bottom: 0;
+  	margin-left: 5px;
+
+}
+
+.modal .modal_btn_no {
+ 	display:inline-block;
+  	width:100px;
+	background-color : gray;
+	color: white;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid transparent; 
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+}
+
+.modal .modal_btn_yes{
+ 	display:inline-block;
+  	width:100px;
+	background-color: #007bff;
+	color: white;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid transparent; 
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+}
+
+
+.modal .modal_content {
+  	width:300px;
+  	margin:100px auto;
+  	padding:20px 10px;
+  	background:#fff;
+  	border:2px solid #666;
+}
+
+.modal .modal_layer {
+  	position:fixed;
+  	top:0;
+  	left:0;
+  	width:100%;
+  	height:100%;
+  	background:rgba(0, 0, 0, 0.5);
+  	z-index:-1;
+}   
+
+
+/* 테이블 */
+table{
+	border: 1px solid #000000;
+	border-collapse: collapse;
+}
+
+table th, td{
+	border: 1px solid #000000;
+}
+
+table th{
+	font-weight: bold;
+	font-size: large;
+	text-align: center;
+}
+
+.tb_td_title, .tb_td_writer{
+	text-align: left;
+	padding-left : 10px;
+}
+
+
+
+.tb_num, .tb_title, .tb_writer, .tb_view{
+	font-size: medium;
+	color: #000000;
+}
+
+.tb_num{
+	width: 10%;
+	text-align: center;
+}
+
+.tb_title{
+	width : 40%;
+}
+
+.tb_writer{
+	width: 20%;	
+}
+
+.tb_view{
+	width: 10%;
+	text-align: center;
+}
+
+
+
+/* a */
+
+a{
+	color : #000000;
+	font-weight: bold;
+}
+
+/* span */
+span{
+	color : #000000;
+}
+
+
 </style>
 <body>
 <script type="text/javascript">
@@ -266,34 +329,3 @@ $(document).ready(function(){
         </div>
     </nav>
     <!-- Navbar End -->
-
-
-    <!-- Header Start -->
-    <div class="container-fluid hero-header bg-light py-5 mb-5">
-        <div class="container py-5">
-            <div class="row g-5 align-items-center">
-                <div class="col-lg-6">
-                    <h1 class="display-4 mb-3 animated slideInDown">Welcome to the May</h1>
-                    <p class="animated slideInDown">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu
-                        diam amet diam et eos. Clita erat ipsum et lorem et sit, sed  stet lorem sit clita duo justo
-                        magna dolore erat</p>
-                    <a href="" class="btn btn-primary py-3 px-4 animated slideInDown">Explore More</a>
-                </div>
-                <div class="col-lg-6 animated fadeIn">
-                    <img class="img-fluid animated pulse infinite" style="animation-duration: 3s;" src="../resources/img/hero-1.png"
-                        alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Header End -->
-
-
-
-
-
-
-
-
-	
-	

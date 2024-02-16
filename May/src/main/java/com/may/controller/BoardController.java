@@ -46,6 +46,7 @@ public class BoardController {
 	@RequestMapping(value = "boRead", method = RequestMethod.GET)
 	public void boReadGET(Integer bo_num, Model model) {
 		logger.debug("boReadGET(Integer bo_num)호출");
+		logger.debug(" 조회수 증가 : " + bService.boViewUp(bo_num));
 		model.addAttribute("boRead", bService.boRead(bo_num));
 	}
 	
@@ -59,10 +60,10 @@ public class BoardController {
 	
 	// 글 수정 POST
 	@ResponseBody
-	@RequestMapping(value = "boModify", method = RequestMethod.POST)
-	public int boModifyPOST(BoardVO boardVO) {
-		logger.debug("boModifyPOST(BoardVO boardVO)호출");
-		return  bService.boModify(boardVO);
+	@RequestMapping(value = "boUpdate", method = RequestMethod.POST)
+	public int boUpdatePOST(BoardVO boardVO) {
+		logger.debug("boUpdatePOST(BoardVO boardVO)호출");
+		return  bService.boUpdate(boardVO);
 	}
 	
 	

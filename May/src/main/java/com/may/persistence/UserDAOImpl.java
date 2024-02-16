@@ -23,13 +23,13 @@ public class UserDAOImpl {
 	@Inject
 	private SqlSession sqlSession;
 	
-	private static final String NAMESPACE = "com.mayeye.mapper.UserMapper";
+	private static final String NAMESPACE = "com.may.mapper.UserMapper";
 	
 	// 현재시간 
 	public String getTime() {
       //디비연결
       SqlSession sqlSession = sqlFactory.openSession();
-      String time = sqlSession.selectOne("com.mayeye.mapper.userMapper.getTime");
+      String time = sqlSession.selectOne("com.may.mapper.userMapper.getTime");
       return time;
    }
    
@@ -63,20 +63,28 @@ public class UserDAOImpl {
       return sqlSession.selectOne(NAMESPACE + ".userInfo",us_id);
    }
 
+   // 회원 비밀번호 체크(정보수정)
+   public String userPwCheck(String us_id) {
+	   logger.debug("DAOImpl : userPwCheck(String us_id) 호출");
+	   return sqlSession.selectOne(NAMESPACE + ".userPwCheck", us_id);	   
+   }
+   
+   // 회원 비밀번호 변경(정보수정)
+   public int userPwUpdate(UserVO userVO) {
+	   logger.debug("DAOImpl : userPwUpdate(UserVO userVO) 호출");
+	   return sqlSession.update(NAMESPACE + ".userPwUpdate", userVO);	   
+   }
    
    // 회원정보 수정
-   public void userInfoUpdate(UserVO userInfoUpdateVO) {
-	   logger.debug("DAOImpl : userInfoUpdate(UserVO userInfoUpdateVO) 호출");
-	   sqlSession.update(NAMESPACE + ".userInfoUpdate", userInfoUpdateVO);
-       logger.debug(" DAOImpl : 수정완료");
-         
+   public int userInfoUpdate(UserVO userVO) {
+	   logger.debug("DAOImpl : userInfoUpdate(UserVO userVO) 호출");
+	   return sqlSession.update(NAMESPACE + ".userInfoUpdate", userVO);
   }
 
    // 회원 탈퇴
-   public int userDelete(UserVO deleteVO) {
-	   logger.debug("DAOImpl : userDelete(UserVO deleteVO)호출 ");
-	   logger.debug("DAOImpl : 탈퇴 완료");
-	   return sqlSession.delete(NAMESPACE + ".userDelete",deleteVO);
+   public int userDelete(String us_id) {
+	   logger.debug("DAOImpl : userDelete(String us_id)호출 ");
+	   return sqlSession.delete(NAMESPACE + ".userDelete",us_id);
    }
       
       

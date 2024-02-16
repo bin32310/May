@@ -1,7 +1,5 @@
 package com.may.service;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -55,17 +53,28 @@ public class UserServiceImpl {
       return udao.userInfo(us_id);
    }
 	
+	// 회원 비밀번호 체크(정보수정)
+	public String userPwCheck(String us_id) {
+		logger.debug("ServiceImpl : userPwCheck(userVO)호출");
+		return udao.userPwCheck(us_id);
+	}
+	
+	// 회원 비밀번호 변경
+	public int userPwUpdate(UserVO userVO) {
+		logger.debug("ServiceImpl : userPwUpdate(userVO)호출");
+		return udao.userPwUpdate(userVO);
+	}
+
 	// 회원정보 수정
-	public void userInfoUpdate(UserVO userInfoUpdateVO) {
-		logger.debug("ServiceImpl : userInfoUpdate(userInfoUpdateVo)호출");
-		udao.userInfoUpdate(userInfoUpdateVO);
+	public int userInfoUpdate(UserVO userVO) {
+		logger.debug("ServiceImpl : userInfoUpdate(userVO)호출");
+		return udao.userInfoUpdate(userVO);
 	}
 	
 	// 회원탈퇴
-	public int userDelete(UserVO deleteVO) {
-		logger.debug("ServiceImpl : userDelete(UserVO deleteVO) 호출");
-		int result = udao.userDelete(deleteVO);
-		return result;
+	public int userDelete(String us_id) {
+		logger.debug("ServiceImpl : userDelete(String us_id) 호출");
+		return udao.userDelete(us_id);
 	}
 	      
 
