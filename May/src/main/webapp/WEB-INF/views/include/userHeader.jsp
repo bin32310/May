@@ -52,7 +52,7 @@
 .btn_blue{
  	display:inline-block;
   	width:100px;
-	background-color: #007bff;
+	background-color: #16D5FF;
 	color: white;
     font-weight: 400;
     text-align: center;
@@ -200,6 +200,9 @@ table th{
 	font-weight: bold;
 	font-size: large;
 	text-align: center;
+	background-color: #16D5FF ;
+	opacity : 0.7;
+	
 }
 
 .tb_td_title, .tb_td_writer{
