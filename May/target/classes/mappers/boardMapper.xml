@@ -34,9 +34,17 @@
 		select b.*, u.us_nickname 
 		from board b join us u 
 		on b.us_id = u.us_id 
-		where b.bo_state = "등록" 
-		order by b.bo_num desc 
+		where b.bo_state = "등록"  
+		order by b.bo_num desc  
+		limit #{pageStart},#{pageSize} 
 	</select> 
+	
+	<!-- 전체 글 수 조회 -->
+	<select id="boardCount" resultType="int">
+		select count(*) from board 
+		where bo_state ="등록"   
+	</select>
+	
 	
 	<!-- 글쓰기 -->
 	<insert id="boWrite">
