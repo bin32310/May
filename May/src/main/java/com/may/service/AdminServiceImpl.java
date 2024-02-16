@@ -9,7 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.may.domain.BoardVO;
+import com.may.domain.Criteria;
 import com.may.domain.NoticeVO;
+import com.may.domain.UserVO;
 import com.may.persistence.AdminDAOImpl;
 import com.may.persistence.BoardDAOImpl;
 
@@ -20,23 +22,23 @@ public class AdminServiceImpl {
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminServiceImpl.class);
 	
-	// NoticeDAO 객체 주입
+	// AdminDAO 객체 주입
 	@Inject
 	private AdminDAOImpl adao;
 	
 	// 메인 화면
+
 	
-	// 공지사항 게시판 리스트
-	public List<NoticeVO> noList(){
-		logger.debug("noList() 호출");
-		return adao.noticeList();
+	// 전체 회원 목록 조회
+	public List<UserVO> userList(Criteria cri) throws Exception{
+		logger.debug("userList(Criteria cri) 호출");
+		return adao.userList(cri);
 	}
 	
-	
-	// 글쓰기
-	public int noWrite(NoticeVO noticeVO) {
-		logger.debug("noWrite(NoticeVO noticeVO) 호출 ");
-		return 	adao.noWrite(noticeVO);
-		
+	// 전체 회원 수 조회
+	public int userCount(Criteria cri) throws Exception {
+		logger.debug("service : userCount() 호출 ");
+		return adao.userCount(cri);
 	}
+	
 }

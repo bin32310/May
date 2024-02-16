@@ -15,7 +15,7 @@ public class Criteria{
 	// 기본 설정
 	public Criteria() {
 		this.page = 1;
-		this.pageSize = 3; // 한페이지에 표시되는 리스트 개수
+		this.pageSize = 5; // 한페이지에 표시되는 리스트 개수
 	}
 	
 	// 

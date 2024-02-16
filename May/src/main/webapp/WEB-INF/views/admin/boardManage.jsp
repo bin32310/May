@@ -4,8 +4,8 @@
 
 
 <!-- 	
-		<h1> /admin/adminMain.jsp</h1>
-		<h1> 관리자 페이지</h1>
+		<h1> /admin/boardManage.jsp</h1>
+		<h1> 글 관리 페이지</h1>
 -->
 
 

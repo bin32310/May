@@ -10,8 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
-import com.may.domain.BoardVO;
-import com.may.domain.NoticeVO;
+import com.may.domain.Criteria;
+import com.may.domain.UserVO;
 
 @Repository(value="adminDAO")
 public class AdminDAOImpl {
@@ -28,16 +28,17 @@ public class AdminDAOImpl {
 	
 	private static final String NAMESPACE = "com.may.mapper.AdminMapper";
 	
-	// 공지사항 전체 글 목록 조회
-	public List<NoticeVO> noticeList(){
-		logger.debug("DAOImpl : noticeList() 호출");
-		return sqlSession.selectList(NAMESPACE + ".noticeList");
-	}
 	
-	// 공지사항 글쓰기
-	public int noWrite(NoticeVO noticeVO) {
-		logger.debug("DAOImpl : noWrite(NoticeVO noticeVO) 호출");
-		return sqlSession.insert(NAMESPACE + ".noWrite", noticeVO);
+	// 전체 회원 목록 조회
+	public List<UserVO> userList(Criteria cri) throws Exception {
+		logger.debug("userList(Criteria cri) 호출");
+		return sqlSession.selectList(NAMESPACE + ".userList", cri);
+	}
+		
+	// 전체 회원 수 조회
+	public int userCount(Criteria cri) throws Exception {
+		logger.debug("userCount(Criteria cri) 호출");
+		return sqlSession.selectOne(NAMESPACE + ".userCount",cri);
 	}
 	
 	

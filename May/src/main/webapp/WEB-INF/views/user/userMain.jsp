@@ -19,7 +19,7 @@ table td .tb_view{
 
 
 </style>
-<c:if test="${!empty us_id && us_id.equals(admin)}">
+<c:if test="${!empty us_id && us_id.equals('admin')}">
 		<c:redirect url="../admin/adminMain"/>
 </c:if>
 <!-- 	
@@ -46,7 +46,7 @@ table td .tb_view{
 
 	
 	<div class="board_section">
-		<c:if test="${!empty us_id && !us_id.equals(admin)}">
+		<c:if test="${!empty us_id && !us_id.equals('admin')}">
 				<input type="button" class="btn_blue" value="글쓰기" onclick="location.href='../board/boWrite';"> <br><br>
 		</c:if>
 		<div id="board_list"> <!-- list_section -->

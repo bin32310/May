@@ -62,7 +62,7 @@
 					
 					<input type="text" id="us_name" class="login_input" name="us_name" placeholder="이름" required="required"> <br> 
 					
-					<input type="text" id="us_nickname" class="login_input" name="us_nickname" placeholder="닉네임" required="required" onkeyup="nicknameCheck();"> <br> 
+					<input type="text" id="us_nickname" class="login_input" name="us_nickname" placeholder="닉네임(8자 이하)" required="required" onkeyup="nicknameCheck();"> <br> 
 					<span class="nick_check" id="nick_no"> 닉네임은 8자 이하만 가능합니다.</span>
 					
 					<input type="text" id="us_tel" class="login_input" name="us_tel" placeholder="휴대폰번호" required="required">
@@ -85,6 +85,8 @@ $(document).ready(function(){
 	
 	// 회원가입
 	$('#us_join_btn').click(function(){
+		
+		if()
 		
 			$.ajax({       
 				type : "post",
