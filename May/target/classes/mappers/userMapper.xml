@@ -76,7 +76,7 @@
    <!-- 회원 탈퇴 처리 -->
    <update id="userDelete">
       update us set us_state = "탈퇴" 
-      where us_id=#{us_id} and us_pw=#{us_pw}
+      where us_id=#{us_id}
    </update>
     
   

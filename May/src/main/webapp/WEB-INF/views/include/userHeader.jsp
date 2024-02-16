@@ -241,6 +241,11 @@ a{
 	font-weight: bold;
 }
 
+/* span */
+span{
+	color : #000000;
+}
+
 
 </style>
 <body>

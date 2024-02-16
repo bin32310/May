@@ -198,7 +198,7 @@ function joinCheck(){
 
 //뒤로가기 
 function backTo(){
-	window.history.back(); 
+	history.back(); 
 }
 
 </script>

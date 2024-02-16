@@ -73,7 +73,7 @@ $(document).ready(function(){
 					alert("로그인 성공");
 					location.replace("/user/userMain");
 				}else{
-					alert("아이디 또는 비밀번호가 틀렸습니다.");
+					alert("회원정보가 없습니다.");
 				}
 			} // success 끝	
 		}); // ajax 끝

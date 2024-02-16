@@ -15,13 +15,25 @@
 	color:RED;
 }
 
-#us_update_check{
+#us_update_check , #us_update_not{
 	display: none;
 }
 
 .text_area{
 	width: 80px;
 	height: 30px;
+}
+
+#us_pw_new_msg{
+	display  :none;
+	color : red;
+}
+
+.mypage_section{
+	width: 50%;
+	margin-left: 25%;
+	margin-right: 25%;
+	text-align: center;
 }
 
 </style>
@@ -35,44 +47,62 @@
 -->
 	<div>
 		<br><hr><br><br>
-		<div >
-			<form action="" id="us_info_form" name="us_info_form" method="POST" onsubmit="joinCheck();">
+		<div class="mypage_section">
+			<div class ="userInfo_section">
 				<h1> 내정보 </h1>
-				<div class="text_area"> 아이디 </div> <input type="text" id="us_id" name="us_id" value="${userInfo.us_id }" required="required" disabled="disabled"> <br><br>
-				<div class="text_area"> 이름 </div> <input type="text" id="us_name" name="us_name" value="${userInfo.us_name }" required="required" disabled="disabled"> <br><br>
-				<div class="text_area"> 닉네임 </div> <input type="text" id="us_nickname" name="us_nickname" value="${userInfo.us_nickname }" required="required" disabled="disabled" onkeyup="nicknameCheck();"> <br><br> 
-				<div class="text_area"> 전화번호 </div> <input type="text" id="us_tel" name="us_tel" value="${userInfo.us_tel }" required="required" disabled="disabled"> <br><br>
-				<input type="button" id="us_pw_update" value="비밀번호 변경">  
-				<input type="button" id="us_update" value="수정하기">
-				<input type="button" id="us_update_check" value="수정완료">
-				<input type="button" id="us_delete" value="탈퇴하기">
-			</form>
+				<br>
+				<form action="" id="us_info_form" name="us_info_form" method="POST" onsubmit="joinCheck();">
+					<div>
+
+					</div>
+					<span class="text_area"> 아이디 </span> <input type="text" id="us_id" name="us_id" value="${userInfo.us_id }" required="required" disabled="disabled"> <br><br>
+					<span class="text_area"> 이름 </span> <input type="text" id="us_name" name="us_name" value="${userInfo.us_name }" required="required" disabled="disabled"> <br><br>
+					<span class="text_area"> 닉네임 </span> <input type="text" id="us_nickname" name="us_nickname" value="${userInfo.us_nickname }" required="required" disabled="disabled" onkeyup="nicknameCheck();"> <br><br> 
+					<span class="text_area"> 전화번호 </span> <input type="text" id="us_tel" name="us_tel" value="${userInfo.us_tel }" required="required" disabled="disabled"> <br><br>
+					<input type="button" id="us_pw_update" class="btn_blue" value="비밀번호 변경" style="width:130px">  
+					<input type="button" id="us_update" class="btn_blue" value="수정하기">
+					<input type="button" id="us_update_check" class="btn_blue" value="수정완료">
+					<input type="button" id="us_update_not" class="btn_gray" value="수정취소">
+					<input type="button" id="us_delete" class="btn_gray" value="탈퇴하기">
+				</form>
+			</div>
 		</div>
 	</div>
 	
 <!-- 비밀번호 변경 버튼 클릭시 Modal -->
-<div id="pw_update_Modal" class="modal fade" role="dialog">
-	<div class="modal-dialog ">
-
-		<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title">비밀번호 변경</h4>
-				<form action="" id="us_pw_update_form" name="us_pw_update_form" method="POST" onsubmit="pwUpdateCheck();">
-					<input type="password" id="us_pw" name="us_pw" placeholder="현재 비밀번호" required="required">
-					<input type="password" id="us_pw_new" name="us_pw_new" placeholder="새 비밀번호" required="required">
-					<input type="password" id="us_pw_new_check" name="us_pw_new_check" placeholder="새비밀번호 확인" required="required">
-				</form>
-			</div>
-
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal" id="pwUpdateModalYes">변경</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal" id="pwUpdateModalNo">취소</button>
-			</div>
+<div id="pw_update_Modal" class="modal">
+	<div class="modal_content ">
+		<div class="modal_header">
+			<h4 class="modal-title">비밀번호 변경</h4>
+			<form action="" id="us_pw_update_form" name="us_pw_update_form" method="POST" onsubmit="pwUpdateCheck();">
+				<input type="password" id="us_pw" name="us_pw" placeholder="현재 비밀번호" required="required">
+				<input type="password" id="us_pw_new" name="us_pw_new" placeholder="새 비밀번호" required="required">
+				<input type="password" id="us_pw_new_check" name="us_pw_new_check" placeholder="새비밀번호 확인" required="required" onkeyup="pw_new_check_function();"><br>
+				<span id="us_pw_new_msg">새비밀번호와 일치하지 않습니다.</span>
+			</form>
+		</div>
+		<div class="modal_footer">
+			<button type="button" class="modal_btn_yes" id="pwUpdateModalYes" disabled="disabled">변경</button>
+			<button type="button" class="modal_btn_no" id="pwUpdateModalNo">취소</button>
 		</div>
 	</div>
+	<div class="modal_layer"></div>
 </div>	
-	
+
+<!-- 탈퇴하기 버튼 클릭시 Modal -->
+<div id="us_delete_Modal" class="modal">
+	<div class="modal_content ">
+		<div class="modal_header">
+			<h4 class="modal-title">정말 탈퇴하시겠습니까?</h4>
+		</div>
+		<div class="modal_footer">
+			<button type="button" class="modal_btn_yes" id="usDeleteModalYes">네</button>
+			<button type="button" class="modal_btn_no" id="usDeleteModalNo">아니오</button>
+		</div>
+	</div>
+	<div class="modal_layer"></div>
+</div>	
+
 <%@ include file="../include/userFooter.jsp" %>
 <script type="text/javascript">
 
@@ -83,64 +113,55 @@ $(document).ready(function(){
 		$('#us_update').css("display","none");
 		$('#us_pw_update').css("display","none");
 		$('#us_delete').css("display","none");
-		$('#us_update_check').css("display","block");
+		$('#us_update_check').css("display","inline");
+		$('#us_update_not').css("display","inline");
 		$('#us_nickname').attr("disabled",false);
+	});
+	
+	// 수정하기 취소
+	$('#us_update_not').click(function(){
+		$('#us_update').css("display","inline");
+		$('#us_pw_update').css("display","inline");
+		$('#us_delete').css("display","inline");
+		$('#us_update_check').css("display","none");
+		$('#us_update_not').css("display","none");
+		$('#us_nickname').attr("disabled",true);
 	});
 	
 	// 수정완료
 	$('#us_update_check').click(function(){
 			$.ajax({       
 				type : "post",
-				url : "/user/userMypageUpdate",
+				url : "/user/userInfoUpdate",
 				data : $("#us_info_form").serialize(),
 				dataType : "JSON",
 				error: function(){
-					alert("내정보 수정 에러");
+					alert("수정 에러");
 				},
 				success : function(data){
 					if(data==1){
-						alert("내정보 수정 완료");
+						alert("수정 완료");
 						location.reload();
 					}else{
-						alert("내정보 수정 실패");
+						alert("수정 실패");
 					}	
 				} // success 끝	
 			}); // ajax 끝
-	}); // #us_join_btn
+	}); // #us_update_check.click
 	
 	// 비밀번호 변경 
 	$('#us_pw_update').click(function(){
-		$('#pw_update_Modal').modal("show");
-	});
-	
-	// 비밀번호 변경시 현재 비밀번호 확인
-	$('#us_pw').click(function(){
-		var us_pw = $('#us_pw').val();
-		$.ajax({
-			type : "post",
-			url : "/user/userPwUpdateCheck",
-			data : {"us_pw" : us_pw},
-			dataType : "JSON",
-			error: function(){
-				alert("현재 비밀번호 확인 에러");
-			},
-			success : function(data){
-				if(data == 1){
-					console.log("현재 비밀번호 확인 성공");
-				}else{
-					console.log("현재 비밀번호 확인 실패");
-				}
-			} // success 끝	
-		}); // ajax 끝
+		$('#pw_update_Modal').css("display","block");
 	});
 	
 	// 비밀번호 변경 Yes
 	$('#pwUpdateModalYes').click(function(){
 		var us_pw_new = $('#us_pw_new').val();
+		var us_pw = $('#us_pw').val();
 		$.ajax({
 			type : "post",
 			url : "/user/userPwUpdate",
-			data : {"us_pw" : us_pw_new},
+			data : {"us_pw" : us_pw ,"us_pw_new" : us_pw_new },
 			dataType : "JSON",
 			error: function(){
 				alert("비밀번호 변경 에러");
@@ -150,16 +171,47 @@ $(document).ready(function(){
 					alert("비밀번호 변경 성공");
 					location.reload();
 				}else{
-					alert("비밀번호 변경 실패");
+					alert("비밀번호가 다릅니다.");
 					location.reload();
 				}
 			} // success 끝	
 		}); // ajax 끝
-	}); //#deleteModalYes.click
+	}); //#pwUpdateModalYes.click
 	
 	// 비밀번호 변경 No
 	$('#pwUpdateModalNo').click(function(){
-		$('#pw_update_Modal').modal("hide");		
+		$('#pw_update_Modal').css("display","none");	
+	});
+	
+	// 탈퇴하기
+	$('#us_delete').click(function(){
+		$('#us_delete_Modal').css("display","block");
+	});
+	
+	// 탈퇴하기 Yes
+	$('#usDeleteModalYes').click(function(){
+		$.ajax({
+			type : "post",
+			url : "/user/userDelete",
+			dataType : "JSON",
+			error: function(){
+				alert("탈퇴 에러");
+			},
+			success : function(data){
+				if(data == 1){
+					alert("탈퇴 완료");
+					location.href="../user/userMain";
+				}else{
+					alert("탈퇴 실패");
+					location.reload();
+				}
+			} // success 끝	
+		}); // ajax 끝
+	}); //#usDeleteModalYes.click
+	
+	// 탈퇴하기 No
+	$('#usDeleteModalNo').click(function(){
+		$('#us_delete_Modal').css("display","none");	
 	});
 	
 	
@@ -184,15 +236,21 @@ function nicknameCheck(){
 	}
 }
 
-function joinCheck(){
-	
-		console.log("회원가입 할수있는지 ");
+// 비밀번호 변경시 새 비밀번호 체크
+function pw_new_check_function(){
+	if($('#us_pw_new').val() ==  $('#us_pw_new_check').val()){
+		$('#us_pw_new_msg').css("display","none");
+		$('#pwUpdateModalYes').attr("disabled",false);
+	}else{
+		$('#us_pw_new_msg').css("display","block");
+		$('#pwUpdateModalYes').attr("disabled",true);
+	}
 
 }
 
 //뒤로가기 
 function backTo(){
-	window.history.back(); 
+	history.back(); 
 }
 
 </script>

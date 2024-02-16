@@ -145,11 +145,49 @@ public class UserController {
 	// 비밀번호 변경(userPwUpdate-POST)
 	@ResponseBody
 	@RequestMapping(value = "/userPwUpdate", method = RequestMethod.POST)
-	public void userPwUpdatePOST(HttpSession session, Model model) {
+	public int userPwUpdatePOST(String us_pw, String us_pw_new, HttpSession session) {
 		logger.debug("userPwUpdatePOST()호출");
 		// 세션 - 아이디
 		String us_id = (String) session.getAttribute("us_id");
-		model.addAttribute("userInfo", uService.userInfo(us_id));
+		
+		String pwCK = uService.userPwCheck(us_id);
+		if(pwCK == null || pwCK.equals("")|| !pwCK.equals(us_pw)) {
+			return 0;
+		}
+		UserVO userVO = new UserVO();
+		userVO.setUs_id(us_id);
+		userVO.setUs_pw(us_pw_new);
+		return uService.userPwUpdate(userVO);
+		
+	}
+	
+	// 내정보 변경(userInfoUpdate-POST)
+	@ResponseBody
+	@RequestMapping(value = "/userInfoUpdate", method = RequestMethod.POST)
+	public int userInfoUpdate(String us_nickname, HttpSession session) {
+		logger.debug("userInfoUpdatePOST()호출");
+		// 세션 - 아이디
+		String us_id = (String) session.getAttribute("us_id");
+		
+		if(us_nickname == null || us_nickname.equals("")) {
+			return 0;
+		}
+		UserVO userVO = new UserVO();
+		userVO.setUs_id(us_id);
+		userVO.setUs_nickname(us_nickname);
+		return uService.userInfoUpdate(userVO);
+	}
+	
+	// 회원 탈퇴하기(userDelete-POST)
+	@ResponseBody
+	@RequestMapping(value = "/userDelete", method = RequestMethod.POST)
+	public int userDelete(HttpSession session) {
+		logger.debug("userDeletePOST()호출");
+		if(uService.userDelete((String) session.getAttribute("us_id")) == 1) {
+			session.invalidate();
+			return 1;
+		}
+		return 0;
 	}
 
 }

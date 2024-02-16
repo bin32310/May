@@ -49,7 +49,7 @@
 				<h1> 글 작성 </h1>
 				<form action="" id="boWrite_form" name="boWrite_form" method="post">
 					<input type="text" id="bo_title" class="board_title" name="bo_title" placeholder="글제목" required="required"><br><br>	
-					<textarea rows="5" id="bo_content" calss="board_content" name="bo_content" placeholder="내용" required="required"></textarea><br><br>
+					<textarea rows="5" id="bo_content" class="board_content" name="bo_content" placeholder="내용" required="required" style="resize:none"></textarea><br><br>
 					<div id="button_section">
 						<input type="button" id="upload" class="btn_blue" value="등록하기">
 						<input type="button" id="back"  class="btn_gray" value="돌아가기" onclick="backTo();">
@@ -65,7 +65,7 @@ $(document).ready(function(){
 	//#us_join_form.validate
 	$("#boWrite_form").validate({
 		rules:{
-			bo_title:{required:true, rangelength:[1,30]},
+			bo_title:{required:true, rangelength:[1,20]},
 			bo_content:{required:true, maxlength:500 }
 		},
 		messages:{
