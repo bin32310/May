@@ -29,20 +29,20 @@ public class BoardDAOImpl {
 	private static final String NAMESPACE = "com.may.mapper.BoardMapper";
 	
 	// 전체 글 목록 조회
-	public List<BoardVO> boardList(Criteria cri)  throws Exception {
-		logger.debug("DAOImpl : boardList(Criteria cri) 호출");
+	public List<BoardVO> boardList(Criteria cri) throws Exception {
+		logger.debug("boardList(Criteria cri) 호출");
 		return sqlSession.selectList(NAMESPACE + ".boardList", cri);
 	}
 	
 	// 전체 글 수 조회
 	public int boardCount(Criteria cri) throws Exception {
-		logger.debug(" DAO : boardCount(Criteria cri) 호출");
+		logger.debug("boardCount(Criteria cri) 호출");
 		return sqlSession.selectOne(NAMESPACE + ".boardCount",cri);
 	}
 	
 	// 글쓰기
 	public int boWrite(BoardVO boardVO) {
-		logger.debug("DAOImpl : boWrite(BoardVO boardVO) 호출");
+		logger.debug("boWrite(BoardVO boardVO) 호출");
 			
 		return sqlSession.insert(NAMESPACE + ".boWrite", boardVO);
 	}

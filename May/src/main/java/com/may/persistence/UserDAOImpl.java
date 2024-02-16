@@ -35,55 +35,55 @@ public class UserDAOImpl {
    
    // 회원가입
    public int userJoin(UserVO joinVO) {
-	   logger.debug("DAOImpl : userJoin(UserVO joinVO)호출");
+	   logger.debug("userJoin(UserVO joinVO)호출");
       return sqlSession.insert(NAMESPACE + ".userJoin", joinVO);
    }
    
    // 회원가입 - user id 중복체크
    public String userIdCheck(String us_id) {
-	   logger.debug("DAOImpl : userIdCheck(String us_id)호출");
+	   logger.debug("userIdCheck(String us_id)호출");
 	   return sqlSession.selectOne(NAMESPACE + ".userIdCheck", us_id);
    }
    
    // 회원가입 - user tel 중복체크
    public String userTelCheck(String us_tel) {
-	   logger.debug("DAOImpl : userTelCheck(String us_tel)호출");
+	   logger.debug("userTelCheck(String us_tel)호출");
 	   return sqlSession.selectOne(NAMESPACE + ".userTelCheck", us_tel);
    }
    
    // 로그인
    public UserVO userLogin(UserVO loginVO) {
-      logger.debug("DAOImpl : userLogin()호출 ");
+      logger.debug("userLogin()호출 ");
       return sqlSession.selectOne(NAMESPACE + ".userLogin",loginVO);
    }
    
    // 회원 정보 조회(내정보)
    public UserVO userInfo(String us_id) {
-      logger.debug("DAOImpl : userInfo(String us_id) 호출 ");
+      logger.debug("userInfo(String us_id) 호출 ");
       return sqlSession.selectOne(NAMESPACE + ".userInfo",us_id);
    }
 
    // 회원 비밀번호 체크(정보수정)
    public String userPwCheck(String us_id) {
-	   logger.debug("DAOImpl : userPwCheck(String us_id) 호출");
+	   logger.debug("userPwCheck(String us_id) 호출");
 	   return sqlSession.selectOne(NAMESPACE + ".userPwCheck", us_id);	   
    }
    
    // 회원 비밀번호 변경(정보수정)
    public int userPwUpdate(UserVO userVO) {
-	   logger.debug("DAOImpl : userPwUpdate(UserVO userVO) 호출");
+	   logger.debug("userPwUpdate(UserVO userVO) 호출");
 	   return sqlSession.update(NAMESPACE + ".userPwUpdate", userVO);	   
    }
    
    // 회원정보 수정
    public int userInfoUpdate(UserVO userVO) {
-	   logger.debug("DAOImpl : userInfoUpdate(UserVO userVO) 호출");
+	   logger.debug("userInfoUpdate(UserVO userVO) 호출");
 	   return sqlSession.update(NAMESPACE + ".userInfoUpdate", userVO);
   }
 
    // 회원 탈퇴
    public int userDelete(String us_id) {
-	   logger.debug("DAOImpl : userDelete(String us_id)호출 ");
+	   logger.debug("userDelete(String us_id)호출 ");
 	   return sqlSession.delete(NAMESPACE + ".userDelete",us_id);
    }
       

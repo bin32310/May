@@ -14,15 +14,14 @@
   	<result property="us_nickname" column="us_nickname"/>
   	<result property="us_tel" column="us_tel"/>
   	<result property="us_state" column="us_state"/>
+  	<result property="us_joinDate" column="us_joinDate"/>
   </resultMap>
   
    	<!-- 현재 시스템 시간 -->
   	<select id="getTime" resultType="string">
       	select now() 
   	</select>
-  
-  	<!-- 유저 -->
-  
+    
  	<!-- 회원가입 -->
    	<insert id="userJoin">
       	insert into us(us_id,us_pw,us_name,us_nickname,us_tel) 

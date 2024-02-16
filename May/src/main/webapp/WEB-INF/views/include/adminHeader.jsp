@@ -154,7 +154,7 @@
 .modal .modal_btn_yes{
  	display:inline-block;
   	width:100px;
-	background-color: #16D5FF;
+	background-color: #007bff;
 	color: white;
     font-weight: 400;
     text-align: center;
@@ -256,7 +256,7 @@ span{
 $(document).ready(function(){
 	
 	// 로그아웃 버튼 클릭
-	$('#us_logout_btn').click(function(){
+	$('#logout_btn').click(function(){
 		
 		$.ajax({
 			type : "post",
@@ -267,7 +267,7 @@ $(document).ready(function(){
 			},
 			success : function(data){
 					alert("로그아웃 완료");
-					location.href="../user/userMain";
+					location.reload();
 
 			} // success 끝	
 		}); // ajax 끝
@@ -276,6 +276,9 @@ $(document).ready(function(){
 }); // documnet  끝
 </script>
 
+<c:if test="${empty us_id && !us_id.equals('admin')}">
+	<c:redirect url="../user/userMain"/>
+</c:if>
 
 	
     <!-- Spinner Start -->
@@ -299,10 +302,10 @@ $(document).ready(function(){
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-4 py-lg-0">
-                <a href="../user/userMain" class="nav-item nav-link active">Home</a>
-                <a href="about.html" class="nav-item nav-link">About</a>
-                <a href="service.html" class="nav-item nav-link">Service</a>
-                <a href="roadmap.html" class="nav-item nav-link">Roadmap</a>
+                <a href="../admin/adminMain" class="nav-item nav-link active">Home</a>
+                <a href="../admin/noticeManage" class="nav-item nav-link">공지관리</a>
+                <a href="../admin/userManage" class="nav-item nav-link">회원관리</a>
+                <a href="../admin/boardManage" class="nav-item nav-link">글관리</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                     <div class="dropdown-menu shadow-sm m-0">
@@ -315,18 +318,11 @@ $(document).ready(function(){
                 <a href="contact.html" class="nav-item nav-link">Contact</a>
             </div>
             <div class="h-100 d-lg-inline-flex align-items-center d-none">
-        		<c:if test="${empty us_id }">
-					<a href="../user/userLogin">로그인</a>&ensp;
-					<a href="../user/userJoin">회원가입</a>&ensp;
-				</c:if>
-				<c:if test="${!empty us_id && !us_id.equals('admin')}">
-					<a href="../user/userMypage">내정보</a>&ensp;
-				</c:if>
 				<c:if test="${!empty us_id && us_id.equals('admin')}">
 					<a href="../admin/adminMain">관리페이지</a>&ensp;
 				</c:if>
 				<c:if test="${!empty us_id}">
-					<a href="" id="us_logout_btn">로그아웃</a>&ensp;
+					<a href="" id="logout_btn">로그아웃</a>&ensp;
 				</c:if>
             </div>
         </div>
