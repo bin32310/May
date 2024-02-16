@@ -36,7 +36,7 @@ public class UserController {
 	// 유저 메인 페이지로 이동
 	@RequestMapping(value = "/userMain", method = RequestMethod.GET)
 	public void userMainGET(Criteria cri, HttpSession session, Model model)throws Exception {
-		logger.debug(" userMainGET()호출");
+		logger.debug("userMainGET()호출");
 		
 		// 페이징 처리( 페이지 블럭 처리 객체 )
 		PageVO pageVO = new PageVO();

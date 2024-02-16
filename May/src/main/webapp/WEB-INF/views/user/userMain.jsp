@@ -16,14 +16,12 @@ table td .tb_view{
 	text-align: center;
 }
 
-.pagination {
-	
-	padding-left: 50%;
-	padding-right: 0;
-	text-align: right;
-}
+
 
 </style>
+<c:if test="${!empty us_id && us_id.equals(admin)}">
+		<c:redirect url="../admin/adminMain"/>
+</c:if>
 <!-- 	
 		<h1> /user/userMain.jsp</h1>
 		<h1> 유저 메인페이지</h1>
