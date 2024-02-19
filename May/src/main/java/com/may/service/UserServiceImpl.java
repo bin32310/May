@@ -76,7 +76,6 @@ public class UserServiceImpl {
 		logger.debug("ServiceImpl : userDelete(String us_id) 호출");
 		return udao.userDelete(us_id);
 	}
-	      
 
 	
 }

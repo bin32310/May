@@ -187,7 +187,7 @@
 }   
 
 
-/* 테이블 */
+/* user 페이지 관련 테이블 */
 table{
 	border: 1px solid #000000;
 	border-collapse: collapse;
@@ -227,7 +227,7 @@ table th{
 	width : 40%;
 }
 
-.tb_writer{
+.tb_writer {
 	width: 20%;	
 }
 
@@ -236,6 +236,24 @@ table th{
 	text-align: center;
 }
 
+/* admin 페이지 관련 테이블 */
+
+.tb_us_state{
+	width: 10%;
+}
+
+.tb_us_name, .tb_us_nickname{
+	width : 15%;
+}
+
+.tb_us_id, .tb_us_tel{
+	width : 25%;
+}
+
+.tb_us_joinDate, .tb_us_outDate{
+	width : 20%;
+
+}
 
 
 /* a */
