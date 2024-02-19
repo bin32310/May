@@ -42,15 +42,15 @@ public class BoardDAOImpl {
 	}
 	
 	// 내 글 목록 조회
-	public List<BoardVO> myBoardList(Map map) throws Exception {
+	public List<BoardVO> myBoardList(Map<String, Object> map) throws Exception {
 		logger.debug("myBoardList(Map map) 호출");
 		return sqlSession.selectList(NAMESPACE + ".myBoardList", map);
 	}
 	
 	// 내 글 수 조회
-	public int myBoardCount() throws Exception {
-		logger.debug("myBoardCount() 호출");
-		return sqlSession.selectOne(NAMESPACE + ".myBoardCount");
+	public int myBoardCount(String us_id) throws Exception {
+		logger.debug("myBoardCount(String us_id) 호출");
+		return sqlSession.selectOne(NAMESPACE + ".myBoardCount",us_id);
 	}
 	
 	// 글쓰기

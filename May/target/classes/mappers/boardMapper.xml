@@ -48,19 +48,19 @@
 	</select>
 	
 	<!-- 내 글 목록(내정보) -->
- 	<select id="myBoardList" resultMap="BoardVO" parameterType="hashMap">
+ 	<select id="myBoardList" resultMap="BoardVO" >
 		select b.*, u.us_nickname 
 		from board b join us u 
 		on b.us_id = u.us_id 
-		where b.us_id = #{us_id} and b.bo_state = "등록"  
+		where b.us_id = #{userVO.us_id} and b.bo_state = "등록"  
 		order by b.bo_num desc  
-		limit #{pageStart},#{pageSize} 
+		limit #{cri.pageStart},#{cri.pageSize} 
 	</select> 
 	
 	<!-- 내 글 수 조회 -->
-	<select id="myBoardCount" resultType="int" parameterType="hashMap">
+	<select id="myBoardCount" resultType="int" >
 		select count(*) from board 
-		where us_id= #{us_id} bo_state ="등록"   
+		where us_id= #{us_id} and bo_state ="등록"   
 	</select>
 	
 	

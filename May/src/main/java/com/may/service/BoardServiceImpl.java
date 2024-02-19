@@ -39,15 +39,15 @@ public class BoardServiceImpl {
 	}
 	
 	// 내 글 목록 조회
-	public List<BoardVO> myBoardList(Map map) throws Exception{
+	public List<BoardVO> myBoardList(Map<String, Object> map) throws Exception{
 		logger.debug("myBoardList(Map map) 호출");
 		return bdao.myBoardList(map);
 	}
 	
 	// 내 글 수 조회
-	public int myBoardCount() throws Exception {
-		logger.debug("service : myBoardCount() 호출 ");
-		return bdao.myBoardCount();
+	public int myBoardCount(String us_id) throws Exception {
+		logger.debug("service : myBoardCount(String us_id) 호출 ");
+		return bdao.myBoardCount(us_id);
 	}
 	
 	

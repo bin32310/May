@@ -46,7 +46,11 @@
     <script src="../resources/js/main.js"></script>
     
 </head>
-
+<style>
+#us_logout_btn{
+	color : black;
+}
+</style>
 <body>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -87,7 +91,7 @@ $(document).ready(function(){
         	<a href="../user/userMain" class="navbar-brand d-flex align-items-center">
         
             	<img class="img-fluid me-2" src="../resources/img/icon-1.png" style="width:45px;">
-            		 <h2 class="m-0 text-primary">May	</h2>
+            		 <h2 class="m-0 text-primary">May</h2>
        
         	</a>
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -100,12 +104,10 @@ $(document).ready(function(){
                 <a href="service.html" class="nav-item nav-link">Service</a>
                 <a href="roadmap.html" class="nav-item nav-link">Roadmap</a>
                 <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                    <a href="../user/userMypage" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">마이페이지</a>
                     <div class="dropdown-menu shadow-sm m-0">
-                        <a href="feature.html" class="dropdown-item">Feature</a>
-                        <a href="token.html" class="dropdown-item">Token Sale</a>
-                        <a href="faq.html" class="dropdown-item">FAQs</a>
-                        <a href="404.html" class="dropdown-item">404 Page</a>
+                        <a href="../user/userMypage" class="dropdown-item">내정보</a>
+                        <a href="../user/userMyBoard" class="dropdown-item">내 글 관리</a>
                     </div>
                 </div>
                 <a href="contact.html" class="nav-item nav-link">Contact</a>
@@ -116,13 +118,13 @@ $(document).ready(function(){
 					<a href="../user/userJoin">회원가입</a>&ensp;
 				</c:if>
 				<c:if test="${!empty us_id && !us_id.equals('admin')}">
-					<a href="../user/userMypage">내정보</a>&ensp;
+					<a href="../user/userMypage">마이페이지</a>&ensp;
 				</c:if>
 				<c:if test="${!empty us_id && us_id.equals('admin')}">
 					<a href="../admin/adminMain">관리페이지</a>&ensp;
 				</c:if>
 				<c:if test="${!empty us_id}">
-					<a href="" id="us_logout_btn">로그아웃</a>&ensp;
+					<a id="us_logout_btn">로그아웃</a>&ensp;
 				</c:if>
             </div>
         </div>

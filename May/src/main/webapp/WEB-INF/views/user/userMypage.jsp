@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../include/userHeader.jsp" %>
 <style>
 
@@ -43,7 +44,7 @@
 
 </style>
 
-<c:if test="${ empty us_id}">
+<c:if test="${empty us_id}">
 	${"<script>alert('잘못된 접근입니다.');location.href='../user/userMain';</script>" }
 </c:if>
 <!-- 	
@@ -57,14 +58,11 @@
 				<h1> 내정보 </h1>
 				<br>
 				<form action="" id="us_info_form" name="us_info_form" method="POST" onsubmit="joinCheck();">
-					<div>
-
-					</div>
 					<span class="text_area"> 아이디 </span> <input type="text" id="us_id" name="us_id" value="${userInfo.us_id }" required="required" disabled="disabled"> <br><br>
 					<span class="text_area"> 이름 </span> <input type="text" id="us_name" name="us_name" value="${userInfo.us_name }" required="required" disabled="disabled"> <br><br>
 					<span class="text_area"> 닉네임 </span> <input type="text" id="us_nickname" name="us_nickname" value="${userInfo.us_nickname }" maxlength="8" disabled="disabled"> <br><br> 
 					<span class="nick_check" id="nickname_no"> 닉네임을 입력해주세요.</span>	
-					<span class="text_area"> 전화번호 </span> <input type="text" id="us_tel" name="us_tel" value="${userInfo.us_tel }" required="required" disabled="disabled"> <br><br>
+					<span class="text_area"> 전화번호 </span> <input type="text" id="us_tel" name="us_tel" value="${userInfo.us_tel }" disabled="disabled"> <br><br>
 					<input type="button" id="us_pw_update" class="btn_blue" value="비밀번호 변경" style="width:130px">  
 					<input type="button" id="us_update" class="btn_blue" value="수정하기">
 					<input type="button" id="us_update_check" class="btn_blue" value="수정완료">
@@ -73,52 +71,6 @@
 				</form>
 			</div>
 		</div>
-		
-		<div class="board_section">
-		<c:if test="${!empty us_id && !us_id.equals('admin')}">
-				<input type="button" class="btn_blue" value="글쓰기" onclick="location.href='../board/boWrite';"> <br><br>
-		</c:if>
-			<div id="board_list"> <!-- list_section -->
-				<table>
-					<tr>
-						<th class="tb_num">번호</th>
-						<th class="tb_title">제목</th>
-						<th class="tb_writer">글쓴이</th>
-						<th class="tb_view">조회수</th>
-					</tr>
-					<c:forEach var="bl" items="${boardList}">
-							<tr>
-								<td class="tb_num"> ${bl.bo_num }</td>
-								<td class="tb_title tb_td_title"><a href="../board/boRead?bo_num=${bl.bo_num}"> ${bl.bo_title }</a></td>
-								<td class="tb_writer tb_td_writer"> ${bl.userVO.us_nickname }</td>
-								<td class="tb_view"> ${bl.bo_view }</td>
-							</tr>
-					</c:forEach>
-				</table>
-			</div><!-- list_section -->
-			<!-- 페이지 번호 -->
-			<div class="board_clearfix">
-				<ul class="pagination pagination-sm no-margin pull-right">
-					<c:if test="${pageVO.prev == true }">
-						<li><a href="userMypage?page=${pageVO.startPage-1 }">«</a></li>
-						&nbsp
-					</c:if>
-					
-					<c:forEach var="i" begin="${pageVO.startPage }" end="${pageVO.endPage }" step="1">
-						&nbsp&nbsp
-						<li ${pageVO.cri.page == i? 'class="active"':'' }><a href="userMypage?page=${i }">${i }</a></li>
-						&nbsp&nbsp
-					</c:forEach>
-					
-					<c:if test="${pageVO.next == true }">
-						&nbsp
-						<li><a href="userMypage?page=${pageVO.endPage+1 }">»</a></li>
-					</c:if>
-				</ul>
-			</div>
-		
-	</div>
-		
 	</div>
 	
 <!-- 비밀번호 변경 버튼 클릭시 Modal -->
@@ -127,11 +79,11 @@
 		<div class="modal_header">
 			<h4 class="modal-title">비밀번호 변경</h4>
 			<form action="" id="us_pw_update_form" name="us_pw_update_form" method="POST">
-				<input type="password" id="us_pw" name="us_pw" placeholder="현재 비밀번호">
+				<input type="text" id="us_pw" name="us_pw" placeholder="현재 비밀번호">
 				<span id="us_pw_msg">8이상 16자 이하만 가능합니다.</span>
-				<input type="password" id="us_pw_new" name="us_pw_new" placeholder="새 비밀번호">
+				<input type="text" id="us_pw_new" name="us_pw_new" placeholder="새 비밀번호">
 				<span id="us_pw_new_msg">8이상 16자 이하만 가능합니다.</span>
-				<input type="password" id="us_pw_new_check" name="us_pw_new_check" placeholder="새비밀번호 확인"><br>
+				<input type="text" id="us_pw_new_check" name="us_pw_new_check" placeholder="새비밀번호 확인"><br>
 				<span id="us_pw_new_check_msg">새비밀번호와 일치하지 않습니다.</span>
 			</form>
 		</div>
@@ -315,7 +267,14 @@ $(document).ready(function(){
 	
 	// 비밀번호 변경 No
 	$('#pwUpdateModalNo').click(function(){
-		$('#pw_update_Modal').css("display","none");	
+		$('#pw_update_Modal').css("display","none");
+		$('#us_pw').val("");
+		$('#us_pw_new').val("");
+		$('#us_pw_new_check').val("");
+		$('#us_pw_msg').css("display","none");
+		$('#us_pw_new_msg').css("display","none");
+		$('#us_pw_new_check_msg').css("display","none");
+		
 	});
 	
 	// 탈퇴하기

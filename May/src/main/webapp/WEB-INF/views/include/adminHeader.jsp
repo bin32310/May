@@ -252,6 +252,7 @@ span{
 
 </style>
 <body>
+
 <script type="text/javascript">
 $(document).ready(function(){
 	
@@ -267,7 +268,7 @@ $(document).ready(function(){
 			},
 			success : function(data){
 					alert("로그아웃 완료");
-					location.reload();
+					location.href="../user/userMain";
 
 			} // success 끝	
 		}); // ajax 끝
@@ -275,12 +276,10 @@ $(document).ready(function(){
 	}); // #us_logout_btn.click 끝
 }); // documnet  끝
 </script>
-
 <c:if test="${empty us_id && !us_id.equals('admin')}">
-	<c:redirect url="../user/userMain"/>
+	${"<script>alert('잘못된 접근입니다.');location.href='../user/userMain';</script>" }
 </c:if>
 
-	
     <!-- Spinner Start -->
     <div id="spinner"
         class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
