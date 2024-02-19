@@ -53,7 +53,7 @@
 			</div>
 		</div>
 	</div>
-<%@ include file="../include/userFooter.jsp" %>
+<%@ include file="../include/footer.jsp" %>
 <script type="text/javascript">
 $(document).ready(function(){
 	

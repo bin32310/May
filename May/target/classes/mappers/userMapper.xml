@@ -15,6 +15,7 @@
   	<result property="us_tel" column="us_tel"/>
   	<result property="us_state" column="us_state"/>
   	<result property="us_joinDate" column="us_joinDate"/>
+  	<result property="us_outDate" column="us_outDate"/>
   </resultMap>
   
    	<!-- 현재 시스템 시간 -->
@@ -74,7 +75,7 @@
 
    <!-- 회원 탈퇴 처리 -->
    <update id="userDelete">
-      update us set us_state = "탈퇴" 
+      update us set us_state = "탈퇴" , us_outDate = now()  
       where us_id=#{us_id}
    </update>
     

@@ -48,8 +48,8 @@
 			<div class="write_section">
 				<h1> 글 작성 </h1>
 				<form action="" id="boWrite_form" name="boWrite_form" method="post">
-					<input type="text" id="bo_title" class="board_title" name="bo_title" placeholder="글제목" required="required"><br><br>	
-					<textarea rows="5" id="bo_content" class="board_content" name="bo_content" placeholder="내용" required="required" style="resize:none"></textarea><br><br>
+					<input type="text" id="bo_title" class="board_title" name="bo_title" placeholder="글제목" ><br><br>	
+					<textarea rows="5" id="bo_content" class="board_content" name="bo_content" placeholder="내용" style="resize:none"></textarea><br><br>
 					<div id="button_section">
 						<input type="button" id="upload" class="btn_blue" value="등록하기">
 						<input type="button" id="back"  class="btn_gray" value="돌아가기" onclick="backTo();">
@@ -58,49 +58,70 @@
 			</div>
 		</div>
 	</div>
-<%@ include file="../include/userFooter.jsp" %>
+<%@ include file="../include/footer.jsp" %>
 <script type="text/javascript">
 $(document).ready(function(){
 	
-	//#us_join_form.validate
-	$("#boWrite_form").validate({
-		rules:{
-			bo_title:{required:true, rangelength:[1,20]},
-			bo_content:{required:true, maxlength:500 }
-		},
-		messages:{
-			bo_title:{required:"제목을 입력해주세요.", rangelength:"제목은 {0}자 이상, {1}자 이하만 가능합니다." },
-			bo_content:{required:"내용을 입력해주세요.", maxlength:"내용은 {0}자까지만 입력 가능합니다."}
+	var title_ok = false;
+	var content_ok = false;
+	
+	// 글제목 체크 
+	$('#bo_title').keyup(function(){
+		if($('#bo_title').val().length >= 1){
+			title_ok = true;
+		}else{
+			title_ok = false;
 		}
-	}); // #boWrite_form.validate
+	}); // ('#bo_title').keyup 끝
+	
+	// 글내용 체크 
+	$('#bo_content').keyup(function(){
+		if($('#bo_content').val().length >= 1){
+			content_ok = true;
+		}else{
+			content_ok = false;
+		}
+	}); // ('#bo_content').keyup 끝
+	
 	
 	// 등록하기 버튼 클릭 시
 	$('#upload').click(function(){
-		if($("#boWrite_form").valid()){
-			console.log("if");
-			$.ajax({
-				type : "post",
-				url : "/board/boWrite",
-				data : $("#boWrite_form").serialize(),
-				dataType : "JSON",
-				error: function(){
-					alert("글 등록 에러");
-				},
-				success : function(data){
-					if(data == 1){
-						alert("글 등록 성공");
-						location.replace("/user/userMain");
-					}else{
-						alert("글 등록 실패");
-					}
-				} // success 끝	
-			}); // ajax 끝
-		} // if
+		
+		if(!title_ok){
+			alert("제목을 입력해주세요.");
+			$('#bo_title').focus();
+			return;
+		}
+		
+		if(!content_ok){
+			alert("내용을 입력해주세요.");
+			$('#bo_content').focus();
+			return;
+		}
+		
+
+		$.ajax({
+			type : "post",
+			url : "/board/boWrite",
+			data : $("#boWrite_form").serialize(),
+			dataType : "JSON",
+			error: function(){
+				alert("글작성 에러");
+			},
+			success : function(data){
+				if(data >= 1){
+					alert("글작성 완료");
+					location.href="/board/boRead?bo_num="+data;
+				}else{
+					alert("글작성 실패");
+				}
+			} // success 끝	
+		}); // ajax 끝
 	}); // #upload.click
 	
 	
 	
-});			
+}); // document.ready			
 		
 	
 //뒤로가기 

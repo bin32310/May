@@ -1,6 +1,7 @@
 package com.may.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -32,9 +33,21 @@ public class BoardServiceImpl {
 	}
 	
 	// 전체 글 수 조회
-	public int boardCount(Criteria cri) throws Exception {
+	public int boardCount() throws Exception {
 		logger.debug("service : boardCount() 호출 ");
-		return bdao.boardCount(cri);
+		return bdao.boardCount();
+	}
+	
+	// 내 글 목록 조회
+	public List<BoardVO> myBoardList(Map map) throws Exception{
+		logger.debug("myBoardList(Map map) 호출");
+		return bdao.myBoardList(map);
+	}
+	
+	// 내 글 수 조회
+	public int myBoardCount() throws Exception {
+		logger.debug("service : myBoardCount() 호출 ");
+		return bdao.myBoardCount();
 	}
 	
 	
@@ -42,6 +55,12 @@ public class BoardServiceImpl {
 	public int boWrite(BoardVO boardVO) {
 		logger.debug("boWrite(BoardVO boardVO) 호출 ");
 		return 	bdao.boWrite(boardVO);
+	}
+	
+	// 가장 최신 글 가져오기
+	public int getBoMaxNum() {
+		logger.debug("getBoMaxNum() 호출 ");
+		return bdao.getBoMaxNum();
 	}
 	
 	// 글읽기

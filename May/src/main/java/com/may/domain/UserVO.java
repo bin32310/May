@@ -19,5 +19,6 @@ public class UserVO {
 	private String us_tel; // 전화번호
 	private String us_state; // 회원 상태(정상, 탈퇴)
 	private Date us_joinDate; // 회원가입일
+	private Date us_outDate; // 회원탈퇴일
 
 }

@@ -24,7 +24,7 @@
 	height: 30px;
 }
 
-#us_pw_new_msg{
+#us_pw_msg, #us_pw_new_msg, #us_pw_new_check_msg{
 	display  :none;
 	color : red;
 }
@@ -34,6 +34,11 @@
 	margin-left: 25%;
 	margin-right: 25%;
 	text-align: center;
+}
+
+#nickname_no{
+	display  :none;
+	color:RED;
 }
 
 </style>
@@ -57,7 +62,8 @@
 					</div>
 					<span class="text_area"> 아이디 </span> <input type="text" id="us_id" name="us_id" value="${userInfo.us_id }" required="required" disabled="disabled"> <br><br>
 					<span class="text_area"> 이름 </span> <input type="text" id="us_name" name="us_name" value="${userInfo.us_name }" required="required" disabled="disabled"> <br><br>
-					<span class="text_area"> 닉네임 </span> <input type="text" id="us_nickname" name="us_nickname" value="${userInfo.us_nickname }" required="required" disabled="disabled" onkeyup="nicknameCheck();"> <br><br> 
+					<span class="text_area"> 닉네임 </span> <input type="text" id="us_nickname" name="us_nickname" value="${userInfo.us_nickname }" maxlength="8" disabled="disabled"> <br><br> 
+					<span class="nick_check" id="nickname_no"> 닉네임을 입력해주세요.</span>	
 					<span class="text_area"> 전화번호 </span> <input type="text" id="us_tel" name="us_tel" value="${userInfo.us_tel }" required="required" disabled="disabled"> <br><br>
 					<input type="button" id="us_pw_update" class="btn_blue" value="비밀번호 변경" style="width:130px">  
 					<input type="button" id="us_update" class="btn_blue" value="수정하기">
@@ -67,6 +73,52 @@
 				</form>
 			</div>
 		</div>
+		
+		<div class="board_section">
+		<c:if test="${!empty us_id && !us_id.equals('admin')}">
+				<input type="button" class="btn_blue" value="글쓰기" onclick="location.href='../board/boWrite';"> <br><br>
+		</c:if>
+			<div id="board_list"> <!-- list_section -->
+				<table>
+					<tr>
+						<th class="tb_num">번호</th>
+						<th class="tb_title">제목</th>
+						<th class="tb_writer">글쓴이</th>
+						<th class="tb_view">조회수</th>
+					</tr>
+					<c:forEach var="bl" items="${boardList}">
+							<tr>
+								<td class="tb_num"> ${bl.bo_num }</td>
+								<td class="tb_title tb_td_title"><a href="../board/boRead?bo_num=${bl.bo_num}"> ${bl.bo_title }</a></td>
+								<td class="tb_writer tb_td_writer"> ${bl.userVO.us_nickname }</td>
+								<td class="tb_view"> ${bl.bo_view }</td>
+							</tr>
+					</c:forEach>
+				</table>
+			</div><!-- list_section -->
+			<!-- 페이지 번호 -->
+			<div class="board_clearfix">
+				<ul class="pagination pagination-sm no-margin pull-right">
+					<c:if test="${pageVO.prev == true }">
+						<li><a href="userMypage?page=${pageVO.startPage-1 }">«</a></li>
+						&nbsp
+					</c:if>
+					
+					<c:forEach var="i" begin="${pageVO.startPage }" end="${pageVO.endPage }" step="1">
+						&nbsp&nbsp
+						<li ${pageVO.cri.page == i? 'class="active"':'' }><a href="userMypage?page=${i }">${i }</a></li>
+						&nbsp&nbsp
+					</c:forEach>
+					
+					<c:if test="${pageVO.next == true }">
+						&nbsp
+						<li><a href="userMypage?page=${pageVO.endPage+1 }">»</a></li>
+					</c:if>
+				</ul>
+			</div>
+		
+	</div>
+		
 	</div>
 	
 <!-- 비밀번호 변경 버튼 클릭시 Modal -->
@@ -74,15 +126,17 @@
 	<div class="modal_content ">
 		<div class="modal_header">
 			<h4 class="modal-title">비밀번호 변경</h4>
-			<form action="" id="us_pw_update_form" name="us_pw_update_form" method="POST" onsubmit="pwUpdateCheck();">
-				<input type="password" id="us_pw" name="us_pw" placeholder="현재 비밀번호" required="required">
-				<input type="password" id="us_pw_new" name="us_pw_new" placeholder="새 비밀번호" required="required">
-				<input type="password" id="us_pw_new_check" name="us_pw_new_check" placeholder="새비밀번호 확인" required="required" onkeyup="pw_new_check_function();"><br>
-				<span id="us_pw_new_msg">새비밀번호와 일치하지 않습니다.</span>
+			<form action="" id="us_pw_update_form" name="us_pw_update_form" method="POST">
+				<input type="password" id="us_pw" name="us_pw" placeholder="현재 비밀번호">
+				<span id="us_pw_msg">8이상 16자 이하만 가능합니다.</span>
+				<input type="password" id="us_pw_new" name="us_pw_new" placeholder="새 비밀번호">
+				<span id="us_pw_new_msg">8이상 16자 이하만 가능합니다.</span>
+				<input type="password" id="us_pw_new_check" name="us_pw_new_check" placeholder="새비밀번호 확인"><br>
+				<span id="us_pw_new_check_msg">새비밀번호와 일치하지 않습니다.</span>
 			</form>
 		</div>
 		<div class="modal_footer">
-			<button type="button" class="modal_btn_yes" id="pwUpdateModalYes" disabled="disabled">변경</button>
+			<button type="button" class="modal_btn_yes" id="pwUpdateModalYes">변경</button>
 			<button type="button" class="modal_btn_no" id="pwUpdateModalNo">취소</button>
 		</div>
 	</div>
@@ -103,10 +157,15 @@
 	<div class="modal_layer"></div>
 </div>	
 
-<%@ include file="../include/userFooter.jsp" %>
+<%@ include file="../include/footer.jsp" %>
 <script type="text/javascript">
 
 $(document).ready(function(){
+	
+	var nickname_ok = false;
+	var pw_ok = false;
+	var pw_new_ok = false;
+	var pw_new_check_ok = false;
 
 	// 수정하기
 	$('#us_update').click(function(){
@@ -128,8 +187,22 @@ $(document).ready(function(){
 		$('#us_nickname').attr("disabled",true);
 	});
 	
+	// 닉네임 체크
+	$('#us_nickname').keyup(function(){
+		if($('#us_nickname').val().length < 8){
+			$('#nickname_no').css("display","block");
+			nickname_ok = false;
+		}else{
+			$('#nickname_no').css("display","none");
+			nickname_ok = true;
+		}
+	});
+	
 	// 수정완료
 	$('#us_update_check').click(function(){
+		
+		if(nickname_ok){
+			
 			$.ajax({       
 				type : "post",
 				url : "/user/userInfoUpdate",
@@ -147,6 +220,12 @@ $(document).ready(function(){
 					}	
 				} // success 끝	
 			}); // ajax 끝
+		}else{
+			$('#nick_no').css("display","block");
+			$('#us_nickname').focus();
+			nickname_ok = false;
+			
+		}
 	}); // #us_update_check.click
 	
 	// 비밀번호 변경 
@@ -154,10 +233,65 @@ $(document).ready(function(){
 		$('#pw_update_Modal').css("display","block");
 	});
 	
+	// 비밀번호 체크 
+	$('#us_pw').keyup(function(){
+		if($('#us_pw').val().length >= 8 && $('#us_pw').val().length <= 16){
+			$('#us_pw_msg').css("display","none");
+			pw_ok  = true;
+		}else{
+			$('#us_pw_msg').css("display","block");
+			pw_ok  = false;
+		}
+	});
+	
+	// 새 비밀번호 체크 
+	$('#us_pw_new').keyup(function(){
+		if($('#us_pw_new').val().length >= 8 && $('#us_pw_new').val().length <= 16){
+			$('#us_pw_new_msg').css("display","none");
+			pw_new_ok  = true;
+		}else{
+			$('#us_pw_new_msg').css("display","block");
+			pw_new_ok  = false;
+		}
+	});
+	
+	// 새 비밀번호 확인 체크 
+	$('#us_pw_new_check').keyup(function(){
+		if($('#us_pw_new').val() == $('#us_pw_new_check').val()){
+			$('#us_pw_new_check_msg').css("display","none");
+			pw_new_check_ok  = true;
+		}else{
+			$('#us_pw_new_check_msg').css("display","block");
+			pw_new_check_ok  = false;
+		}
+	});
+	
+
+	
+	
 	// 비밀번호 변경 Yes
 	$('#pwUpdateModalYes').click(function(){
 		var us_pw_new = $('#us_pw_new').val();
 		var us_pw = $('#us_pw').val();
+		
+		if(!pw_ok){
+			alert('현재 비밀번호를 입력하세요.');
+			$('#us_pw').focus();
+			return;
+		}
+		
+		if(!pw_new_ok){
+			alert('새 비밀번호를 입력하세요.');
+			$('#us_pw_new').focus();
+			return;
+		}
+		
+		if(!pw_new_check_ok){
+			alert('새 비밀번호와 똑같이 입력하세요.');
+			$('#us_pw_new_check').focus();
+			return;
+		}
+
 		$.ajax({
 			type : "post",
 			url : "/user/userPwUpdate",
@@ -171,11 +305,12 @@ $(document).ready(function(){
 					alert("비밀번호 변경 성공");
 					location.reload();
 				}else{
-					alert("비밀번호가 다릅니다.");
+					alert("비밀번호가 일치하지 않습니다.");
 					location.reload();
 				}
 			} // success 끝	
 		}); // ajax 끝
+
 	}); //#pwUpdateModalYes.click
 	
 	// 비밀번호 변경 No
@@ -217,36 +352,6 @@ $(document).ready(function(){
 	
 }); // document 끝 
 
-
-// 비밀번호 확인 체크 
-function pwCheck(){
-	if($('#us_pw_new').val() == $('#us_pw_new_check').val()){
-		$('#pwCk_no').css("display","none");
-	}else{
-		$('#pwCk_no').css("display","block");
-	}
-}
-
-// 닉네임 8자 이하 체크
-function nicknameCheck(){
-	if($('#us_nickname').val().length > 8){
-		$('#nick_no').css("display","block");
-	}else{
-		$('#nick_no').css("display","none");
-	}
-}
-
-// 비밀번호 변경시 새 비밀번호 체크
-function pw_new_check_function(){
-	if($('#us_pw_new').val() ==  $('#us_pw_new_check').val()){
-		$('#us_pw_new_msg').css("display","none");
-		$('#pwUpdateModalYes').attr("disabled",false);
-	}else{
-		$('#us_pw_new_msg').css("display","block");
-		$('#pwUpdateModalYes').attr("disabled",true);
-	}
-
-}
 
 //뒤로가기 
 function backTo(){
