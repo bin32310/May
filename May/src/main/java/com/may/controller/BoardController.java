@@ -37,7 +37,13 @@ public class BoardController {
 		logger.debug("boWritePOST(BoardVO boardVO)호출");
 		boardVO.setUs_id((String)session.getAttribute("us_id"));
 		logger.debug("글 정보 boardVO : " + boardVO);
-		return bService.boWrite(boardVO);
+		if(bService.boWrite(boardVO)==1) {
+			return bService.getBoMaxNum();
+		}
+		return 0;
+
+		
+		
 	}
 	
 	// 글 읽기 GET

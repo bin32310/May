@@ -1,6 +1,8 @@
 package com.may.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -41,8 +43,7 @@ public class UserController {
 		// 페이징 처리( 페이지 블럭 처리 객체 )
 		PageVO pageVO = new PageVO();
 		pageVO.setCri(cri);
-		pageVO.setTotalCount(bService.boardCount(cri)); // 전체 글 수
-		logger.debug("pageVO : " + pageVO);
+		pageVO.setTotalCount(bService.boardCount()); // 전체 글 수
 		model.addAttribute("pageVO", pageVO);
 
 		// 페이지 이동시 받아온 페이지 번호
@@ -77,7 +78,7 @@ public class UserController {
 	@RequestMapping(value="userIdCheck", method = RequestMethod.POST, produces = "application/text;charset=utf8")
 	public String userIdCheckPOST(String us_id) throws Exception {
 		logger.debug("userIdCheckPOST(String us_id)호출");
-		String result = "입력";
+		String result = "불가능";
 		if(us_id == null || us_id.equals("")){ // 아이디 입력안함
 		}else{
 			result = uService.userIdCheck(us_id);
@@ -93,16 +94,13 @@ public class UserController {
 	@RequestMapping(value="userTelCheck", method = RequestMethod.POST, produces = "application/text;charset=utf8")
 	public String userTelCheckPOST(String us_tel) throws Exception {
 		logger.debug("userTelCheck(String us_tel)호출");
-		String result = "입력";
+		String result = "불가능";
 		if(us_tel == null || us_tel.equals("")) { // 전화번호 입력안함
-			return "입력";
 		}else {
 			result = uService.userTelCheck(us_tel);
-			logger.debug("result1 : " +  result);
 			if(result == null || result.equals("")){ //중복 전화번호 없음
 				result = "가능";
 			}
-			logger.debug("result2 : " +  result);
 		}
 		return result;
 	}
@@ -148,11 +146,35 @@ public class UserController {
 	// 내정보 페이지로 이동(Mypage-GET)
 	// http://localhost:8080/user/userMypage
 	@RequestMapping(value = "/userMypage", method = RequestMethod.GET)
-	public void userMypageGET(HttpSession session, Model model) throws Exception {
+	public void userMypageGET(Map<String, Object> map, Criteria cri , HttpSession session, Model model) throws Exception {
 		logger.debug("userMypageGET()호출");
 		// 세션 - 아이디
 		String us_id = (String) session.getAttribute("us_id");
+		
+		// 회원정보 조회
 		model.addAttribute("userInfo", uService.userInfo(us_id));
+		
+		map = new HashMap<String, Object>();
+		map.put("cri", cri);
+		map.put("us_id", us_id);
+		
+		// 페이징 처리( 페이지 블럭 처리 객체 )
+		PageVO pageVO = new PageVO();
+		pageVO.setCri(cri);
+		pageVO.setTotalCount(bService.myBoardCount()); // 내 글 수
+		logger.debug("pageVO : " + pageVO);
+		model.addAttribute("pageVO", pageVO);
+
+		// 페이지 이동시 받아온 페이지 번호
+		if (cri.getPage() > pageVO.getEndPage()) {
+			// 잘못된 페이지 정보 입력
+			cri.setPage(pageVO.getEndPage());
+		}
+		
+		// 내 글 목록 불러오기
+		List<BoardVO> boardList = bService.myBoardList(map);
+		model.addAttribute("boardList", boardList);
+		
   }
 	
 	// 비밀번호 변경(userPwUpdate-POST)

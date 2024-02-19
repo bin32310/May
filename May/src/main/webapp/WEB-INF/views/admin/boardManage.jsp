@@ -9,6 +9,6 @@
 -->
 
 
-<%@ include file="../include/adminFooter.jsp" %>
+<%@ include file="../include/footer.jsp" %>
 </body>
 </html>

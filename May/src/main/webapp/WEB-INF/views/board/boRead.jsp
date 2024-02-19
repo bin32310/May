@@ -107,7 +107,7 @@ input[type=text], textarea{
 </div>
 
 
-<%@ include file="../include/userFooter.jsp" %>
+<%@ include file="../include/footer.jsp" %>
 
 </body>
 <script type="text/javascript">
@@ -128,14 +128,14 @@ $(document).ready(function(){
 			data : {"bo_num" : bo_num},
 			dataType : "JSON",
 			error: function(){
-				alert("글 삭제 에러");
+				alert("삭제 에러");
 			},
 			success : function(data){
 				if(data == 1){
-					alert("글 삭제 성공");
+					alert("삭제 완료");
 					location.replace("../user/userMain");
 				}else{
-					alert("글 삭제 실패");
+					alert("삭제 실패");
 					location.reload();
 				}
 			} // success 끝	

@@ -17,6 +17,7 @@
 			<th class="tb_us_nickname">닉네임</th>
 			<th class="tb_us_tel">전화번호</th>
 			<th class="tb_us_joinDate">가입일</th>
+			<th class="tb_us_outDate">탈퇴일</th>
 		</tr>
 		<c:forEach var="ul" items="${userList}">
 			<tr>
@@ -26,6 +27,7 @@
 				<td class="tb_us_nickname">${ul.us_nickname }</td>
 				<td class="tb_us_tel"> ${ul.us_tel }</td>
 				<td class="tb_us_joinDate"> ${ul.us_joinDate }</td>
+				<td class="tb_us_outDate"> ${ul.us_outDate }</td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -51,6 +53,6 @@
 	</ul>
 </div>
 
-<%@ include file="../include/adminFooter.jsp" %>
+<%@ include file="../include/footer.jsp" %>
 </body>
 </html>
