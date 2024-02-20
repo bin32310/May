@@ -1,7 +1,5 @@
 package com.may.domain;
 
-import java.util.Date;
-
 import org.apache.ibatis.type.Alias;
 
 import lombok.Data;
@@ -17,8 +15,8 @@ public class UserVO {
 	private String us_name; // 이름(실명)
 	private String us_nickname; // 닉네임(8자 제한)
 	private String us_tel; // 전화번호
-	private String us_state; // 회원 상태(정상, 탈퇴)
-	private Date us_join_date; // 회원가입일
-	private Date us_out_date; // 회원탈퇴일
+	private String us_state; // 회원 상태(join, out)
+	private String us_join_date; // 회원가입일
+	private String us_out_date; // 회원탈퇴일
 
 }

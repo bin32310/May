@@ -51,7 +51,7 @@ public class UserServiceImpl {
 		logger.debug("ServiceImpl : userFindPw(UserVO userVO)호출");
 		return udao.userFindPw(userVO);
 	}
-	
+	 
 	//  아이디 찾기 
 	public String userFindId(UserVO userVO) {
 		logger.debug("ServiceImpl : userFindId(UserVO userVO)호출");

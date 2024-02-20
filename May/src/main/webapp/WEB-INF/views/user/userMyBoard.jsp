@@ -78,7 +78,7 @@ table th, table td{
 			</div><!-- 페이지 번호 끝-->
 		</div>
 	</div>
-
+ 
 <%@ include file="../include/footer.jsp" %>
 <script type="text/javascript">
 

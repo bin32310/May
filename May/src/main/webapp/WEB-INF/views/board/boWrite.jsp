@@ -20,7 +20,7 @@
 	width : 50%;
 	height: 40px;
 }
-
+ 
 .board_content{
 	width : 50%;
 	resize: none;

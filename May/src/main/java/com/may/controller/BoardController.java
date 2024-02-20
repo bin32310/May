@@ -68,4 +68,5 @@ public class BoardController {
 		return bService.boUpdate(boardVO);
 	}
 
+	
 }

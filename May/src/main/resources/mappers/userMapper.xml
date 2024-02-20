@@ -106,7 +106,7 @@
 			US_JOIN_DATE,
 			US_OUT_DATE
 		FROM 
-			US 
+			US
 		WHERE
 			US_ID = #{us_id}
 	</select>
@@ -146,10 +146,10 @@
 		UPDATE /* userDelete */
 			US 
 		SET 
-			US_STATE = "out", 
+			US_STATE = "out",
 			US_OUT_DATE = NOW() 
 		WHERE
-			US_ID = #{us_id} 
+			US_ID = #{us_id}
 	</update>
 
 

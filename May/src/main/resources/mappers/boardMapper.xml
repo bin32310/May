@@ -68,16 +68,16 @@
 			A.BO_TITLE,
 			A.BO_CONTENT,
 			A.BO_VIEW,
-			B.US_NICKNAME 
+			B.US_NICKNAME
 		FROM 
 			BOARD A JOIN US B
-			ON A.US_ID = B.US_ID 
+			ON A.US_ID = B.US_ID
 		WHERE 
 			A.US_ID = #{userVO.us_id}
 			AND
 			A.BO_STATE = "upload"
 		ORDER BY
-			A.BO_NUM DESC  
+			A.BO_NUM DESC
 		LIMIT
 			#{cri.pageStart},#{cri.pageSize} 
 	</select> 
@@ -99,7 +99,7 @@
 	<insert id="boWrite">
 		INSERT INTO /* boWrite */
 			BOARD
-			(BO_TITLE, BO_CONTENT, US_ID) 
+			(BO_TITLE, BO_CONTENT, US_ID)
 		VALUES
 			(#{bo_title}, #{bo_content}, #{us_id})
 	</insert>
@@ -109,7 +109,7 @@
 		SELECT /* getBoMaxNum */
 			MAX(bo_num)
 		FROM
-			BOARD 
+			BOARD
 	</select>
 
 	<!-- 글읽기 -->

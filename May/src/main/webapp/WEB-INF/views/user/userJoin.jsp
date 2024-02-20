@@ -45,7 +45,7 @@
 <!-- 	
 		<h1> /user/userJoin.jsp</h1>
 		<h1> 유저 회원가입 페이지</h1>
--->
+--> 
 <div>
 	<br>
 	<hr>
@@ -195,7 +195,7 @@
 			if (us_tel.length == 11) { // 11자리면
 				$.ajax({
 					type : "post",
-					url : "../user/userTelCheck",
+					url : "/user/userTelCheck",
 					data : {
 						"us_tel" : us_tel
 					},

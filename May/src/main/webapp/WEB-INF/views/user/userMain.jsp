@@ -15,7 +15,7 @@
 table td .tb_view{
 	text-align: center;
 }
-
+ 
 
 
 </style>

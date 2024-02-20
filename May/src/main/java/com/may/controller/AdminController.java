@@ -70,4 +70,5 @@ public class AdminController {
 	public void boardManageGET(Criteria cri, Model model)throws Exception {
 		logger.debug("boardManageGET()호출");
 	}
+	
 }

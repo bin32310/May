@@ -25,7 +25,7 @@ public class BoardServiceImpl {
 	private BoardDAOImpl bdao;
 	
 	// 메인 화면
-	
+	 
 	// 전체 글 목록 조회
 	public List<BoardVO> boardList(Criteria cri) throws Exception{
 		logger.debug("boardList(Criteria cri) 호출");

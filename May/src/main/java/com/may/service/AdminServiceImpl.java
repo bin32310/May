@@ -27,7 +27,7 @@ public class AdminServiceImpl {
 	private AdminDAOImpl adao;
 	
 	// 메인 화면
-
+ 
 	
 	// 전체 회원 목록 조회
 	public List<UserVO> userList(Criteria cri) throws Exception{

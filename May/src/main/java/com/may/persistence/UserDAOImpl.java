@@ -62,7 +62,7 @@ public class UserDAOImpl {
 	   logger.debug("userFindId(UserVO userVO)호출 ");
 	   return sqlSession.selectOne(NAMESPACE + ".userFindId",userVO);
    }
-   
+    
    // 비밀번호 찾기
    public String userFindPw(UserVO userVO) {
 	   logger.debug("userFindPw(UserVO userVO)호출 ");

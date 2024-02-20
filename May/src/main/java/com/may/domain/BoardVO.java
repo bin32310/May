@@ -16,7 +16,7 @@ public class BoardVO {
 	private String bo_content; // 내용
 	private int bo_view; // 조회수
 	private String bo_img; // 이미지
-	private String bo_state; // 글 상태
+	private String bo_state; // 글 상태(upload, delete)
 	
 	private UserVO userVO; // userVO
 
