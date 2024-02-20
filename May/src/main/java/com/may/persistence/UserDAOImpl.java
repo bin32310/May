@@ -53,8 +53,14 @@ public class UserDAOImpl {
    
    // 로그인
    public UserVO userLogin(UserVO loginVO) {
-      logger.debug("userLogin()호출 ");
+      logger.debug("userLogin(UserVO loginVO)호출 ");
       return sqlSession.selectOne(NAMESPACE + ".userLogin",loginVO);
+   }
+   
+   // 비밀번호 찾기
+   public String userFindPw(UserVO userVO) {
+	   logger.debug("userFindPw(UserVO userVO)호출 ");
+	   return sqlSession.selectOne(NAMESPACE + ".userFindPw",userVO);
    }
    
    // 회원 정보 조회(내정보)

@@ -113,7 +113,7 @@ public class UserController {
 		return "/user/userLogin";
    }
 	
-   // 로그인 시도(login-post)
+	// 로그인 시도(login-post)
 	@ResponseBody
 	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
 	public int userLoginPOST(UserVO loginVO, HttpSession session) throws Exception{
@@ -131,17 +131,36 @@ public class UserController {
 		}
       return 0;
       
-   }
+	}
 
-   // 로그아웃 처리
-   @ResponseBody
-   @RequestMapping(value = "/userLogout", method = RequestMethod.POST)
-   public int userLogoutPOST(HttpSession session) throws Exception {
-      logger.debug("userLogoutPOST()호출 ");
-      // 세션정보 초기화
-      session.invalidate();
-      return 1;
-   }
+	// 로그아웃 처리
+	@ResponseBody
+	@RequestMapping(value = "/userLogout", method = RequestMethod.POST)
+	public int userLogoutPOST(HttpSession session) throws Exception {
+		logger.debug("userLogoutPOST()호출 ");
+		// 세션정보 초기화
+		session.invalidate();
+		return 1;
+	}
+   
+	// 비밀번호 찾기 페이지로 이동(userFindPw-GET)
+	// http://localhost:8080/user/userFindPw
+	@RequestMapping(value = "/userFindPw", method = RequestMethod.GET)
+	public void userFindPwGET() throws Exception {
+		logger.debug("userFindPwGET()호출");
+	}
+   
+	// 비밀번호 찾기(userFindPw-POST)
+	@ResponseBody
+	@RequestMapping(value = "/userFindPw", method = RequestMethod.POST , produces = "application/text;charset=utf8")
+	public String userFindPwPOST(UserVO userVO) throws Exception {
+		logger.debug("userFindPwPOST()호출");
+		String us_pk = uService.userFindPw(userVO);
+		if(us_pk == null || us_pk.equals("")) {
+			return "없음";
+		}
+		return us_pk;
+	}   
    
 	// 내정보 페이지로 이동(Mypage-GET)
 	// http://localhost:8080/user/userMypage
@@ -151,7 +170,7 @@ public class UserController {
 
 		// 회원정보 조회
 		model.addAttribute("userInfo", uService.userInfo((String) session.getAttribute("us_id")));
-  }
+	}
 	
 	// 비밀번호 변경(userPwUpdate-POST)
 	@ResponseBody
