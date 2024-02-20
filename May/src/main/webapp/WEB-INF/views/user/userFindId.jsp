@@ -18,8 +18,8 @@
 		<form action="" method="post">
 			<input type="text" name="us_name" placeholder="이름" required="required">		
 			<input type="text" name="us_tel" placeholder="전화번호" required="required">  
-			<input type="submit" value="아이디 찾기">
-			<
+			<input type="button" value="아이디 찾기">
+			</form>
 		</div>
 	</div>
 

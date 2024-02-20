@@ -46,6 +46,12 @@ public class UserServiceImpl {
 		return udao.userLogin(loginVO);
 	}
 	
+	// 비밀번호 찾기 
+	public String userFindPw(UserVO userVO) {
+		logger.debug("ServiceImpl : userFindPw(UserVO userVO)호출");
+		return udao.userFindPw(userVO);
+	}
+	
 	// 회원 정보 조회(내정보)
 	public UserVO userInfo(String us_id) {
       logger.debug("ServiceImpl : userInfo(String us_id)호출");  
