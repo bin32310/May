@@ -114,7 +114,8 @@
 
 $(document).ready(function(){
 	
-	var nickname_ok = false;
+	var nickname = $('#us_nickname').val();
+	var nickname_ok = true;
 	var pw_ok = false;
 	var pw_new_ok = false;
 	var pw_new_check_ok = false;
@@ -136,12 +137,17 @@ $(document).ready(function(){
 		$('#us_delete').css("display","inline");
 		$('#us_update_check').css("display","none");
 		$('#us_update_not').css("display","none");
+		$('#us_nickname').val(nickname);
 		$('#us_nickname').attr("disabled",true);
+		$('#nickname_no').css("display","none");
+		nickname_ok = true;
+
+		
 	});
 	
 	// 닉네임 체크
 	$('#us_nickname').keyup(function(){
-		if($('#us_nickname').val().length < 8){
+		if($('#us_nickname').val().length >= 1){
 			$('#nickname_no').css("display","block");
 			nickname_ok = false;
 		}else{
