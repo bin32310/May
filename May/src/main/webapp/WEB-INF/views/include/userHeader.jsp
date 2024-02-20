@@ -92,7 +92,7 @@ $(document).ready(function(){
         
             	<img class="img-fluid me-2" src="../resources/img/icon-1.png" style="width:45px;">
             		 <h2 class="m-0 text-primary">May</h2>
-       
+        
         	</a>
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>

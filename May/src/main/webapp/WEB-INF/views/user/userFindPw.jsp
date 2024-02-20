@@ -23,6 +23,7 @@
 			</form>
 		</div>
 	</div>
+	
 <%@ include file="../include/footer.jsp" %>	
 <script type="text/javascript">
 
@@ -78,7 +79,7 @@ $(document).ready(function(){
 					alert("회원정보가 존재하지 않습니다.");
 				}else{
 					alert("회원님의 비밀번호는 " + data + "입니다.");
-					location.href="../user/userMain";
+					location.href="../user/userLogin";
 				}	
 			} // success 끝	
 		});	// ajax 끝 

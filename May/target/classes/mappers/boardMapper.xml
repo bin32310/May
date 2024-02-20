@@ -14,8 +14,8 @@
   		<result property="us_nickname" column="us_nickname"/>
   		<result property="us_tel" column="us_tel"/>
   		<result property="us_state" column="us_state"/>
-  		<result property="us_joinDate" column="us_joinDate"/>
-  		<result property="us_outDate" column="us_outDate"/>
+  		<result property="us_join_date" column="us_join_date"/>
+  		<result property="us_out_date" column="us_out_date"/>
   	</resultMap>
   	
   	<resultMap type="com.may.domain.BoardVO" id="BoardVO">
@@ -28,77 +28,133 @@
   		<result property="bo_state" column="bo_state"/>
   		<collection property="userVO" resultMap="UserVO"/>
   	</resultMap>
-  	
-  
-   
+
+
+
 	<!-- 전체 글 목록(메인) -->
  	<select id="boardList" resultMap="BoardVO">
-		select b.*, u.us_nickname 
-		from board b join us u 
-		on b.us_id = u.us_id 
-		where b.bo_state = "등록"  
-		order by b.bo_num desc  
-		limit #{pageStart},#{pageSize} 
+		SELECT /* boardList */ 
+			A.BO_NUM,
+			A.BO_TITLE,
+			A.BO_CONTENT,
+			A.BO_VIEW,
+			B.US_NICKNAME 
+		FROM
+			BOARD A JOIN US B 
+			ON A.US_ID = B.US_ID 
+		WHERE
+			A.BO_STATE = "upload"  
+		order by
+			A.BO_NUM DESC  
+		limit
+			#{pageStart},#{pageSize} 
 	</select> 
 	
 	<!-- 전체 글 수 조회 -->
 	<select id="boardCount" resultType="int">
-		select count(*) from board 
-		where bo_state ="등록"   
+		SELECT /* boardCount */
+			COUNT(*)
+		FROM
+			BOARD
+		WHERE
+			BO_STATE ="upload"
 	</select>
 	
 	<!-- 내 글 목록(내정보) -->
  	<select id="myBoardList" resultMap="BoardVO" >
-		select b.*, u.us_nickname 
-		from board b join us u 
-		on b.us_id = u.us_id 
-		where b.us_id = #{userVO.us_id} and b.bo_state = "등록"  
-		order by b.bo_num desc  
-		limit #{cri.pageStart},#{cri.pageSize} 
+		SELECT /* myBoardList */
+			A.US_ID,
+			A.BO_NUM,
+			A.BO_TITLE,
+			A.BO_CONTENT,
+			A.BO_VIEW,
+			B.US_NICKNAME
+		FROM 
+			BOARD A JOIN US B
+			ON A.US_ID = B.US_ID
+		WHERE 
+			A.US_ID = #{userVO.us_id}
+			AND
+			A.BO_STATE = "upload"
+		ORDER BY
+			A.BO_NUM DESC
+		LIMIT
+			#{cri.pageStart},#{cri.pageSize} 
 	</select> 
-	
+
 	<!-- 내 글 수 조회 -->
 	<select id="myBoardCount" resultType="int" >
-		select count(*) from board 
-		where us_id= #{us_id} and bo_state ="등록"   
+		SELECT  /* myBoardCount */
+			COUNT(*)
+		FROM
+			BOARD
+		WHERE
+			US_ID= #{us_id}
+			AND
+			BO_STATE ="upload"
 	</select>
-	
-	
+
+
 	<!-- 글쓰기 -->
 	<insert id="boWrite">
-		insert into board(bo_title, bo_content, us_id) 
-		values(#{bo_title}, #{bo_content}, #{us_id})
+		INSERT INTO /* boWrite */
+			BOARD
+			(BO_TITLE, BO_CONTENT, US_ID)
+		VALUES
+			(#{bo_title}, #{bo_content}, #{us_id})
 	</insert>
-	
+
 	<!-- 가장 최신 글 번호  -->
 	<select id="getBoMaxNum" resultType="int">
-		select max(bo_num) from board 
+		SELECT /* getBoMaxNum */
+			MAX(bo_num)
+		FROM
+			BOARD
 	</select>
-	
+
 	<!-- 글읽기 -->
 	<select id="boRead" resultMap="BoardVO">
-		select * 
-		from board  b join us u  
-		on b.us_id = u.us_id 
-		where b.bo_num = #{bo_num}
+		SELECT /* boRead */
+			A.US_ID,
+			A.BO_NUM,
+			A.BO_TITLE,
+			A.BO_CONTENT,
+			A.BO_VIEW,
+			B.US_NICKNAME
+		FROM
+			BOARD A JOIN US B
+			ON A.US_ID = B.US_ID
+		WHERE A.BO_NUM = #{bo_num}
 	</select>
-	
+
 	<!-- 글 조회수 증가 -->
 	<update id="boViewUp">
-		update board set bo_view = bo_view + 1  
-		where bo_num=#{bo_num}
+		UPDATE /* boViewUp */
+			BOARD
+		SET
+			BO_VIEW = BO_VIEW + 1
+		WHERE BO_NUM = #{bo_num}
 	</update>
-	
+
 	<!-- 글삭제 -->
 	<update id="boDelete">
-		update board set bo_state="삭제" 
-		where bo_num=#{bo_num}
+		UPDATE /* boDelete */
+			BOARD
+		SET
+			BO_STATE = "delete" 
+		WHERE
+			BO_NUM = #{bo_num}
 	</update>
 
 	<!-- 글수정 -->
 	<update id="boUpdate">
-		update board set bo_title=#{bo_title}, bo_content=#{bo_content}  
-		where bo_num=#{bo_num}
+		UPDATE /* boUpdate */
+			BOARD
+		SET
+			BO_TITLE = #{bo_title},
+			BO_CONTENT = #{bo_content}
+		WHERE
+			BO_NUM = #{bo_num}
 	</update>
   
   </mapper>

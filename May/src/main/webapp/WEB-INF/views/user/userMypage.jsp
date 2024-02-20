@@ -176,7 +176,6 @@ $(document).ready(function(){
 			$('#nick_no').css("display","block");
 			$('#us_nickname').focus();
 			nickname_ok = false;
-			
 		}
 	}); // #us_update_check.click
 	

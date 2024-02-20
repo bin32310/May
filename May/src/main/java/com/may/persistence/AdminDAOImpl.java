@@ -22,7 +22,7 @@ public class AdminDAOImpl {
 	
 	@Inject
 	private SqlSessionFactory sqlFactory;
-	
+	 
 	@Inject
 	private SqlSession sqlSession;
 	

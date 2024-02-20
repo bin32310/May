@@ -23,7 +23,7 @@ public class BoardDAOImpl {
 	
 	@Inject
 	private SqlSessionFactory sqlFactory;
-	
+	 
 	@Inject
 	private SqlSession sqlSession;
 	

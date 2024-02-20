@@ -53,7 +53,7 @@ public class AdminController {
 		pageVO.setDisplayPageNum(10);
 		logger.debug("pageVO : " + pageVO);
 		model.addAttribute("pageVO", pageVO);
-
+	
 		// 페이지 이동시 받아온 페이지 번호
 		if (cri.getPage() > pageVO.getEndPage()) {
 			// 잘못된 페이지 정보 입력
@@ -70,4 +70,5 @@ public class AdminController {
 	public void boardManageGET(Criteria cri, Model model)throws Exception {
 		logger.debug("boardManageGET()호출");
 	}
+	
 }

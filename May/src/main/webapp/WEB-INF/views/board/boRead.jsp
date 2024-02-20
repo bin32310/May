@@ -113,7 +113,7 @@ input[type=text], textarea{
 <script type="text/javascript">
 $(document).ready(function(){
 	
-
+ 
 	// 삭제하기 버튼 클릭 시 Modal show
 	$('#delete').click(function(){
 		$('#deleteModal').css("display","block");
