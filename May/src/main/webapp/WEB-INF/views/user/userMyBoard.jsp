@@ -24,7 +24,7 @@ table th, table td{
 </style>
 
 <c:if test="${empty us_id}">
-	${"<script>alert('잘못된 접근입니다.');location.href='../user/userMain';</script>" }
+	${"<script>alert('로그인 해주세요.');location.href='../user/userLogin';</script>" }
 </c:if>
 <!-- 	
 		<h1> /user/userMyBoard.jsp</h1>
@@ -60,19 +60,19 @@ table th, table td{
 			<div class="board_clearfix"><!-- 페이지 번호 -->
 				<ul class="pagination pagination-sm no-margin pull-right">
 					<c:if test="${pageVO.prev == true }">
-						<li><a href="userMypage?page=${pageVO.startPage-1 }">«</a></li>
+						<li><a href="userMyBoard?page=${pageVO.startPage-1 }">«</a></li>
 						&nbsp
 					</c:if>
 					
 					<c:forEach var="i" begin="${pageVO.startPage }" end="${pageVO.endPage }" step="1">
 						&nbsp&nbsp
-						<li ${pageVO.cri.page == i? 'class="active"':'' }><a href="userMypage?page=${i }">${i }</a></li>
+						<li ${pageVO.cri.page == i? 'class="active"':'' }><a href="userMyBoard?page=${i }">${i }</a></li>
 						&nbsp&nbsp
 					</c:forEach>
 					
 					<c:if test="${pageVO.next == true }">
 						&nbsp
-						<li><a href="userMypage?page=${pageVO.endPage+1 }">»</a></li>
+						<li><a href="userMyBoard?page=${pageVO.endPage+1 }">»</a></li>
 					</c:if>
 				</ul>
 			</div><!-- 페이지 번호 끝-->
