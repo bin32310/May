@@ -11,26 +11,42 @@
   
 	<!-- 회원 목록 -->
 	<select id="userList" resultType="UserVO">
-	select * from us 
-	order by us_joinDate desc 
-	limit #{pageStart},#{pageSize} 
-	</select> 
+	SELECT /* userList */
+		*
+	FROM
+		US
+	ORDER BY
+		US_JOIN_DATE DESC
+	LIMIT
+		#{pageStart}, #{pageSize}
+	</select>
 	
 	<!-- 전체 회원 수 조회 -->
 	<select id="userCount" resultType="int">
-		select count(*) from us    
+		SELECT /* userCount */
+			COUNT(*)
+		FROM
+			US
 	</select>
 	
 	<!-- 글 목록 -->
 	<select id="boardList" resultType="BoardVO">
-	select * from board  
-	order by bo_num desc   
-	limit #{pageStart},#{pageSize} 
+		SELECT /* boardList */
+			*
+		FROM
+			BOARD
+		ORDER BY
+			BO_NUM DESC   
+		LIMIT
+			#{pageStart},#{pageSize} 
 	</select> 
 	
 	<!-- 전체 글 수 조회 -->
 	<select id="boardCount" resultType="int">
-		select count(*) from board   
+		SELECT /* boardCount */
+			COUNT(*)
+		FROM
+			BOARD
 	</select>
 	  
   

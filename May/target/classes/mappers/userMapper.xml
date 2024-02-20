@@ -4,93 +4,154 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
-  <mapper namespace="com.may.mapper.UserMapper">
-  
-  <resultMap type="com.may.domain.UserVO" id="userMap">
-  	<result property="us_id" column="us_id"/>
-  	<result property="us_pw" column="us_pw"/>
-  	<result property="us_name" column="us_name"/>
-  	<result property="us_nickname" column="us_nickname"/>
-  	<result property="us_tel" column="us_tel"/>
-  	<result property="us_state" column="us_state"/>
-  	<result property="us_joinDate" column="us_joinDate"/>
-  	<result property="us_outDate" column="us_outDate"/>
-  </resultMap>
-  
-   	<!-- 현재 시스템 시간 -->
-  	<select id="getTime" resultType="string">
-      	select now() 
-  	</select>
-    
- 	<!-- 회원가입 -->
-   	<insert id="userJoin">
-      	insert into us(us_id,us_pw,us_name,us_nickname,us_tel) 
-      	values(#{us_id},#{us_pw},#{us_name},#{us_nickname},#{us_tel})
-   	</insert>
-   	
-   	<!-- 회원가입 - userId 중복 확인 -->
-   	<select id="userIdCheck" resultType="String">
-   		select us_id from us 
-   		where us_id=#{us_id} 
-   	</select>
 
-   	<!-- 회원가입 - userTel 중복 확인 -->
-   	<select id="userTelCheck" resultType="String">
-   		select us_tel from us 
-   		where us_tel=#{us_tel} 
-   	</select>
-   	
-   	<!-- 로그인 -->
-   	<select id="userLogin" resultType="UserVO">
-      	select * from us 
-      	where us_id=#{us_id} and us_pw=#{us_pw} and us_state="정상"
-   	</select> 
-   	
-  	<!-- 아이디 찾기 -->
-   	<select id="userFindId" resultType="String">
-      	select us_id from us  
-      	where us_name=#{us_name} and us_tel=#{us_tel} and us_state="정상" 
-   	</select> 
-   	
-   	<!-- 비밀번호 찾기 -->
-   	<select id="userFindPw" resultType="String">
-      	select us_pw from us  
-      	where us_id=#{us_id} and us_tel=#{us_tel} and us_state="정상" 
-   	</select> 
+<mapper namespace="com.may.mapper.UserMapper">
 
-   	<!-- 회원정보 조회 -->
-   	<select id="userInfo" resultType="UserVO">
-      	select * from us 
-      	where us_id=#{us_id}
-   	</select>
+	<resultMap type="com.may.domain.UserVO" id="userMap">
+		<result property="us_id" column="us_id"/>
+		<result property="us_pw" column="us_pw"/>
+		<result property="us_name" column="us_name"/>
+		<result property="us_nickname" column="us_nickname"/>
+		<result property="us_tel" column="us_tel"/>
+		<result property="us_state" column="us_state"/>
+		<result property="us_join_date" column="us_join_date"/>
+		<result property="us_out_date" column="us_out_date"/>
+	</resultMap>
+  	
+	<!-- 현재 시스템 시간 -->
+	<select id="getTime" resultType="string">
+		SELECT /* getTime */
+			NOW() 
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="userJoin">
+		INSERT INTO /* userJoin */
+			US
+			(US_ID, US_PW, US_NAME, US_NICKNAME, US_TEL) 
+		VALUES
+			(#{us_id}, #{us_pw}, #{us_name}, #{us_nickname}, #{us_tel})
+	</insert>
+	
+	<!-- 회원가입 - userId 중복 확인 -->
+	<select id="userIdCheck" resultType="String">
+		SELECT /* userIdCheck */
+			US_ID
+		FROM
+			US
+		WHERE
+			US_ID = #{us_id}
+	</select>
+	
+	<!-- 회원가입 - userTel 중복 확인 -->
+	<select id="userTelCheck" resultType="String">
+		SELECT /* userTelCheck */
+			US_TEL
+		FROM
+			US
+		WHERE
+			US_TEL = #{us_tel}
+	</select>
+	
+	<!-- 로그인 -->
+	<select id="userLogin" resultType="UserVO">
+		SELECT /* userLogin */
+			US_ID,
+			US_NICKNAME
+		FROM
+			US
+		WHERE
+			US_ID = #{us_id}
+			AND
+			US_PW = #{us_pw}
+			AND
+			US_STATE = "join"
+	</select> 
+	
+	<!-- 아이디 찾기 -->
+	<select id="userFindId" resultType="String">
+		SELECT /* userFindId */
+			US_ID
+		FROM
+			US  
+		WHERE
+			US_NAME = #{us_name}
+			AND
+			US_TEL = #{us_tel}
+			AND
+			US_STATE = "join" 
+	</select> 
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="userFindPw" resultType="String">
+		SELECT /* userFindPw */
+			US_PW
+		FROM
+			US  
+		WHERE
+			US_ID = #{us_id}
+			AND
+			US_TEL = #{us_tel}
+			AND
+			US_STATE = "join" 
+	</select> 
+	
+	<!-- 회원정보 조회 -->
+	<select id="userInfo" resultType="UserVO">
+		SELECT /* userInfo */
+			US_ID,
+			US_NAME,
+			US_NICKNAME,
+			US_TEL,
+			US_JOIN_DATE,
+			US_OUT_DATE
+		FROM 
+			US 
+		WHERE
+			US_ID = #{us_id}
+	</select>
+	
+	<!-- 회원정보 수정 -->
+	<update id="userInfoUpdate">
+		UPDATE /* userInfoUpdate */
+			US 
+		SET
+			US_NICKNAME=#{us_nickname} 
+		WHERE
+			US_ID=#{us_id}
+	</update>
+	
+	<!-- 비밀번호 체크 -->
+	<select id="userPwCheck" resultType="String">
+		SELECT /* userPwCheck */ 
+			US_PW
+		FROM 
+			US 
+		WHERE 
+			US_ID = #{us_id}
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="userPwUpdate">
+		UPDATE /* userPwUpdate */ 
+			US 
+		SET 
+			US_PW = #{us_pw} 
+		WHERE 
+			US_ID = #{us_id}
+	</update>
+	
+	<!-- 회원 탈퇴 처리 -->
+	<update id="userDelete">
+		UPDATE /* userDelete */
+			US 
+		SET 
+			US_STATE = "out", 
+			US_OUT_DATE = NOW() 
+		WHERE
+			US_ID = #{us_id} 
+	</update>
 
-   	<!-- 회원정보 수정 -->
-   	<update id="userInfoUpdate">
-      	update us 
-      	set us_nickname=#{us_nickname} 
-		where us_id=#{us_id}
-   	</update>
-   	
- 	<!-- 비밀번호 체크 -->
-   	<select id="userPwCheck" resultType="String">
-      	select us_pw from us 
-      	where us_id=#{us_id}
-   	</select>
-   	
-   	<!-- 비밀번호 변경 -->
-   	<update id="userPwUpdate">
-      	update us 
-      	set us_pw=#{us_pw} 
-		where us_id=#{us_id}
-   	</update>
 
-   <!-- 회원 탈퇴 처리 -->
-   <update id="userDelete">
-      update us set us_state = "탈퇴" , us_outDate = now()  
-      where us_id=#{us_id}
-   </update>
-    
-  
-  
-  </mapper>
+
+</mapper>
