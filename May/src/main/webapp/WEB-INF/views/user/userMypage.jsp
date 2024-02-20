@@ -141,7 +141,7 @@ $(document).ready(function(){
 		$('#us_nickname').attr("disabled",true);
 		$('#nickname_no').css("display","none");
 		nickname_ok = true;
-
+ 
 		
 	});
 	
