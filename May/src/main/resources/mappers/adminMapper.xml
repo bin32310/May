@@ -12,7 +12,7 @@
 	<!-- 회원 목록 -->
 	<select id="userList" resultType="UserVO">
 	SELECT /* userList */
-		*
+		US_ID, US_NAME, US_NICKNAME, US_STATE, US_JOIN_DATE, US_OUT_DATE
 	FROM
 		US
 	ORDER BY
