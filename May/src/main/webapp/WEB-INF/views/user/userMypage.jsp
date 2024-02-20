@@ -129,7 +129,7 @@ $(document).ready(function(){
 		$('#us_update_not').css("display","inline");
 		$('#us_nickname').attr("disabled",false);
 	});
-	
+	 
 	// 수정하기 취소
 	$('#us_update_not').click(function(){
 		$('#us_update').css("display","inline");
