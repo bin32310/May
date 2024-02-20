@@ -17,9 +17,9 @@
 		<div>
 		<form action="" method="post">
 			<input type="text" name="us_id" placeholder="아이디" required="required">		
-			<input type="password" name="us_pw" placeholder="비밀번호" required="required">  
-			<input type="submit" value="로그인">
-			<
+			<input type="text" name="us_tel" placeholder="전화번호" required="required">  
+			<input type="submit" value="비밀번호 찾기">
+			</form>
 		</div>
 	</div>
 

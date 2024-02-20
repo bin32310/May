@@ -124,7 +124,7 @@ $(document).ready(function(){
 					<a href="../admin/adminMain">관리페이지</a>&ensp;
 				</c:if>
 				<c:if test="${!empty us_id}">
-					<a id="us_logout_btn">로그아웃</a>&ensp;
+					<a id="us_logout_btn" style="cursor:pointer" >로그아웃</a>&ensp;
 				</c:if>
             </div>
         </div>

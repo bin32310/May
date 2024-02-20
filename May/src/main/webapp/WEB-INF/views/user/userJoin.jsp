@@ -96,34 +96,34 @@ $(document).ready(function(){
 	$('#us_join_btn').click(function(){
 		
 		if(!id_ok){
-			alert("아이디를 입력해주세요.");
+			alert("아이디를 확인해주세요.");
 			$('#us_id').focus();
 			return;
 		}
 		if(!pw_ok){
-			alert("비밀번호를 입력해주세요.");
+			alert("비밀번호를 확인해주세요.");
 			$('#us_pw').focus();
 			return;
 		}
 		if(!pw_check_ok){
-			alert("비밀번호확인을 입력해주세요.");
+			alert("비밀번호확인을 확인해주세요.");
 			$('#us_pw_check').focus();
 			return;
 		}
 		if(!name_ok){
-			alert("이름을 입력해주세요.");
+			alert("이름을 확인해주세요.");
 			$('#name_no').css("display","block");
 			$('#us_name').focus();
 			return;
 		}
 		if(!nickname_ok){
-			alert("닉네임을 입력해주세요.");
+			alert("닉네임을 확인해주세요.");
 			$('#nickname_no').css("display","block");
 			$('#us_nickname').focus();
 			return;
 		}
 		if(!tel_ok){
-			alert("전화번호를 입력해주세요.");
+			alert("전화번호를 확인해주세요.");
 			$('#us_tel').focus();
 			return;
 		}

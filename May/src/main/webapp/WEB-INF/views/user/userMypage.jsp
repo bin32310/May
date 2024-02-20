@@ -45,7 +45,7 @@
 </style>
 
 <c:if test="${empty us_id}">
-	${"<script>alert('잘못된 접근입니다.');location.href='../user/userMain';</script>" }
+	${"<script>alert('로그인 해주세요.');location.href='../user/userLogin';</script>" }
 </c:if>
 <!-- 	
 		<h1> /user/userMypage.jsp</h1>
