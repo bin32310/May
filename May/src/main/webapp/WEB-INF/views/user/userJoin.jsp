@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../include/userHeader.jsp"%>
+
 <style>
 
 /* 아이디/전화번호 유효성 체크 */
@@ -13,7 +14,7 @@
 	color: GREEN;
 }
 
-#id_no, #pw_no, #pwCk_no, #tel_no, #name_no, #nickname_no {
+#id_no, #pw_no, #pwCk_no, #tel_no, #name_no, #name_no1, #nickname_no, #nickname_no1 {
 	color: RED;
 }
 
@@ -65,13 +66,14 @@
 				<input type="password" id="us_pw_check" class="login_input" name="us_pw_check" maxlength="8" placeholder="비밀번호 확인"> <br>
 				<span class="pw_check" id="pwCk_no"> 비밀번호와 다릅니다.</span>
 				<input type="text" id="us_name" class="login_input" name="us_name" placeholder="이름(실명)" maxlength="15"> <br>
-				<span class="name_check" id="name_no"> 이름을 입력해주세요.</span>
-				<input type="text" id="us_nickname" class="login_input" name="us_nickname" placeholder="닉네임(8자 이하)" maxlength="8"> <br> <span
-					class="nick_check" id="nickname_no"> 닉네임을 입력해주세요.</span> <input
-					type="text" id="us_tel" class="login_input" name="us_tel"
-					placeholder="휴대폰번호(-제외)" maxlength="11"> <span
-					class="tel_check" id="tel_ok"> 사용가능한 번호입니다.</span> <span
-					class="tel_check" id="tel_no"> 이미 존재하는 전화번호입니다.</span><br>
+				<span class="name_check" id="name_no"> 이름(실명)을 입력해주세요.</span>
+				<span class="name_check" id="name_no1"> 한글만 입력 가능합니다.</span>
+				<input type="text" id="us_nickname" class="login_input" name="us_nickname" placeholder="닉네임(8자 이하)" maxlength="8"> <br>
+				<span class="nick_check" id="nickname_no"> 닉네임을 입력해주세요.</span>
+				<span class="nick_check" id="nickname_no1"> 한글, 영문, 숫자만 입력 가능합니다.</span>
+				<input type="text" id="us_tel" class="login_input" name="us_tel" value="010" placeholder="휴대폰번호(-제외)" maxlength="11"> <br>
+					<span class="tel_check" id="tel_ok"> 사용가능한 번호입니다.</span>
+					<span class="tel_check" id="tel_no"> 이미 존재하는 전화번호입니다.</span><br>
 				<br> <input type="button" id="us_join_btn" class="btn_blue"
 					value="회원가입"> <input type="button" id="back"
 					class="btn_gray" value="돌아가기" onclick="backTo();">
@@ -85,11 +87,18 @@
 
 		//유효성 검사 통과 여부
 		var id_ok = false;
-		var pw_ok = false;
+		var pw_ok = false;                       
 		var pw_check_ok = false;
 		var name_ok = false;
 		var nickname_ok = false;
 		var tel_ok = false;
+		
+		// 정규식 : replace(정규식, '') 에 들어갈 정규식이다.
+		var id_reg_check = new RegExp(/[^A-Za-z0-9]{3,8}/g); // 영어 숫자만 입력 가능, 3~8자리
+		var pw_reg_check = new RegExp(/[^A-Za-z0-9]{3,8}/g); // 영어 숫자만 입력 가능, 3~8자리
+		var name_reg_check = /[^ㄱ-힣]*$/g; // 한글만 입력 가능, 1~10자리
+		var nickname_reg_check = /[^A-Za-z0-9]{1,8}$/g; // 영어, 숫자, 한글만 입력 가능, 1~8자리
+		var tel_reg_check = /^010[0-9]{8}/; // 010으로 시작하고 그 뒤는 0~9까지의 숫자만 8개 , 총 11자
 
 		// 페이지 로드시 아이디에 포커스
 		$('#us_id').focus();
@@ -152,6 +161,7 @@
 		// 아이디 중복체크
 		$('#us_id').keyup(function() {
 			var us_id = $('#us_id').val();
+
 			if (us_id.length >= 3) { // 3자 이상
 				$.ajax({
 					type : "post",
@@ -182,11 +192,18 @@
 				$('#id_no').css("display", "block");
 			}
 		}); //('#us_id').keyup 끝
-
-		// 전화번호 중복체크
+		var us_tel = "";
+		// 전화번호 입력 체크
+		$('#us_tel').keydown(function() {
+			 us_tel = $('#us_tel').val().replace(/[^0-9]*$/,''); //숫자를 제외하고 공백 처리
+			$('#us_tel').val(us_tel);
+		});
+		
+		// 전화번호 010으로 시작여부, 길이(11자), 중복 체크
 		$('#us_tel').keyup(function() {
-			var us_tel = $('#us_tel').val();
-			if (us_tel.length == 11) { // 11자리면
+			
+			if ( $('#us_tel').val().search(tel_reg_check) == 0) { 
+				
 				$.ajax({
 					type : "post",
 					url : "/user/userTelCheck",
@@ -213,8 +230,9 @@
 				}); // ajax 끝
 			} // if
 			else {
+
 				$('#tel_ok').css("display", "none");
-				$('#tel_no').text('-를 제외한 전화번호를 입력해주세요.');
+				$('#tel_no').text('정상적이지 않은 전화번호입니다.');
 				$('#tel_no').css("display", "block");
 				tel_ok = false;
 			}
@@ -241,10 +259,24 @@
 				pw_check_ok = false;
 			}
 		}); // ('#us_pw_check').keyup 끝
-
-		// 이름 체크
+		
+		
+		// 이름에 들어오면 안되는 문자들
+		var us_name_check_no = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
+		// 이름 체크(한글만 입력 가능)
+		$('#us_name').keydown(function() {
+			if(us_name_check_no.test($('#us_name').val())){
+				var us_name_check = $('#us_name').val().replace(name_reg_check, '');
+				$('#us_name').val(us_name_check);
+				$('#name_no1').css("display", "block");
+			}else{
+				$('#name_no1').css("display", "none");
+			}
+		}); //('#us_name').keydown 끝
+		
+		// 이름 체크(길이 체크)
 		$('#us_name').keyup(function() {
-			if ($('#us_name').val().length >= 1) {
+			if ($('#us_name').val().length >= 1 && $('#us_name').val().length <= 10) {
 				$('#name_no').css("display", "none");
 				name_ok = true;
 			} else {
@@ -253,12 +285,27 @@
 			}
 		}); //('#us_name').keyup 끝
 
-		// 닉네임 체크
+		
+		// 닉네임에 들어오면 안되는 문자들
+		var us_nickname_check_no = /[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g; 
+		// 닉네임 체크(영어, 숫자, 한글만 입력 가능)
+		$('#us_nickname').keydown(function() {
+			if (us_nickname_check_no.test($('#us_nickname').val())){
+				var us_nickname_check = $('#us_nickname').val().replace(nickname_reg_check, '');
+				$('#us_nickname').val(us_nickname_check);
+				$('#nickname_no1').css("display", "block");
+			} else {
+				$('#nickname_no1').css("display", "none");
+			}
+		}); //('#us_nickname').keyup 끝
+		
+		// 닉네임 체크(길이 체크)
 		$('#us_nickname').keyup(function() {
-			if ($('#us_nickname').val().length >= 1) {
+			if ($('#us_nickname').val().length >= 1 && $('#us_nickname').val().length <= 8) {
 				$('#nickname_no').css("display", "none");
 				nickname_ok = true;
 			} else {
+				$('#nickname_no').text("1자이상 8자 이상 입력해주세요.");
 				$('#nickname_no').css("display", "block");
 				nickname_ok = false;
 			}
