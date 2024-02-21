@@ -3,6 +3,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../resources/lib/wow/wow.min.js"></script>
+    <script src="../resources/lib/easing/easing.min.js"></script>
+    <script src="../resources/lib/waypoints/waypoints.min.js"></script>
+    <script src="../resources/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../resources/lib/counterup/counterup.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="../resources/js/main.js"></script>
 <head>
 	<meta charset="UTF-8">
 	<title>May</title>
@@ -33,17 +44,7 @@
     <!-- Template Stylesheet -->
     <link href="../resources/css/style.css" rel="stylesheet">
     
-        <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../resources/lib/wow/wow.min.js"></script>
-    <script src="../resources/lib/easing/easing.min.js"></script>
-    <script src="../resources/lib/waypoints/waypoints.min.js"></script>
-    <script src="../resources/lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="../resources/lib/counterup/counterup.min.js"></script>
 
-    <!-- Template Javascript -->
-    <script src="../resources/js/main.js"></script>
     
 </head>
 <style>
