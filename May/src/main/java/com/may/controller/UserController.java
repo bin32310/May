@@ -70,7 +70,29 @@ public class UserController {
 	public int userJoinPOST(UserVO userVO) throws Exception {
 		logger.debug("userJoinPOST(UserVO userVO)호출");
 		logger.debug("회원가입 정보 userVO : " + userVO);
-		return uService.userJoin(userVO);
+		
+		boolean us_id = false, us_pw = false, us_name = false, us_nickname = false, us_tel = false;
+
+		if(userVO.getUs_id().length() >= 3 && userVO.getUs_id().length() <= 8) {
+			us_id = true;
+		}
+		if(userVO.getUs_pw().length() >= 3 && userVO.getUs_pw().length() <= 8) {
+			us_pw = true;
+		}
+		if(userVO.getUs_name().length() >= 1 && userVO.getUs_name().length() <= 15) {
+			us_name = true;
+		}
+		if(userVO.getUs_nickname().length() >= 1 && userVO.getUs_nickname().length() <= 8) {
+			us_nickname = true;
+		}
+		if(userVO.getUs_tel().length() == 11) {
+			us_tel = true;
+		}
+		// 모든 조건 만족시
+		if(us_id && us_pw && us_name && us_nickname && us_tel) {
+			return uService.userJoin(userVO);
+		}
+		return 0;
 	}
 
 	// user id 중복 체크

@@ -56,22 +56,17 @@
 			<h1>회원가입</h1>
 			<br>
 			<form action="" id="us_join_form" name="us_join_form" method="POST">
-				<input type="text" id="us_id" class="login_input" name="us_id"
-					maxlength="30" placeholder="아이디(최소 8자 , 최대 30자)">
+				<input type="text" id="us_id" class="login_input" name="us_id" maxlength="8" placeholder="아이디(최소 3자 , 최대 8자)">
 				<p class="id_check" id="id_ok">사용 가능한 아이디입니다.</p>
 				<p class="id_check" id="id_no">사용 불가능한 아이디입니다.</p>
 
-				<input type="password" id="us_pw" class="login_input" name="us_pw"
-					maxlength="16" placeholder="비밀번호(최소 8자, 최대 16자)"> <br>
-				<span class="pw_check" id="pw_no"> 8자 이상 입력해주세요.</span> <input
-					type="password" id="us_pw_check" class="login_input"
-					name="us_pw_check" maxlength="16" placeholder="비밀번호 확인"> <br>
-				<span class="pw_check" id="pwCk_no"> 비밀번호와 다릅니다.</span> <input
-					type="text" id="us_name" class="login_input" name="us_name"
-					placeholder="이름(실명)" maxlength="15"> <br> <span
-					class="name_check" id="name_no"> 이름을 입력해주세요.</span> <input
-					type="text" id="us_nickname" class="login_input" name="us_nickname"
-					placeholder="닉네임(8자 이하)" maxlength="8"> <br> <span
+				<input type="password" id="us_pw" class="login_input" name="us_pw" maxlength="8" placeholder="비밀번호(최소 3자, 최대 8자)"> <br>
+				<span class="pw_check" id="pw_no"> 3자 이상 입력해주세요.</span> 
+				<input type="password" id="us_pw_check" class="login_input" name="us_pw_check" maxlength="8" placeholder="비밀번호 확인"> <br>
+				<span class="pw_check" id="pwCk_no"> 비밀번호와 다릅니다.</span>
+				<input type="text" id="us_name" class="login_input" name="us_name" placeholder="이름(실명)" maxlength="15"> <br>
+				<span class="name_check" id="name_no"> 이름을 입력해주세요.</span>
+				<input type="text" id="us_nickname" class="login_input" name="us_nickname" placeholder="닉네임(8자 이하)" maxlength="8"> <br> <span
 					class="nick_check" id="nickname_no"> 닉네임을 입력해주세요.</span> <input
 					type="text" id="us_tel" class="login_input" name="us_tel"
 					placeholder="휴대폰번호(-제외)" maxlength="11"> <span
@@ -80,7 +75,6 @@
 				<br> <input type="button" id="us_join_btn" class="btn_blue"
 					value="회원가입"> <input type="button" id="back"
 					class="btn_gray" value="돌아가기" onclick="backTo();">
-
 			</form>
 		</div>
 	</div>
@@ -158,7 +152,7 @@
 		// 아이디 중복체크
 		$('#us_id').keyup(function() {
 			var us_id = $('#us_id').val();
-			if (us_id.length >= 8) { // 8자 이상
+			if (us_id.length >= 3) { // 3자 이상
 				$.ajax({
 					type : "post",
 					url : "/user/userIdCheck",
@@ -184,7 +178,7 @@
 				}); // ajax 끝
 			} else {
 				$('#id_ok').css("display", "none");
-				$('#id_no').text('8자 이상 입력해주세요.');
+				$('#id_no').text('3자 이상 입력해주세요.');
 				$('#id_no').css("display", "block");
 			}
 		}); //('#us_id').keyup 끝
@@ -228,7 +222,7 @@
 
 		// 비밀번호 체크 
 		$('#us_pw').keyup(function() {
-			if ($('#us_pw').val().length >= 8) {
+			if ($('#us_pw').val().length >= 3) {
 				$('#pw_no').css("display", "none");
 				pw_ok = true;
 			} else {
@@ -271,7 +265,7 @@
 		}); //('#us_nickname').keyup 끝
 
 	}); // document 끝 
-
+ 
 	//뒤로가기 
 	function backTo() {
 		history.back();

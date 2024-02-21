@@ -79,11 +79,11 @@
 		<div class="modal_header">
 			<h4 class="modal-title">비밀번호 변경</h4>
 			<form action="" id="us_pw_update_form" name="us_pw_update_form" method="POST">
-				<input type="text" id="us_pw" name="us_pw" placeholder="현재 비밀번호">
-				<span id="us_pw_msg">8이상 16자 이하만 가능합니다.</span>
-				<input type="text" id="us_pw_new" name="us_pw_new" placeholder="새 비밀번호">
-				<span id="us_pw_new_msg">8이상 16자 이하만 가능합니다.</span>
-				<input type="text" id="us_pw_new_check" name="us_pw_new_check" placeholder="새비밀번호 확인"><br>
+				<input type="text" id="us_pw" name="us_pw" maxlength="8" placeholder="현재 비밀번호">
+				<span id="us_pw_msg">3자 이상 8자 이하만 가능합니다.</span>
+				<input type="text" id="us_pw_new" name="us_pw_new" maxlength="8" placeholder="새 비밀번호">
+				<span id="us_pw_new_msg">3이상 8자 이하만 가능합니다.</span>
+				<input type="text" id="us_pw_new_check" name="us_pw_new_check" maxlength="8" placeholder="새비밀번호 확인"><br>
 				<span id="us_pw_new_check_msg">새비밀번호와 일치하지 않습니다.</span>
 			</form>
 		</div>
@@ -192,7 +192,7 @@ $(document).ready(function(){
 	
 	// 비밀번호 체크 
 	$('#us_pw').keyup(function(){
-		if($('#us_pw').val().length >= 8 && $('#us_pw').val().length <= 16){
+		if($('#us_pw').val().length >= 3 && $('#us_pw').val().length <= 8){
 			$('#us_pw_msg').css("display","none");
 			pw_ok  = true;
 		}else{
@@ -203,7 +203,7 @@ $(document).ready(function(){
 	
 	// 새 비밀번호 체크 
 	$('#us_pw_new').keyup(function(){
-		if($('#us_pw_new').val().length >= 8 && $('#us_pw_new').val().length <= 16){
+		if($('#us_pw_new').val().length >= 3 && $('#us_pw_new').val().length <= 8){
 			$('#us_pw_new_msg').css("display","none");
 			pw_new_ok  = true;
 		}else{
