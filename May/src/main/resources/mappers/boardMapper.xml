@@ -27,6 +27,9 @@
   		<result property="bo_state" column="bo_state"/>
   		<result property="bo_lock" column="bo_lock"/>
   		<result property="bo_reply" column="bo_reply"/>
+  		<result property="re_ref" column="re_ref"/>
+  		<result property="re_lev" column="re_lev"/>
+  		<result property="re_seq" column="re_seq"/>
   		<collection property="userVO" resultMap="UserVO"/>
   	</resultMap>
 
@@ -48,9 +51,9 @@
 			ON A.US_ID = B.US_ID 
 		WHERE
 			A.BO_STATE = "upload"  
-		order by
+		ORDER BY
 			A.BO_NUM DESC  
-		limit
+		LIMIT
 			#{pageStart},#{pageSize} 
 	</select> 
 	

@@ -55,7 +55,6 @@ public class UserController {
 
 		// 전체 글 목록 불러오기
 		List<BoardVO> boardList = bService.boardList(cri);
-		logger.debug("test : " + boardList);
 		model.addAttribute("boardList", boardList);
 	}
 

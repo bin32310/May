@@ -9,7 +9,7 @@ import lombok.Data;
 public class Criteria{
 	
 	private int page;
-	private int pageSize;
+	private int pageSize; // 한페이지에 표시되는 리스트 개수
 	private String keyword;
 	
 	// 기본 설정

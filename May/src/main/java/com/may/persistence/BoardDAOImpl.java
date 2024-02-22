@@ -56,7 +56,6 @@ public class BoardDAOImpl {
 	// 글쓰기
 	public int boWrite(BoardVO boardVO) {
 		logger.debug("boWrite(BoardVO boardVO) 호출");
-			
 		return sqlSession.insert(NAMESPACE + ".boWrite", boardVO);
 	}
 	

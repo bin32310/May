@@ -63,7 +63,7 @@ input[type=text], textarea{
 <c:if test="${empty us_id}">
 	${"<script>alert('로그인이 필요합니다.');location.href='../user/userLogin';</script>" }
 </c:if>
-<c:if test="${boRead.bo_state.equals('delete')}">
+<c:if test="${ !us_id.equals('admin') && boRead.bo_state.equals('delete')}">
 	${"<script>alert('존재하지 않는 게시글입니다.');location.href='../user/userMain';</script>" }
 </c:if>
 
@@ -93,6 +93,9 @@ input[type=text], textarea{
 							<input type="button" id="updateOk" class="btn_blue" value="수정완료">
 							<input type="button" id="delete" class="btn_red" value="삭제하기">
 						</c:if>
+						<c:if test="${us_id.equals('admin') && boRead.bo_reply.equals('no')}">
+							<input type="button" id="admin_reply" class="btn_blue" value="답변하기">
+						</c:if>
 							<input type="button" id="back" class="btn_gray" value="목록으로" onclick="location.href='../user/userMain';">
 					</div>			
 					</div>
@@ -111,6 +114,23 @@ input[type=text], textarea{
 			<button type="button" class="modal_btn_yes" id="deleteModalYes">네</button>
 			<button type="button" class="modal_btn_no" id="deleteModalNo">아니오</button>
 		</div>
+	</div>
+	<div class="modal_layer"></div>
+</div>
+
+<!-- 답변하기 버튼 클릭시 Modal -->
+<div id="replyModal" class="modal">
+	<div class="modal_content">
+		<form action="" method="post">
+			<div class="modal_header">
+				<h4 class="modal-title">${boRead.bo_num }번째 글 답변</h4>
+					<textarea rows="5" cols="30" id="bo_reply_content" name="bo_reply_content" placeholder="답변내용"></textarea><br>
+			</div>
+			<div class="modal_footer">
+				<button type="button" class="modal_btn_yes" id="replyModalYes">답변등록</button>
+				<button type="button" class="modal_btn_no" id="replyModalNo">취소</button>
+			</div>
+		</form>
 	</div>
 	<div class="modal_layer"></div>
 </div>
@@ -201,6 +221,45 @@ $(document).ready(function(){
 			} // success 끝	
 		}); // ajax 끝
 	}); // #modefyOk.click
+	
+	
+	// 답변하기 버튼 클릭 시 Modal show
+	$('#admin_reply').click(function(){
+		$('#replyModal').css("display","block");
+	}); // #admin_reply.click
+	
+	// 답변 Yes
+	$('#replyModalYes').click(function(){
+		
+		var bo_num = ${boRead.bo_num};
+		var bo_title =  "[답변]" + $('#bo_title').val();
+		var bo_content = $('#bo_reply_content').val();
+		
+		$.ajax({
+			type : "post",
+			url : "/admin/boReply",
+			data : {"bo_num" : bo_num, "bo_title" : bo_title, "bo_content" : bo_content },
+			dataType : "JSON",
+			error: function(){
+				alert("답변등록 에러");
+			},
+			success : function(data){
+				if(data == 1){
+					$('#replyModal').css("display","none");	
+					alert("답변등록 완료");
+					
+				}else{
+					alert("답변등록 실패");
+				}
+			} // success 끝	
+		}); // ajax 끝
+	}); //#replyModalYes.click
+	
+	// 답변 No
+	$('#replyModalNo').click(function(){
+		$('#replyModal').css("display","none");		
+		$('#bo_reply_content').val("");
+	});
 	
 });	// $(document) 끝	
 		
