@@ -39,7 +39,7 @@ table td .tb_view{
 						<th class="tb_us_out_date">탈퇴일</th>
 					</tr>
 					<c:forEach var="ul" items="${userList}">
-						<tr>
+						<tr> 
 							<td class="tb_us_state"> ${ul.us_state }</td>
 							<td class="tb_us_id"> ${ul.us_id}</td>
 							<td class="tb_us_name"> ${ul.us_name }</td>
