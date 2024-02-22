@@ -250,7 +250,7 @@ table th{
 	width : 25%;
 }
 
-.tb_us_joinDate, .tb_us_outDate{
+.tb_us_join_date, .tb_us_out_date{
 	width : 20%;
 
 }

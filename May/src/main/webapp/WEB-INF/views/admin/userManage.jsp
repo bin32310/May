@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../include/adminHeader.jsp" %>
 <style>
 
@@ -36,8 +35,8 @@ table td .tb_view{
 						<th class="tb_us_name">이름</th>
 						<th class="tb_us_nickname">닉네임</th>
 						<th class="tb_us_tel">전화번호</th>
-						<th class="tb_us_joinDate">가입일</th>
-						<th class="tb_us_outDate">탈퇴일</th>
+						<th class="tb_us_join_date">가입일</th>
+						<th class="tb_us_out_date">탈퇴일</th>
 					</tr>
 					<c:forEach var="ul" items="${userList}">
 						<tr>
@@ -46,8 +45,8 @@ table td .tb_view{
 							<td class="tb_us_name"> ${ul.us_name }</td>
 							<td class="tb_us_nickname">${ul.us_nickname }</td>
 							<td class="tb_us_tel"> ${ul.us_tel }</td>
-							<td class="tb_us_joinDate"> <fmt:formatDate pattern="yyyy년 MM월 dd일" value="${ul.us_joinDate }"/></td>
-							<td class="tb_us_outDate"> <fmt:formatDate pattern="yyyy년 mm월 dd일" value="${ul.us_outDate }"/> </td>
+							<td class="tb_us_join_date"> ${ul.us_join_date }</td>
+							<td class="tb_us_out_date"> ${ul.us_out_date }</td>
 						</tr>
 					</c:forEach>
 				</table>
