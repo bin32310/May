@@ -15,8 +15,9 @@ public class BoardVO {
 	private String bo_title; // 제목
 	private String bo_content; // 내용
 	private int bo_view; // 조회수
-	private String bo_img; // 이미지
 	private String bo_state; // 글 상태(upload, delete)
+	private String bo_lock; // 글 공개/비공개(lock, unlock)
+	private String bo_reply; // 답변여부(no - 미답변, yes - 답변완료)
 	
 	private UserVO userVO; // userVO
 
