@@ -101,17 +101,8 @@ $(document).ready(function(){
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-4 py-lg-0">
                 <a href="../user/userMain" class="nav-item nav-link active">Home</a>
-                <a href="about.html" class="nav-item nav-link">About</a>
-                <a href="service.html" class="nav-item nav-link">Service</a>
-                <a href="roadmap.html" class="nav-item nav-link">Roadmap</a>
-                <div class="nav-item dropdown">
-                    <a href="../user/userMypage" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">마이페이지</a>
-                    <div class="dropdown-menu shadow-sm m-0">
-                        <a href="../user/userMypage" class="dropdown-item">내정보</a>
-                        <a href="../user/userMyBoard" class="dropdown-item">내 글 관리</a>
-                    </div>
-                </div>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+                <a href="../user/userMypage" class="nav-item nav-link">내정보</a>
+                <a href="../user/userMyBoard" class="nav-item nav-link">내글목록</a>
             </div>
             <div class="h-100 d-lg-inline-flex align-items-center d-none">
         		<c:if test="${empty us_id }">

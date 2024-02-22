@@ -41,4 +41,22 @@ public class AdminServiceImpl {
 		return adao.userCount(cri);
 	}
 	
+	// 전체 글 목록 조회
+	public List<BoardVO> boardList(Criteria cri) throws Exception{
+		logger.debug("boardList(Criteria cri) 호출");
+		return adao.boardList(cri);
+	}
+	
+	// 전체 글 수 조회
+	public int boardCount() throws Exception {
+		logger.debug("service : boardCount() 호출 ");
+		return adao.boardCount();
+	}
+	
+	// 답변등록
+	public int boReply(BoardVO boardVO) {
+		logger.debug("boReply(BoardVO boardVO) 호출 ");
+		return 	adao.boReply(boardVO);
+	}
+	
 }

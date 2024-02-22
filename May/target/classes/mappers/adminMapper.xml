@@ -42,14 +42,14 @@
 			US
 	</select>
 	
-	<!-- 글 목록 -->
-	<select id="boardList" resultType="BoardVO">
-		SELECT /* boardList */
+	<!-- 전체 글 목록(글관리) -->
+ 	<select id="boardList" resultType="BoardVO">
+		SELECT /* boardList */ 
 			*
 		FROM
 			BOARD
 		ORDER BY
-			BO_NUM DESC
+			BO_NUM DESC  
 		LIMIT
 			#{pageStart},#{pageSize} 
 	</select> 
@@ -61,7 +61,15 @@
 		FROM
 			BOARD
 	</select>
-	  
+	
+	<!-- 답변등록 -->
+	<insert id="boReply">
+		INSERT INTO /* boWrite */
+			BOARD
+			(BO_TITLE, BO_CONTENT, US_ID)
+		VALUES
+			(#{bo_title}, #{bo_content}, #{us_id})
+	</insert>  
   
   
   

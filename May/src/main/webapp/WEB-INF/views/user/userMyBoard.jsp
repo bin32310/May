@@ -41,15 +41,27 @@ table th, table td{
 			<div class="board_list"> <!-- list_section -->
 				<table>
 					<tr>
-						<th class="tb_num">번호</th>
+						<th class="tb_reply">답변상태</th>
 						<th class="tb_title">제목</th>
-						<th class="tb_writer">글쓴이</th>
+						<th class="tb_writer">작성자</th>
 						<th class="tb_view">조회수</th>
 					</tr>
 					<c:forEach var="bl" items="${boardList}">
 							<tr>
-								<td class="tb_num"> ${bl.bo_num }</td>
-								<td class="tb_title tb_td_title"><a href="../board/boRead?bo_num=${bl.bo_num}"> ${bl.bo_title }</a></td>
+								<c:if test="${bl.bo_reply.equals('no') }">
+									<td class="tb_reply"> 미답변</td>
+								</c:if>
+								<c:if test="${bl.bo_reply.equals('yes') }">
+									<td class="tb_reply"> 답변완료</td>
+								</c:if>
+								<td class="tb_title tb_td_title"> <!-- 제목 -->
+									<a href="../board/boRead?bo_num=${bl.bo_num}">
+										<c:if test="${bl.bo_lock.equals('lock')}"> <!-- 비공개글 -->
+											<img alt="lock_icon" src="../resources/img/lock_icon.png" width="30px" height="30px">
+										</c:if>
+										${bl.bo_title }
+									</a>
+								</td>
 								<td class="tb_writer tb_td_writer"> ${bl.userVO.us_nickname }</td>
 								<td class="tb_view"> ${bl.bo_view }</td>
 							</tr>
