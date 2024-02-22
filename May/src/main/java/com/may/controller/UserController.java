@@ -3,6 +3,7 @@ package com.may.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -64,37 +65,38 @@ public class UserController {
 		logger.debug("userJoinGET()호출");
 	}
 
+	// 유효성 검사용 정규식 
+	public static final String us_id_reg_check = "^[a-zA-Z0-9][a-zA-Z0-9]{2,7}";
+	public static final String us_pw_reg_check = "^[a-zA-Z0-9][a-zA-Z0-9]{2,7}";
+	public static final String us_name_reg_check = "^[가-힣][가-힣]{0,9}";
+	public static final String us_nickname_reg_check = "^[a-zA-Z0-9ㄱ-힣][a-zA-Z0-9ㄱ-힣]{0,7}";
+	public static final String us_tel_reg_check = "^010[0-9]{8}";
+	
 	// 회원가입
 	@ResponseBody
 	@RequestMapping(value = "userJoin", method = RequestMethod.POST)
 	public int userJoinPOST(UserVO userVO, String us_pw_check) throws Exception {
 		logger.debug("userJoinPOST(UserVO userVO)호출");
 		logger.debug("회원가입 정보 userVO : " + userVO);
+		logger.debug("회원가입 정보 pw_ch : " + us_pw_check);
 		
 		boolean us_id = false, us_pw = false, us_pw_ck = false, us_name = false, us_nickname = false, us_tel = false;
+		
+		us_id = Pattern.matches(us_id_reg_check, userVO.getUs_id());
+		us_pw = Pattern.matches(us_pw_reg_check, userVO.getUs_pw());
+		us_name = Pattern.matches(us_name_reg_check, userVO.getUs_name());
+		us_nickname = Pattern.matches(us_nickname_reg_check, userVO.getUs_nickname());
+		us_tel = Pattern.matches(us_tel_reg_check, userVO.getUs_tel());
 
-		if (userVO.getUs_id().length() >= 3 && userVO.getUs_id().length() <= 8) {
-			us_id = true;
-		}
-		if (userVO.getUs_pw().length() >= 3 && userVO.getUs_pw().length() <= 8) {
-			us_pw = true;
-		}
 		if (userVO.getUs_pw().equals(us_pw_check)) {
 			us_pw_ck = true;
 		}
-		if (userVO.getUs_name().length() >= 1 && userVO.getUs_name().length() <= 10) {
-			us_name = true;
-		}
-		if (userVO.getUs_nickname().length() >= 1 && userVO.getUs_nickname().length() <= 8) {
-			us_nickname = true;
-		}
-		if (userVO.getUs_tel().length() == 11) {
-			us_tel = true;
-		}
+
 		// 모든 조건 만족시
 		if (us_id && us_pw && us_pw_ck && us_name && us_nickname && us_tel) {
 			return uService.userJoin(userVO);
 		}
+		
 		return 0;
 	}
 

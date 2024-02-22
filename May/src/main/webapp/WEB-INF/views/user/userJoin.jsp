@@ -57,23 +57,26 @@
 			<h1>회원가입</h1>
 			<br>
 			<form action="" id="us_join_form" name="us_join_form" method="POST">
-				<input type="text" id="us_id" class="login_input" name="us_id" maxlength="8" placeholder="아이디(최소 3자 , 최대 8자)">
+				<input type="text" id="us_id" class="login_input" name="us_id" maxlength="8" placeholder="아이디(3~8자)">
 				<p class="id_check" id="id_ok">사용 가능한 아이디입니다.</p>
 				<p class="id_check" id="id_no">사용 불가능한 아이디입니다.</p>
 
-				<input type="password" id="us_pw" class="login_input" name="us_pw" maxlength="8" placeholder="비밀번호(최소 3자, 최대 8자)"> <br>
+				<input type="password" id="us_pw" class="login_input" name="us_pw" maxlength="8" placeholder="비밀번호(3~8자)"> <br>
 				<span class="pw_check" id="pw_no"> 3자 이상 입력해주세요.</span> 
+				
 				<input type="password" id="us_pw_check" class="login_input" name="us_pw_check" maxlength="8" placeholder="비밀번호 확인"> <br>
 				<span class="pw_check" id="pwCk_no"> 비밀번호와 다릅니다.</span>
-				<input type="text" id="us_name" class="login_input" name="us_name" placeholder="이름(실명)" maxlength="15"> <br>
+				
+				<input type="text" id="us_name" class="login_input" name="us_name" placeholder="이름(실명)" maxlength="10"> <br>
 				<span class="name_check" id="name_no"> 이름(실명)을 입력해주세요.</span>
-				<span class="name_check" id="name_no1"> 한글만 입력 가능합니다.</span>
-				<input type="text" id="us_nickname" class="login_input" name="us_nickname" placeholder="닉네임(8자 이하)" maxlength="8"> <br>
+				
+				<input type="text" id="us_nickname" class="login_input" name="us_nickname" placeholder="닉네임(1~8자)" maxlength="8"> <br>
 				<span class="nick_check" id="nickname_no"> 닉네임을 입력해주세요.</span>
-				<span class="nick_check" id="nickname_no1"> 한글, 영문, 숫자만 입력 가능합니다.</span>
+				
 				<input type="text" id="us_tel" class="login_input" name="us_tel" value="010" placeholder="휴대폰번호(-제외)" maxlength="11"> <br>
-					<span class="tel_check" id="tel_ok"> 사용가능한 번호입니다.</span>
+					<span class="tel_check" id="tel_ok"> 사용가능한 전화번호입니다.</span>
 					<span class="tel_check" id="tel_no"> 이미 존재하는 전화번호입니다.</span><br>
+					
 				<br> <input type="button" id="us_join_btn" class="btn_blue"
 					value="회원가입"> <input type="button" id="back"
 					class="btn_gray" value="돌아가기" onclick="backTo();">
@@ -92,13 +95,7 @@
 		var name_ok = false;
 		var nickname_ok = false;
 		var tel_ok = false;
-		
-		// 정규식 : replace(정규식, '') 에 들어갈 정규식이다.
-		var id_reg_check = new RegExp(/[^A-Za-z0-9]{3,8}/g); // 영어 숫자만 입력 가능, 3~8자리
-		var pw_reg_check = new RegExp(/[^A-Za-z0-9]{3,8}/g); // 영어 숫자만 입력 가능, 3~8자리
-		var name_reg_check = /[^ㄱ-힣]*$/g; // 한글만 입력 가능, 1~10자리
-		var nickname_reg_check = /[^A-Za-z0-9]{1,8}$/g; // 영어, 숫자, 한글만 입력 가능, 1~8자리
-		var tel_reg_check = /^010[0-9]{8}/; // 010으로 시작하고 그 뒤는 0~9까지의 숫자만 8개 , 총 11자
+
 
 		// 페이지 로드시 아이디에 포커스
 		$('#us_id').focus();
@@ -158,11 +155,24 @@
 			}); // ajax 끝
 		}); // #us_join_btn
 
-		// 아이디 중복체크
+		
+		// 아이디 입력문자(영문,숫자만), 중복 체크
 		$('#us_id').keyup(function() {
+			
+			var us_id_reg_check = /^[a-zA-Z0-9][a-zA-Z0-9]*$/; // 정규식
 			var us_id = $('#us_id').val();
-
-			if (us_id.length >= 3) { // 3자 이상
+			if (us_id != null && us_id_reg_check.test(us_id) ){ // 압력문자 체크
+				$('#id_ok').css("display", "none");
+				$('#id_no').css("display", "none");
+			}else{
+				$('#id_ok').css("display", "none");
+				$('#id_no').text('영문, 숫자만 입력 가능합니다.');
+				$('#id_no').css("display", "block");
+				id_ok = false;
+				return;
+			}
+			
+			if ( us_id != null && us_id.length >= 3) { // 3자 이상
 				$.ajax({
 					type : "post",
 					url : "/user/userIdCheck",
@@ -186,23 +196,32 @@
 						}
 					} // success 끝	
 				}); // ajax 끝
-			} else {
+			}else{
 				$('#id_ok').css("display", "none");
 				$('#id_no').text('3자 이상 입력해주세요.');
 				$('#id_no').css("display", "block");
+				id_ok = false;
 			}
 		}); //('#us_id').keyup 끝
-		var us_tel = "";
-		// 전화번호 입력 체크
-		$('#us_tel').keydown(function() {
-			 us_tel = $('#us_tel').val().replace(/[^0-9]*$/,''); //숫자를 제외하고 공백 처리
-			$('#us_tel').val(us_tel);
-		});
 		
-		// 전화번호 010으로 시작여부, 길이(11자), 중복 체크
+		
+		// 전화번호 010으로 시작여부, 숫자만 입력, 길이(11자), 중복 체크
 		$('#us_tel').keyup(function() {
 			
-			if ( $('#us_tel').val().search(tel_reg_check) == 0) { 
+			var us_tel_reg_check = /^010[0-9]*$/; // 정규식
+			var us_tel = $('#us_tel').val();
+			if ( us_tel != null && us_tel_reg_check.test(us_tel)) {
+				$('#tel_ok').css("display", "none");
+				$('#tel_no').css("display", "none");
+			}else{
+				$('#tel_ok').css("display", "none");
+				$('#tel_no').text('숫자만 입력 가능합니다.');
+				$('#tel_no').css("display", "block");
+				tel_ok = false;
+				return;
+			} 
+			
+			if (us_tel != null && us_tel.length == 11) {
 				
 				$.ajax({
 					type : "post",
@@ -228,8 +247,7 @@
 						}
 					} // success 끝	
 				}); // ajax 끝
-			} // if
-			else {
+			}else{
 
 				$('#tel_ok').css("display", "none");
 				$('#tel_no').text('정상적이지 않은 전화번호입니다.');
@@ -238,12 +256,25 @@
 			}
 		}); // ('#us_tel').keyup 끝
 
-		// 비밀번호 체크 
+		// 비밀번호 입력문자(영문, 숫자만) , 길이 체크 
 		$('#us_pw').keyup(function() {
-			if ($('#us_pw').val().length >= 3) {
+
+			var us_pw_reg_check = /^[a-zA-Z0-9][a-zA-Z0-9]*$/; // 정규식
+			var us_pw = $('#us_pw').val();
+			if (us_pw != null && us_pw_reg_check.test(us_pw) ){ // 압력문자 체크
+				$('#pw_no').css("display", "none");
+			}else{
+				$('#pw_no').text('영문, 숫자만 입력 가능합니다.');
+				$('#pw_no').css("display", "block");
+				pw_ok = false;
+				return;
+			}
+			
+			if (us_pw != null && us_pw.length >= 3) {
 				$('#pw_no').css("display", "none");
 				pw_ok = true;
-			} else {
+			}else{
+				$('#pw_no').text('3자 이상 입력해주세요.');
 				$('#pw_no').css("display", "block");
 				pw_ok = false;
 			}
@@ -254,58 +285,56 @@
 			if ($('#us_pw').val() == $('#us_pw_check').val()) {
 				$('#pwCk_no').css("display", "none");
 				pw_check_ok = true;
-			} else {
+			}else{
 				$('#pwCk_no').css("display", "block");
 				pw_check_ok = false;
 			}
 		}); // ('#us_pw_check').keyup 끝
 		
 		
-		// 이름에 들어오면 안되는 문자들
-		var us_name_check_no = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
-		// 이름 체크(한글만 입력 가능)
-		$('#us_name').keydown(function() {
-			if(us_name_check_no.test($('#us_name').val())){
-				var us_name_check = $('#us_name').val().replace(name_reg_check, '');
-				$('#us_name').val(us_name_check);
-				$('#name_no1').css("display", "block");
-			}else{
-				$('#name_no1').css("display", "none");
-			}
-		}); //('#us_name').keydown 끝
-		
-		// 이름 체크(길이 체크)
+		// 이름 입력문자(한글만), 길이 체크
 		$('#us_name').keyup(function() {
-			if ($('#us_name').val().length >= 1 && $('#us_name').val().length <= 10) {
+			
+			var us_name_reg_check = /^[가-힣][가-힣]*$/; // 정규식
+			var us_name = $('#us_name').val();
+			if (us_name != null && us_name_reg_check.test(us_name) ){ // 압력문자 체크
+				$('#name_no').css("display", "none");
+			}else{
+				$('#name_no').text('이름(실명)을 입력해주세요.');
+				$('#name_no').css("display", "block");
+				name_ok = false;
+				return;
+			}
+			
+			if (us_name != null && us_name.length >= 1 && us_name.length <= 10) {
 				$('#name_no').css("display", "none");
 				name_ok = true;
-			} else {
+			}else{
+				$('#name_no').text('이름을 입력해주세요.');
 				$('#name_no').css("display", "block");
 				name_ok = false;
 			}
 		}); //('#us_name').keyup 끝
-
 		
-		// 닉네임에 들어오면 안되는 문자들
-		var us_nickname_check_no = /[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g; 
-		// 닉네임 체크(영어, 숫자, 한글만 입력 가능)
-		$('#us_nickname').keydown(function() {
-			if (us_nickname_check_no.test($('#us_nickname').val())){
-				var us_nickname_check = $('#us_nickname').val().replace(nickname_reg_check, '');
-				$('#us_nickname').val(us_nickname_check);
-				$('#nickname_no1').css("display", "block");
-			} else {
-				$('#nickname_no1').css("display", "none");
-			}
-		}); //('#us_nickname').keyup 끝
-		
-		// 닉네임 체크(길이 체크)
+		// 닉네임 입력문자(영어, 숫자, 한글만), 길이 체크
 		$('#us_nickname').keyup(function() {
-			if ($('#us_nickname').val().length >= 1 && $('#us_nickname').val().length <= 8) {
+			
+			var us_nickname_reg_check = /^[a-zA-Z0-9ㄱ-힣][a-zA-Z0-9ㄱ-힣]*$/; // 정규식
+			var us_nickname = $('#us_nickname').val();
+			if (us_nickname != null && us_nickname_reg_check.test(us_nickname) ){ // 압력문자 체크
+				$('#nickname_no').css("display", "none");
+			}else{
+				$('#nickname_no').text('한글, 영문, 숫자만 입력 가능합니다.');
+				$('#nickname_no').css("display", "block");
+				nickname_ok = false;
+				return;
+			}
+			
+			if (us_nickname != null && $('#us_nickname').val().length >= 1 && $('#us_nickname').val().length <= 8) {
 				$('#nickname_no').css("display", "none");
 				nickname_ok = true;
-			} else {
-				$('#nickname_no').text("1자이상 8자 이상 입력해주세요.");
+			}else{
+				$('#nickname_no').text("1자 이상 8자 이하로 입력해주세요.");
 				$('#nickname_no').css("display", "block");
 				nickname_ok = false;
 			}
