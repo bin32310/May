@@ -62,6 +62,7 @@ public class AdminController {
 		
 		// 전체 회원 목록 불러오기
 		List<UserVO> userList = aService.userList(cri);
+		logger.debug("userList : " + userList);
 		model.addAttribute("userList", userList);
 	}
 	

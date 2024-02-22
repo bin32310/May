@@ -48,7 +48,10 @@
 			<div class="write_section">
 				<h1> 글 작성 </h1>
 				<form action="" id="boWrite_form" name="boWrite_form" method="post">
-					<input type="text" id="bo_title" class="board_title" name="bo_title" placeholder="글제목" ><br><br>	
+					<input type="text" id="bo_title" class="board_title" name="bo_title" placeholder="글제목" >	
+			   		<label for="unlock">공개 <input type="radio" id="unlock_radio_btn" name="bo_lock" value="unlock" checked="checked" ></label>			
+			   		<label for="lock">비공개 <input type="radio" id="lock_radio_btn" name="bo_lock" value="lock"  ></label>	
+			   		<br><br>
 					<textarea rows="5" id="bo_content" class="board_content" name="bo_content" placeholder="내용" style="resize:none"></textarea><br><br>
 					<div id="button_section">
 						<input type="button" id="upload" class="btn_blue" value="등록하기">

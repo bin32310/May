@@ -12,7 +12,20 @@
 	<!-- 회원 목록 -->
 	<select id="userList" resultType="UserVO">
 	SELECT /* userList */
-		US_ID, US_NAME, US_NICKNAME, US_STATE, US_JOIN_DATE, US_OUT_DATE
+		US_ID,
+		US_NAME,
+		US_NICKNAME,
+		US_STATE,
+		CONCAT(
+				SUBSTR(US_TEL, 1, 3),
+				'-',
+				SUBSTR(US_TEL, 4, 4),
+				'-',
+				SUBSTR(US_TEL, 8, 4)
+				
+				) as US_TEL,
+		DATE_FORMAT(US_JOIN_DATE, '%Y년 %m월 %d일') as US_JOIN_DATE,
+		DATE_FORMAT(US_OUT_DATE, '%Y년 %m월 %d일') as US_OUT_DATE
 	FROM
 		US
 	ORDER BY

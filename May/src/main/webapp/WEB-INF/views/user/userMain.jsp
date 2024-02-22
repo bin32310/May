@@ -52,18 +52,37 @@ table td .tb_view{
 		<div id="board_list"> <!-- list_section -->
 			<table>
 				<tr>
-					<th class="tb_num">번호</th>
+					<th class="tb_reply">답변상태</th>
 					<th class="tb_title">제목</th>
-					<th class="tb_writer">글쓴이</th>
+					<th class="tb_writer">작성자</th>
 					<th class="tb_view">조회수</th>
 				</tr>
 				<c:forEach var="bl" items="${boardList}">
-					<tr>
-						<td class="tb_num"> ${bl.bo_num }</td>
-						<td class="tb_title tb_td_title"><a href="../board/boRead?bo_num=${bl.bo_num}"> ${bl.bo_title }</a></td>
-						<td class="tb_writer tb_td_writer"> ${bl.userVO.us_nickname }</td>
-						<td class="tb_view"> ${bl.bo_view }</td>
-					</tr>
+						<tr>
+							<c:if test="${bl.bo_reply.equals('no') }">
+								<td class="tb_reply"> 미답변</td>
+							</c:if>
+							<c:if test="${bl.bo_reply.equals('yes') }">
+								<td class="tb_reply"> 답변완료</td>
+							</c:if>
+							
+							<c:if test="${bl.bo_lock.equals('unlock')}"><!-- 공개글 -->
+								<td class="tb_title tb_td_title"><a href="../board/boRead?bo_num=${bl.bo_num}"> ${bl.bo_title }</a></td>
+							</c:if>
+							<c:if test="${bl.bo_lock.equals('lock')}"> <!-- 비공개글 -->
+							<td class="tb_title tb_td_title">
+								<img alt="lock_icon" src="../resources/img/lock_icon.png" width="30px" height="30px">
+								<c:if test="${!empty us_id && bl.us_id.equals(us_id)}"> <!-- 내 글일땐 --> 
+										<a href="../board/boRead?bo_num=${bl.bo_num}"> ${bl.bo_title }</a>
+								</c:if>
+								<c:if test="${(empty us_id) || !bl.us_id.equals(us_id)}"><!-- 내 글이 아닐땐 -->
+										<a class="lock_board_click" > 비공개글입니다.</a>
+								</c:if>
+							</td>	
+							</c:if>
+							<td class="tb_writer tb_td_writer"> ${bl.userVO.us_nickname }</td>
+							<td class="tb_view"> ${bl.bo_view }</td>
+						</tr>
 				</c:forEach>
 			</table>
 		</div><!-- list_section -->
@@ -89,6 +108,18 @@ table td .tb_view{
 		</div>
 	</div>
 <%@ include file="../include/footer.jsp" %>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+	
+	$('.lock_board_click').click(function(){
+		alert("비공개글은 작성자만 확인할 수 있습니다.");
+	});
+	
+});
+
+</script>
 
 </body>
 </html>

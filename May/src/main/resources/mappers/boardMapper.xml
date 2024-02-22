@@ -24,8 +24,9 @@
   		<result property="bo_title" column="bo_title"/>
   		<result property="bo_content" column="bo_content"/>
   		<result property="bo_view" column="bo_view"/>
-  		<result property="bo_img" column="bo_img"/>
   		<result property="bo_state" column="bo_state"/>
+  		<result property="bo_lock" column="bo_lock"/>
+  		<result property="bo_reply" column="bo_reply"/>
   		<collection property="userVO" resultMap="UserVO"/>
   	</resultMap>
 
@@ -34,10 +35,13 @@
 	<!-- 전체 글 목록(메인) -->
  	<select id="boardList" resultMap="BoardVO">
 		SELECT /* boardList */ 
+			A.US_ID,
 			A.BO_NUM,
 			A.BO_TITLE,
 			A.BO_CONTENT,
 			A.BO_VIEW,
+			A.BO_LOCK,
+			A.BO_REPLY,
 			B.US_NICKNAME 
 		FROM
 			BOARD A JOIN US B 
@@ -68,6 +72,8 @@
 			A.BO_TITLE,
 			A.BO_CONTENT,
 			A.BO_VIEW,
+			A.BO_LOCK,
+			A.BO_REPLY,
 			B.US_NICKNAME
 		FROM 
 			BOARD A JOIN US B
@@ -99,9 +105,9 @@
 	<insert id="boWrite">
 		INSERT INTO /* boWrite */
 			BOARD
-			(BO_TITLE, BO_CONTENT, US_ID)
+			(BO_TITLE, BO_CONTENT, US_ID, BO_LOCK)
 		VALUES
-			(#{bo_title}, #{bo_content}, #{us_id})
+			(#{bo_title}, #{bo_content}, #{us_id}, #{bo_lock})
 	</insert>
 
 	<!-- 가장 최신 글 번호  -->
@@ -119,7 +125,10 @@
 			A.BO_NUM,
 			A.BO_TITLE,
 			A.BO_CONTENT,
+			A.BO_STATE,
 			A.BO_VIEW,
+			A.BO_LOCK,
+			A.BO_REPLY,
 			B.US_NICKNAME
 		FROM
 			BOARD A JOIN US B
@@ -152,7 +161,8 @@
 			BOARD
 		SET
 			BO_TITLE = #{bo_title},
-			BO_CONTENT = #{bo_content}
+			BO_CONTENT = #{bo_content},
+			BO_LOCK = #{bo_lock}
 		WHERE
 			BO_NUM = #{bo_num}
 	</update>
