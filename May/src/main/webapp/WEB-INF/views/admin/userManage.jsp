@@ -47,7 +47,7 @@ table td .tb_view{
 							<td class="tb_us_tel"> ${ul.us_tel }</td>
 							<td class="tb_us_join_date"> ${ul.us_join_date }</td>
 							<td class="tb_us_out_date"> ${ul.us_out_date }</td> 
-						</tr>
+						</tr> 
 					</c:forEach>
 				</table>
 			</div><!-- user_list -->
