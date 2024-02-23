@@ -45,14 +45,17 @@
 			A.BO_VIEW,
 			A.BO_LOCK,
 			A.BO_REPLY,
-			B.US_NICKNAME 
+			A.RE_REF,
+			A.RE_LEV,
+			A.RE_SEQ,
+			B.US_NICKNAME
 		FROM
 			BOARD A JOIN US B 
 			ON A.US_ID = B.US_ID 
 		WHERE
 			A.BO_STATE = "upload"  
 		ORDER BY
-			A.BO_NUM DESC  
+			A.RE_REF DESC, A.RE_LEV, A.RE_SEQ 
 		LIMIT
 			#{pageStart},#{pageSize} 
 	</select> 
@@ -132,6 +135,7 @@
 			A.BO_VIEW,
 			A.BO_LOCK,
 			A.BO_REPLY,
+			A.RE_REF,
 			B.US_NICKNAME
 		FROM
 			BOARD A JOIN US B
@@ -155,7 +159,19 @@
 		SET
 			BO_STATE = "delete" 
 		WHERE
-			BO_NUM = #{bo_num}
+			RE_REF = #{re_ref}
+	</update>
+	
+	<!-- 답글삭제 -->
+	<update id="reDelete">
+		UPDATE /* reDelete */
+			BOARD
+		SET
+			BO_STATE = "delete" 
+		WHERE
+			RE_REF = #{re_ref}
+			AND
+			RE_LEV = 1
 	</update>
 
 	<!-- 글수정 -->
@@ -169,5 +185,53 @@
 		WHERE
 			BO_NUM = #{bo_num}
 	</update>
+	
+	<!-- 글-답글 공개여부 수정 -->
+	<update id="reLockUpdate">
+		UPDATE /* reLockUpdate */
+			BOARD
+		SET
+			BO_LOCK = #{bo_lock}
+		WHERE
+			RE_REF = #{re_ref}
+			AND
+			RE_LEV = 1
+	</update>
+	
+	<!-- 원글 작성자 -->
+	<select id="boWriter" resultType="String">
+		SELECT /* boWriter */
+			US_ID
+		FROM
+			BOARD
+		WHERE
+			RE_REF = #{re_ref} 
+			AND
+			RE_LEV = 0
+	</select>
+	
+	<!-- 답글 보기 -->
+	<select id="goReply" resultType="int">
+		SELECT /* goReply */
+			BO_NUM
+		FROM
+			BOARD
+		WHERE
+			RE_REF = #{re_ref} 
+			AND
+			RE_LEV = 1
+	</select>
+	
+	<!-- 답글 보기 -->
+	<select id="goOrigin" resultType="int">
+		SELECT /* goOrigin */
+			BO_NUM
+		FROM
+			BOARD
+		WHERE
+			RE_REF = #{re_ref} 
+			AND
+			RE_LEV = 0
+	</select>
   
   </mapper>

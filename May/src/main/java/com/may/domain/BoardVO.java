@@ -16,8 +16,8 @@ public class BoardVO {
 	private String bo_content; // 내용
 	private int bo_view; // 조회수
 	private String bo_state; // 글 상태(upload, delete)
-	private String bo_lock; // 글 공개/비공개(lock, unlock)
-	private String bo_reply; // 답변여부(no - 미답변, yes - 답변완료)
+	private String bo_lock; // 글 공개/비공개(lock - 비공개, unlock - 공개)
+	private String bo_reply; // 답변여부(no - 미답변, yes - 답변완료, re - 답글인 경우)
 	
 	private int re_ref; // 답글의 그룹번호
 						// 일반글 : 글 번호와 동일(bno == re_ref)
@@ -30,7 +30,7 @@ public class BoardVO {
 	private int re_seq; // 답글의 순서(시퀀스)
 						// 일반글 : 항상 0 (일반글이 가장 위쪽에 위치) 
 						// 답글 : 원글(기준)의 re_seq + 1 
-	
+		
 	private UserVO userVO; // userVO
 
 }

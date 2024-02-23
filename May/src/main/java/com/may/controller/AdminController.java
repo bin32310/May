@@ -99,9 +99,15 @@ public class AdminController {
 	public int boardManagePOST(BoardVO boardVO, HttpSession session,Model model)throws Exception {
 		logger.debug("boardManageGET()호출");
 		boardVO.setUs_id((String)session.getAttribute("us_id"));
+		
 		logger.debug("글 내용 확인 : " + boardVO);
 		
-		return aService.boReply(boardVO);
+		// 답변 등록 후 bo_reply 를 yes로 업데이트
+		if ( aService.boReply(boardVO) == 1) {
+			boardVO.setBo_reply("yes");
+			return aService.boReplyUpadte(boardVO);
+		};
+		return 0;
 	}
 	
 	
