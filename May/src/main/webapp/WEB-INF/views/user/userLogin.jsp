@@ -79,6 +79,13 @@ $(document).ready(function(){
 		}); // ajax 끝
 	}); // #login.click
 	
+	$('#us_login_form').keypress(function(e){
+		if(e.keyCode === 13){
+			$('#login').trigger('click');
+		}
+	});
+	
+	
 	
 });			
 
