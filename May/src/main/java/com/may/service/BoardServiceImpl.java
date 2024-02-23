@@ -75,16 +75,46 @@ public class BoardServiceImpl {
 		return 	bdao.boViewUp(bo_num);
 	}
 	
-	// 글삭제
-	public int boDelete(Integer bo_num) {
-		logger.debug("boDelete(Integer bo_num) 호출 ");
-		return 	bdao.boDelete(bo_num);
+	// 글삭제(원글과 답글 모두 삭제)
+	public int boDelete(Integer re_ref) {
+		logger.debug("boDelete(Integer re_ref) 호출 ");
+		return 	bdao.boDelete(re_ref);
+	}
+	
+	// 답변만삭제
+	public int reDelete(Integer re_ref) {
+		logger.debug("reDelete(Integer re_ref) 호출 ");
+		return 	bdao.reDelete(re_ref);
 	}
 	
 	// 글수정
 	public int boUpdate(BoardVO boardVO) {
 		logger.debug("boUpdate(BoardVO boardVO) 호출 ");
 		return 	bdao.boUpdate(boardVO);
+	}
+	
+	// 답변 공개여부 변경
+	public int reLockUpdate(BoardVO boardVO) {
+		logger.debug("reLockUpdate(BoardVO boardVO) 호출 ");
+		return 	bdao.reLockUpdate(boardVO);
+	}
+	
+	// 원글 작성자
+	public String boWriter(int re_ref) {
+		logger.debug("boWriter(int re_ref) 호출 ");
+		return 	bdao.boWriter(re_ref);
+	}
+	
+	// 답변보기
+	public int goReply(int re_ref) {
+		logger.debug("goReply(int re_ref) 호출 ");
+		return bdao.goReply(re_ref);
+	}
+	
+	// 답변보기
+	public int goOrigin(int re_ref) {
+		logger.debug("goOrigin(int re_ref) 호출 ");
+		return bdao.goOrigin(re_ref);
 	}
 	
 }

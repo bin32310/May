@@ -61,4 +61,10 @@ public class AdminDAOImpl {
 		return sqlSession.insert(NAMESPACE + ".boReply", boardVO);
 	}
 	
+	// 답변등록후 bo_reply를 yes로 업데이트
+	public int boReplyUpadte(BoardVO boardVO) {
+		logger.debug("boReplyUpadte(BoardVO boardVO) 호출");
+		return sqlSession.update(NAMESPACE + ".boReplyUpadte", boardVO);
+	}
+	
 }

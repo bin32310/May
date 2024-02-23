@@ -28,6 +28,9 @@
 							<c:if test="${bl.bo_reply.equals('yes') }">
 								<td class="tb_reply"> 답변완료</td>
 							</c:if>
+							<c:if test="${bl.bo_reply.equals('re') }">
+								<td class="tb_reply"> 답변</td>
+							</c:if>
 							
 							<c:if test="${bl.bo_state.equals('upload') }">
 								<td class="tb_reply"> 등록</td>
@@ -35,16 +38,15 @@
 							<c:if test="${bl.bo_state.equals('delete') }">
 								<td class="tb_reply"> 삭제</td>
 							</c:if>
-
-							<c:if test="${bl.bo_lock.equals('unlock')}"><!-- 공개글 -->
-								<td class="tb_title tb_td_title"><a href="../board/boRead?bo_num=${bl.bo_num}"> ${bl.bo_title }</a></td>
-							</c:if>
-							<c:if test="${bl.bo_lock.equals('lock')}"> <!-- 비공개글 -->
 							<td class="tb_title tb_td_title">
-								<img alt="lock_icon" src="../resources/img/lock_icon.png" width="30px" height="30px">
+								<c:if test="${bl.bo_reply.equals('re') }">
+									<img alt="reply" src="../resources/img/reply.gif" width="30px" height="20px">
+								</c:if>
+								<c:if test="${bl.bo_lock.equals('lock')}"> <!-- 비공개글 -->
+									<img alt="lock_icon" src="../resources/img/lock_icon.png" width="30px" height="30px">
+								</c:if>
 								<a href="../board/boRead?bo_num=${bl.bo_num}"> ${bl.bo_title }</a>
 							</td>	
-							</c:if>
 							<td class="tb_writer tb_td_writer"> ${bl.us_id }</td>
 							<td class="tb_view"> ${bl.bo_view }</td>
 						</tr>

@@ -59,4 +59,10 @@ public class AdminServiceImpl {
 		return 	adao.boReply(boardVO);
 	}
 	
+	// 답변등록
+	public int boReplyUpadte(BoardVO boardVO) {
+		logger.debug("boReplyUpadte(BoardVO boardVO) 호출 ");
+		return 	adao.boReplyUpadte(boardVO);
+	}
+	
 }
