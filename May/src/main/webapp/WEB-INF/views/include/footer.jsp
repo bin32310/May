@@ -213,13 +213,13 @@ table th{
 
 
 
-.tb_num, .tb_title, .tb_writer, .tb_view{
+.tb_reply, .tb_state, .tb_title, .tb_writer, .tb_view{
 	font-size: medium;
 	color: #000000;
 }
 
-.tb_num{
-	width: 10%;
+.tb_reply{
+	width: 15%;
 	text-align: center;
 }
 
@@ -231,7 +231,7 @@ table th{
 	width: 20%;	
 }
 
-.tb_view{
+.tb_view, .tb_state{
 	width: 10%;
 	text-align: center;
 }

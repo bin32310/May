@@ -29,7 +29,6 @@
   		<result property="bo_reply" column="bo_reply"/>
   		<result property="re_ref" column="re_ref"/>
   		<result property="re_lev" column="re_lev"/>
-  		<result property="re_seq" column="re_seq"/>
   		<collection property="userVO" resultMap="UserVO"/>
   	</resultMap>
 
@@ -47,7 +46,6 @@
 			A.BO_REPLY,
 			A.RE_REF,
 			A.RE_LEV,
-			A.RE_SEQ,
 			B.US_NICKNAME
 		FROM
 			BOARD A JOIN US B 
@@ -55,7 +53,7 @@
 		WHERE
 			A.BO_STATE = "upload"  
 		ORDER BY
-			A.RE_REF DESC, A.RE_LEV, A.RE_SEQ 
+			A.RE_REF DESC, A.RE_LEV
 		LIMIT
 			#{pageStart},#{pageSize} 
 	</select> 
@@ -213,7 +211,7 @@
 	<!-- 답글 보기 -->
 	<select id="goReply" resultType="int">
 		SELECT /* goReply */
-			BO_NUM
+			MAX(BO_NUM)
 		FROM
 			BOARD
 		WHERE
@@ -222,7 +220,7 @@
 			RE_LEV = 1
 	</select>
 	
-	<!-- 답글 보기 -->
+	<!-- 원글 보기 -->
 	<select id="goOrigin" resultType="int">
 		SELECT /* goOrigin */
 			BO_NUM
