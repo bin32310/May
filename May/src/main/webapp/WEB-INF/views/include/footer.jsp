@@ -19,7 +19,7 @@
                 <div class="col-md-6">
                     <h5 class="mb-4">Get In Touch</h5>
                     <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, Daejeon, Korea</p>
-                    <p><i class="fa fa-phone-alt me-3"></i>010 0000 0000</p>
+                    <p><i class="fa fa-phone-alt me-3"></i>02-123-1234</p>
                     <p><i class="fa fa-envelope me-3"></i>dbs730100@mayeye.net</p>
                 </div>
  
@@ -212,6 +212,11 @@ table th{
 }
 
 
+
+.tb_us_state, .tb_us_id, .tb_us_name, .tb_us_nickname, .tb_us_tel, .tb_us_join_date, .tb_us_out_date{
+	font-size: medium;
+	color: #000000;
+}
 
 .tb_reply, .tb_state, .tb_title, .tb_writer, .tb_view{
 	font-size: medium;

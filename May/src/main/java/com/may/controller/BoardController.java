@@ -38,10 +38,19 @@ public class BoardController {
 	@RequestMapping(value = "boWrite", method = RequestMethod.POST)
 	public int boWritePOST(BoardVO boardVO, HttpSession session) throws Exception {
 		logger.debug("boWritePOST(BoardVO boardVO)호출");
+		
+		Integer maxNum = bService.getBoMaxNum();
+		if(maxNum == null) { // 첫글이면
+			maxNum = 1;
+		}else {
+			maxNum += 1;
+		}
+		
 		boardVO.setUs_id((String) session.getAttribute("us_id"));
+		boardVO.setRe_ref(maxNum);
 		logger.debug("글 정보 boardVO : " + boardVO);
 		if (bService.boWrite(boardVO) == 1) {
-			return bService.getBoMaxNum();
+			return maxNum;
 		}
 		return 0;
 
@@ -49,9 +58,10 @@ public class BoardController {
 
 	// 글 읽기 GET
 	@RequestMapping(value = "boRead", method = RequestMethod.GET)
-	public void boReadGET(Integer bo_num, Model model, HttpSession session) throws Exception {
+	public void boReadGET(Integer bo_num,Model model, HttpSession session) throws Exception {
 		logger.debug("boReadGET(Integer bo_num)호출");
 		logger.debug(" 조회수 증가 : " + bService.boViewUp(bo_num));
+
 		// 글정보
 		BoardVO boardVO = bService.boRead(bo_num);
 		model.addAttribute("boRead", boardVO);

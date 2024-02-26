@@ -109,13 +109,13 @@
 	<insert id="boWrite">
 		INSERT INTO /* boWrite */
 			BOARD
-			(BO_TITLE, BO_CONTENT, US_ID, BO_LOCK)
+			(BO_TITLE, BO_CONTENT, US_ID, BO_LOCK, RE_REF)
 		VALUES
-			(#{bo_title}, #{bo_content}, #{us_id}, #{bo_lock})
+			(#{bo_title}, #{bo_content}, #{us_id}, #{bo_lock}, #{re_ref})
 	</insert>
 
 	<!-- 가장 최신 글 번호  -->
-	<select id="getBoMaxNum" resultType="int">
+	<select id="getBoMaxNum" resultType="Integer">
 		SELECT /* getBoMaxNum */
 			MAX(bo_num)
 		FROM

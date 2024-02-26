@@ -57,13 +57,12 @@
 	<select id="userLogin" resultType="UserVO">
 		SELECT /* userLogin */
 			US_ID,
+			US_PW,
 			US_NICKNAME
 		FROM
 			US
 		WHERE
 			US_ID = #{us_id}
-			AND
-			US_PW = #{us_pw}
 			AND
 			US_STATE = "join"
 	</select> 

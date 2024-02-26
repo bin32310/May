@@ -58,7 +58,7 @@ public class BoardServiceImpl {
 	}
 	
 	// 가장 최신 글 가져오기
-	public int getBoMaxNum() {
+	public Integer getBoMaxNum() {
 		logger.debug("getBoMaxNum() 호출 ");
 		return bdao.getBoMaxNum();
 	}

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,11 +35,14 @@ public class UserController {
 
 	@Inject
 	private BoardServiceImpl bService;
+	
+	@Inject
+	BCryptPasswordEncoder passEncoder;
 
 	// http://localhost:8080/user/userMain
 	// 유저 메인 페이지로 이동
 	@RequestMapping(value = "/userMain", method = RequestMethod.GET)
-	public void userMainGET(Criteria cri, Model model) throws Exception {
+	public void userMainGET(Criteria cri, Model model, HttpSession session) throws Exception {
 		logger.debug("userMainGET()호출");
 
 		// 페이징 처리( 페이지 블럭 처리 객체 )
@@ -52,6 +56,8 @@ public class UserController {
 			// 잘못된 페이지 정보 입력
 			cri.setPage(pageVO.getEndPage());
 		}
+		// session에 페이지 정보 저장
+		session.setAttribute("page", cri.getPage());
 
 		// 전체 글 목록 불러오기
 		List<BoardVO> boardList = bService.boardList(cri);
@@ -94,6 +100,8 @@ public class UserController {
 
 		// 모든 조건 만족시
 		if (us_id && us_pw && us_pw_ck && us_name && us_nickname && us_tel) {
+			String encoding_pw = passEncoder.encode(userVO.getUs_pw());
+			userVO.setUs_pw(encoding_pw);
 			return uService.userJoin(userVO);
 		}
 		
@@ -145,16 +153,19 @@ public class UserController {
 	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
 	public int userLoginPOST(UserVO loginVO, HttpSession session) throws Exception {
 		logger.debug("userLoginPOST()호출");
-
-		// 로그인
+		
+		// 아이디에 관한 회원 정보 들고오기
 		UserVO resultVO = uService.userLogin(loginVO);
-		logger.debug("resultVO : " + resultVO);
-
+		
+		// 정보가 있으면
 		if (resultVO != null) {
-			// 세션에 로그인 정보 저장
-			session.setAttribute("us_id", resultVO.getUs_id());
-			session.setAttribute("us_nickname", resultVO.getUs_nickname());
-			return 1;
+			// 비밀번호 일치 여부 확인
+			if(passEncoder.matches(loginVO.getUs_pw(), resultVO.getUs_pw())) {
+				// 세션에 로그인 정보 저장
+				session.setAttribute("us_id", resultVO.getUs_id());
+				session.setAttribute("us_nickname", resultVO.getUs_nickname());
+				return 1;
+			};
 		}
 		return 0;
 
@@ -225,16 +236,19 @@ public class UserController {
 		logger.debug("userPwUpdatePOST()호출");
 		// 세션 - 아이디
 		String us_id = (String) session.getAttribute("us_id");
-
+		
+		// 아이디에 해당하는 비밀번호
 		String pwCK = uService.userPwCheck(us_id);
-		if (pwCK == null || pwCK.equals("") || !pwCK.equals(us_pw)) {
+		
+		if (pwCK == null || pwCK.equals("") || !passEncoder.matches(us_pw,pwCK)) { // 해당하는 비밀번호가 없으면
 			return 0;
 		}
-		UserVO userVO = new UserVO();
-		userVO.setUs_id(us_id);
-		userVO.setUs_pw(us_pw_new);
-		return uService.userPwUpdate(userVO);
-
+		logger.debug("us_pw : " + pwCK);
+		
+			UserVO userVO = new UserVO();
+			userVO.setUs_id(us_id);
+			userVO.setUs_pw(passEncoder.encode(us_pw_new)); // 암호화한 비밀번호
+			return uService.userPwUpdate(userVO);
 	}
 
 	// 내정보 변경(userInfoUpdate-POST)

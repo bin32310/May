@@ -147,7 +147,13 @@ input[type=text], textarea{
 					<c:if test="${us_id.equals('admin') && boRead.bo_state.equals('upload') && boRead.bo_reply.equals('no')}">
 						<input type="button" id="admin_reply" class="btn_blue" value="답변하기">
 					</c:if>
-					<input type="button" id="back" class="btn_gray" value="목록으로" onclick="location.href='../user/userMain';">
+					<c:if test="${!us_id.equals('admin')}">
+						<input type="button" id="user_back" class="btn_gray" value="목록으로" onclick="location.href='../user/userMain?page='+${page};">
+					</c:if>
+					<c:if test="${us_id.equals('admin')}">
+						<input type="button" id="admin_back" class="btn_gray" value="목록으로" onclick="location.href='../admin/boardManage?page='+${page};">
+					</c:if>
+					
 				</div>			
 				</div>
 			</form>
@@ -367,7 +373,6 @@ $(document).ready(function(){
 	
 });	// $(document) 끝	
 		
-
 
 </script>
 </html>
