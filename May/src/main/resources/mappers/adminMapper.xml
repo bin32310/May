@@ -49,7 +49,7 @@
 		FROM
 			BOARD
 		ORDER BY
-			RE_REF DESC, RE_LEV, RE_SEQ  
+			RE_REF DESC, RE_LEV
 		LIMIT
 			#{pageStart},#{pageSize} 
 	</select> 
@@ -66,9 +66,9 @@
 	<insert id="boReply">
 		INSERT INTO /* boWrite */
 			BOARD
-			(BO_TITLE, BO_CONTENT, US_ID, BO_REPLY, BO_LOCK, RE_REF, RE_LEV, RE_SEQ)
+			(BO_TITLE, BO_CONTENT, US_ID, BO_REPLY, BO_LOCK, RE_REF, RE_LEV)
 		VALUES
-			('답변입니다.', #{bo_content}, #{us_id}, 're', #{bo_lock}, #{bo_num}, 1, 1)
+			('답변입니다.', #{bo_content}, #{us_id}, 're', #{bo_lock}, #{bo_num}, 1)
 	</insert>  
   
 	<!-- 답변등록/삭제후 bo_reply를 yes/no로 업데이트 -->

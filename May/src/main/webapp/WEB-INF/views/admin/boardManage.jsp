@@ -2,16 +2,35 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/adminHeader.jsp" %>
 
+<style>
+
+.board_section{
+	width: 50%;
+	margin-left: 25%;
+	margin-right: 25%;
+	padding-left: 10%;
+	padding-right: 10%;
+	
+}
+
+table td .tb_view{
+	text-align: center;
+}
+
+</style>
 
 <!-- 	
 		<h1> /admin/boardManage.jsp</h1>
 		<h1> 글 관리 페이지</h1>
 -->
+<br><hr><br><br>
 	<div class="board_section">
 		<c:if test="${!empty us_id && !us_id.equals('admin')}">
 				<input type="button" class="btn_blue" value="글쓰기" onclick="location.href='../board/boWrite';"> <br><br>
 		</c:if>
 		<div id="board_list"> <!-- list_section -->
+			<h1>글 관리</h1>
+			<br>
 			<table>
 				<tr>
 					<th class="tb_reply">답변상태</th>

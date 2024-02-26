@@ -27,7 +27,7 @@ public class BoardVO {
 						// 일반글 : 항상 0 (들여쓰기 없음)
 						// 답글 : 원글(기준)의 re_lev + 1 
 	
-	private int re_seq; // 답글의 순서(시퀀스)
+	// private int re_seq; // 답글의 순서(시퀀스)
 						// 일반글 : 항상 0 (일반글이 가장 위쪽에 위치) 
 						// 답글 : 원글(기준)의 re_seq + 1 
 		

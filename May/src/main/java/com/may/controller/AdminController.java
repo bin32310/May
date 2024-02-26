@@ -70,7 +70,7 @@ public class AdminController {
 	
 	// 글 관리 페이지
 	@RequestMapping(value = "/boardManage", method = RequestMethod.GET)
-	public void boardManageGET(Criteria cri, Model model)throws Exception {
+	public void boardManageGET(Criteria cri, Model model, HttpSession session)throws Exception {
 		logger.debug("boardManageGET()호출");
 		
 		// 페이징 처리( 페이지 블럭 처리 객체 )
@@ -86,6 +86,8 @@ public class AdminController {
 			// 잘못된 페이지 정보 입력
 			cri.setPage(pageVO.getEndPage());
 		}
+		// session에 페이지 정보 저장
+		session.setAttribute("page", cri.getPage());
 
 		// 전체 글 목록 불러오기
 		List<BoardVO> boardList = aService.boardList(cri);

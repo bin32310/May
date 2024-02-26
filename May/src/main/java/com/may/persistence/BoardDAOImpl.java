@@ -60,7 +60,7 @@ public class BoardDAOImpl {
 	}
 	
 	// 가장 최신 글번호 가져오기
-	public int getBoMaxNum() {
+	public Integer getBoMaxNum() {
 		logger.debug("getBoMaxNum() 호출 ");
 		return sqlSession.selectOne(NAMESPACE + ".getBoMaxNum");
 	}

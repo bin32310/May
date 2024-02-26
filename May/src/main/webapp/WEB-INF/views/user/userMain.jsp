@@ -16,11 +16,13 @@ table td .tb_view{
 	text-align: center;
 }
  
-
+.page_active{
+	color: #16D5FF;
+}
 
 </style>
 <c:if test="${!empty us_id && us_id.equals('admin')}">
-		<c:redirect url="../admin/adminMain"/>
+	<c:redirect url="../admin/adminMain"/>
 </c:if>
 <!-- 	
 		<h1> /user/userMain.jsp</h1>
@@ -44,8 +46,10 @@ table td .tb_view{
     </div>
     <!-- Header End -->
 
-	
 	<div class="board_section">
+		<ui>
+			<li style="color:#16D5FF;" >1</li>
+		</ui>
 		<c:if test="${!empty us_id && !us_id.equals('admin')}">
 				<input type="button" class="btn_blue" value="글쓰기" onclick="location.href='../board/boWrite';"> <br><br>
 		</c:if>
@@ -83,7 +87,7 @@ table td .tb_view{
 									<c:if test="${(empty us_id) || !bl.us_id.equals(us_id) }"><!-- 내 글이 아닐땐 -->
 										<c:choose>
 											<c:when test="${bl.bo_reply.equals('re') }">
-												<a href="../board/boRead?bo_num=${bl.bo_num}" > 답변입니다.</a>
+												<a href="../board/boRead?bo_num=${bl.bo_num}&pageNum=${i}" > 답변입니다.</a>
 											</c:when>
 											<c:otherwise>
 												<a class="lock_board_click" > 비공개글입니다.</a>
@@ -108,7 +112,7 @@ table td .tb_view{
 				
 				<c:forEach var="i" begin="${pageVO.startPage }" end="${pageVO.endPage }" step="1">
 					&nbsp&nbsp
-					<li ${pageVO.cri.page == i? 'class="active"':'' }><a href="userMain?page=${i }">${i }</a></li>
+					<li ${pageVO.cri.page == i? 'class="page_active" style="color:#16D5FF;" ' : '' }><a href="userMain?page=${i }">${i }</a></li>
 					&nbsp&nbsp
 				</c:forEach>
 				

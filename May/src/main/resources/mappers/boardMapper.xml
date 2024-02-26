@@ -29,7 +29,6 @@
   		<result property="bo_reply" column="bo_reply"/>
   		<result property="re_ref" column="re_ref"/>
   		<result property="re_lev" column="re_lev"/>
-  		<result property="re_seq" column="re_seq"/>
   		<collection property="userVO" resultMap="UserVO"/>
   	</resultMap>
 
@@ -47,7 +46,6 @@
 			A.BO_REPLY,
 			A.RE_REF,
 			A.RE_LEV,
-			A.RE_SEQ,
 			B.US_NICKNAME
 		FROM
 			BOARD A JOIN US B 
@@ -55,7 +53,7 @@
 		WHERE
 			A.BO_STATE = "upload"  
 		ORDER BY
-			A.RE_REF DESC, A.RE_LEV, A.RE_SEQ 
+			A.RE_REF DESC, A.RE_LEV
 		LIMIT
 			#{pageStart},#{pageSize} 
 	</select> 
@@ -111,13 +109,13 @@
 	<insert id="boWrite">
 		INSERT INTO /* boWrite */
 			BOARD
-			(BO_TITLE, BO_CONTENT, US_ID, BO_LOCK)
+			(BO_TITLE, BO_CONTENT, US_ID, BO_LOCK, RE_REF)
 		VALUES
-			(#{bo_title}, #{bo_content}, #{us_id}, #{bo_lock})
+			(#{bo_title}, #{bo_content}, #{us_id}, #{bo_lock}, #{re_ref})
 	</insert>
 
 	<!-- 가장 최신 글 번호  -->
-	<select id="getBoMaxNum" resultType="int">
+	<select id="getBoMaxNum" resultType="Integer">
 		SELECT /* getBoMaxNum */
 			MAX(bo_num)
 		FROM
@@ -213,7 +211,7 @@
 	<!-- 답글 보기 -->
 	<select id="goReply" resultType="int">
 		SELECT /* goReply */
-			BO_NUM
+			MAX(BO_NUM)
 		FROM
 			BOARD
 		WHERE
@@ -222,7 +220,7 @@
 			RE_LEV = 1
 	</select>
 	
-	<!-- 답글 보기 -->
+	<!-- 원글 보기 -->
 	<select id="goOrigin" resultType="int">
 		SELECT /* goOrigin */
 			BO_NUM
