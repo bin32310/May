@@ -133,7 +133,7 @@ input[type=text], textarea{
 				<hr>
 				<textarea rows="5" cols="100" id="bo_content" name="bo_content" disabled="disabled">${boRead.bo_content }</textarea><br>
 				<div class="button_section">
-					<c:if test="${us_id.equals(boRead.us_id)}">
+					<c:if test="${us_id.equals(boRead.us_id) && !boRead.bo_state.equals('delete')}">
 						<input type="button" id="update" class="btn_blue" value="수정하기">
 						<input type="button" id="updateOk" class="btn_blue" value="수정완료">
 						<input type="button" id="delete" class="btn_red" value="삭제하기">
@@ -227,7 +227,11 @@ $(document).ready(function(){
 			success : function(data){
 				if(data >= 1){
 					alert("삭제 완료");
-					location.replace("../user/userMain");
+					if(bo_reply == "re"){
+						location.replace("../admin/boardManage");
+					}else{
+						location.replace("../user/userMain");
+					}
 				}else{
 					alert("삭제 실패");
 					location.reload();
@@ -295,26 +299,32 @@ $(document).ready(function(){
 		var bo_num = $('#bo_num').val();
 		var bo_content = $('#bo_reply_content').val();
 		var bo_lock = $('#bo_lock_now').val();
+		var re_ref = $('#re_ref').val();
 		
-		$.ajax({
-			type : "post",
-			url : "/admin/boReply",
-			data : {"bo_num" : bo_num, "bo_content" : bo_content ,  "bo_lock" : bo_lock },
-			dataType : "JSON",
-			error: function(){
-				alert("답변등록 에러");
-			},
-			success : function(data){
-				if(data == 1){
-					$('#replyModal').css("display","none");	
-					$('#admin_reply').css("display","none");
-					alert("답변등록 완료");
-					
-				}else{
-					alert("답변등록 실패");
-				}
-			} // success 끝	
-		}); // ajax 끝
+		if(bo_content != null & bo_content != ""){
+			$.ajax({
+				type : "post",
+				url : "/admin/boReply",
+				data : {"bo_num" : bo_num, "bo_content" : bo_content ,  "bo_lock" : bo_lock , "re_ref" : re_ref },
+				dataType : "JSON",
+				error: function(){
+					alert("답변등록 에러");
+				},
+				success : function(data){
+					if(data == 1){
+						$('#replyModal').css("display","none");	
+						$('#admin_reply').css("display","none");
+						alert("답변등록 완료");
+						
+					}else{
+						alert("답변등록 실패");
+					}
+				} // success 끝	
+			}); // ajax 끝
+		}else{
+			alert("답변을 입력해주세요.");
+		}
+		
 	}); //#replyModalYes.click
 	
 	// 답변 No

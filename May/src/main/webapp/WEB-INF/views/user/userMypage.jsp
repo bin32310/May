@@ -148,11 +148,11 @@ $(document).ready(function(){
 	// 닉네임 체크
 	$('#us_nickname').keyup(function(){
 		if($('#us_nickname').val().length >= 1){
-			$('#nickname_no').css("display","block");
-			nickname_ok = false;
-		}else{
 			$('#nickname_no').css("display","none");
 			nickname_ok = true;
+		}else{
+			$('#nickname_no').css("display","block");
+			nickname_ok = false;
 		}
 	});
 	

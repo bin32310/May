@@ -103,6 +103,15 @@ public class AdminController {
 		boardVO.setUs_id((String)session.getAttribute("us_id"));
 		
 		logger.debug("글 내용 확인 : " + boardVO);
+		// re_seq의 순서 확인
+		Integer seq = aService.boReplySeq(boardVO.getRe_ref());
+		if(seq == null) {
+			logger.debug("if - seq : " + seq);
+			boardVO.setRe_seq(1);
+		}else {
+			logger.debug("else - seq : " + seq);
+			boardVO.setRe_seq(seq+1);
+		}
 		
 		// 답변 등록 후 bo_reply 를 yes로 업데이트
 		if ( aService.boReply(boardVO) == 1) {

@@ -82,9 +82,9 @@ public class BoardServiceImpl {
 	}
 	
 	// 답변만삭제
-	public int reDelete(Integer re_ref) {
-		logger.debug("reDelete(Integer re_ref) 호출 ");
-		return 	bdao.reDelete(re_ref);
+	public int reDelete(BoardVO boardReVO) {
+		logger.debug("reDelete(BoardVO boardReVO) 호출 ");
+		return 	bdao.reDelete(boardReVO);
 	}
 	
 	// 글수정

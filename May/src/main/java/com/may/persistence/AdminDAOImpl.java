@@ -55,6 +55,12 @@ public class AdminDAOImpl {
 		return sqlSession.selectOne(NAMESPACE + ".boardCount");
 	}
 	
+	// re_seq 확인
+	public Integer boReplySeq(Integer re_ref) {
+		logger.debug("boReplySeq(Integer re_ref) 호출");
+		return sqlSession.selectOne(NAMESPACE + ".boReplySeq", re_ref);
+	}
+	
 	// 답변등록
 	public int boReply(BoardVO boardVO) {
 		logger.debug("boReply(BoardVO boardVO) 호출");

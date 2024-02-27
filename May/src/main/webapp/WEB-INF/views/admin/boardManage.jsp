@@ -48,7 +48,7 @@ table td .tb_view{
 								<td class="tb_reply"> 답변완료</td>
 							</c:if>
 							<c:if test="${bl.bo_reply.equals('re') }">
-								<td class="tb_reply"> 답변</td>
+								<td class="tb_reply"> 답변 ${bl.re_seq } </td>
 							</c:if>
 							
 							<c:if test="${bl.bo_state.equals('upload') }">
