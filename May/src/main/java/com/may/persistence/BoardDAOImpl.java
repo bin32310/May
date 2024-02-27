@@ -84,9 +84,9 @@ public class BoardDAOImpl {
 	}
 	
 	// 답글삭제
-	public int reDelete(Integer re_ref) {
-		logger.debug("reDelete(Integer re_ref) 호출 ");
-		return 	sqlSession.update(NAMESPACE + ".reDelete", re_ref);
+	public int reDelete(BoardVO boardReVO) {
+		logger.debug("reDelete(BoardVO boardReVO) 호출 ");
+		return 	sqlSession.update(NAMESPACE + ".reDelete", boardReVO);
 	}
 	
 	// 글수정

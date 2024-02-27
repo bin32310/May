@@ -77,17 +77,29 @@ public class BoardController {
 	@RequestMapping(value = "boDelete", method = RequestMethod.POST)
 	public int boDeletePOST(String bo_reply, Integer re_ref) throws Exception {
 		logger.debug("boDeletePOST(Integer bo_num)호출");
-		
+		logger.debug("bo_reply : " + bo_reply);
+		logger.debug("re_ref : " + re_ref);
 		// 답글만 삭제시
-		// 답글이고 && 답글 삭제 성공시
-		if(bo_reply.equals("re") && bService.reDelete(re_ref) == 1) {
-			// 원글의 답변상태를 no로 update 
-			BoardVO boardVO = new BoardVO();
-			boardVO.setBo_num(re_ref);
-			boardVO.setBo_reply("no");
-			return aService.boReplyUpadte(boardVO);
+		// 답글이면 
+		if(bo_reply.equals("re")) {
+			// seq가 가장 높은 답글만 삭제
+			BoardVO boardReVO = new BoardVO();
+			boardReVO.setRe_ref(re_ref);
+			boardReVO.setRe_seq(aService.boReplySeq(re_ref));
+			logger.debug("boardReVO.getRe_seq : " + boardReVO.getRe_seq() );
+			if(bService.reDelete(boardReVO) == 1) {
+				
+				// 원글의 답변상태를 no로 update 
+				BoardVO boardVO = new BoardVO();
+				boardVO.setBo_num(re_ref);
+				boardVO.setBo_reply("no");
+				
+				logger.debug("reply만 삭제" );
+				return aService.boReplyUpadte(boardVO);
+			}
 		}
 		// 원글과 답글 모두 삭제
+		logger.debug("모두 삭제 " );
 		return bService.boDelete(re_ref);
 	}
 

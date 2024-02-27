@@ -29,6 +29,7 @@
   		<result property="bo_reply" column="bo_reply"/>
   		<result property="re_ref" column="re_ref"/>
   		<result property="re_lev" column="re_lev"/>
+  		<result property="re_seq" column="re_seq"/>
   		<collection property="userVO" resultMap="UserVO"/>
   	</resultMap>
 
@@ -53,7 +54,7 @@
 		WHERE
 			A.BO_STATE = "upload"  
 		ORDER BY
-			A.RE_REF DESC, A.RE_LEV
+			A.RE_REF DESC, A.RE_LEV, A.RE_SEQ
 		LIMIT
 			#{pageStart},#{pageSize} 
 	</select> 
@@ -170,6 +171,8 @@
 			RE_REF = #{re_ref}
 			AND
 			RE_LEV = 1
+			AND
+			RE_SEQ = #{re_seq}
 	</update>
 
 	<!-- 글수정 -->

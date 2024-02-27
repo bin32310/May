@@ -49,7 +49,7 @@
 		FROM
 			BOARD
 		ORDER BY
-			RE_REF DESC, RE_LEV
+			RE_REF DESC, RE_LEV, RE_SEQ
 		LIMIT
 			#{pageStart},#{pageSize} 
 	</select> 
@@ -62,13 +62,26 @@
 			BOARD
 	</select>
 	
+	<!-- re_seq 확인 -->
+	<select id="boReplySeq" resultType="Integer">
+		SELECT /* boReplySeq */
+			MAX(RE_SEQ)
+		FROM
+			BOARD
+		WHERE
+			RE_REF = #{re_ref}
+			AND
+			RE_LEV = 1
+	</select>
+	
+	
 	<!-- 답변등록 -->
 	<insert id="boReply">
 		INSERT INTO /* boWrite */
 			BOARD
-			(BO_TITLE, BO_CONTENT, US_ID, BO_REPLY, BO_LOCK, RE_REF, RE_LEV)
+			(BO_TITLE, BO_CONTENT, US_ID, BO_REPLY, BO_LOCK, RE_REF, RE_LEV, RE_SEQ)
 		VALUES
-			('답변입니다.', #{bo_content}, #{us_id}, 're', #{bo_lock}, #{bo_num}, 1)
+			('답변입니다.', #{bo_content}, #{us_id}, 're', #{bo_lock}, #{bo_num}, 1, #{re_seq})
 	</insert>  
   
 	<!-- 답변등록/삭제후 bo_reply를 yes/no로 업데이트 -->

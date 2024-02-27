@@ -112,7 +112,17 @@ table td .tb_view{
 				
 				<c:forEach var="i" begin="${pageVO.startPage }" end="${pageVO.endPage }" step="1">
 					&nbsp&nbsp
-					<li ${pageVO.cri.page == i? 'class="page_active" style="color:#16D5FF;" ' : '' }><a href="userMain?page=${i }">${i }</a></li>
+					<li ${pageVO.cri.page == i? 'yes':'no' }>
+					
+						<c:if test="${pageVO.cri.page eq i}">
+							class="page_active" style="color:#16D5FF;"
+							${"<script>alert('현재 페이지');</script>" }
+						</c:if>
+					
+						<a href="userMain?page=${i }">
+							${pageVO.cri.page == i? '':'' }${i }
+						</a>
+					</li>
 					&nbsp&nbsp
 				</c:forEach>
 				
