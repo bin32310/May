@@ -23,6 +23,7 @@ table td .tb_view{
 		<h1> /admin/boardManage.jsp</h1>
 		<h1> 글 관리 페이지</h1>
 -->
+
 <br><hr><br><br>
 	<div class="board_section">
 		<c:if test="${!empty us_id && !us_id.equals('admin')}">
