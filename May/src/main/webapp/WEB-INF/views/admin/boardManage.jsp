@@ -109,5 +109,6 @@ table td .tb_view{
 	</div>
 
 <%@ include file="../include/footer.jsp" %>
+
 </body>
 </html>
