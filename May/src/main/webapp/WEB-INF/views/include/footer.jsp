@@ -273,6 +273,13 @@ span{
 	color : #000000;
 }
 
+/* page_num_color */
+
+.page_active{
+	color: #16D5FF;
+	font-weight: bold;
+}
+
 
 </style>            
 
