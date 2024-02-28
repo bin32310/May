@@ -16,9 +16,7 @@ table td .tb_view{
 	text-align: center;
 }
  
-.page_active{
-	color: #16D5FF;
-}
+
 
 </style>
 <c:if test="${!empty us_id && us_id.equals('admin')}">
@@ -47,9 +45,6 @@ table td .tb_view{
     <!-- Header End -->
 
 	<div class="board_section">
-		<ui>
-			<li style="color:#16D5FF;" >1</li>
-		</ui>
 		<c:if test="${!empty us_id && !us_id.equals('admin')}">
 				<input type="button" class="btn_blue" value="글쓰기" onclick="location.href='../board/boWrite';"> <br><br>
 		</c:if>
@@ -112,16 +107,19 @@ table td .tb_view{
 				
 				<c:forEach var="i" begin="${pageVO.startPage }" end="${pageVO.endPage }" step="1">
 					&nbsp&nbsp
-					<li ${pageVO.cri.page == i? 'yes':'no' }>
-					
+					<li 
 						<c:if test="${pageVO.cri.page eq i}">
-							class="page_active" style="color:#16D5FF;"
-							${"<script>alert('현재 페이지');</script>" }
+							class="page_active"
 						</c:if>
-					
-						<a href="userMain?page=${i }">
-							${pageVO.cri.page == i? '':'' }${i }
-						</a>
+					>
+						<c:if test="${pageVO.cri.page ne i}">
+							<a href="userMain?page=${i }">
+								${i }
+							</a>
+						</c:if>
+						<c:if test="${pageVO.cri.page eq i}">
+								${i }
+						</c:if>
 					</li>
 					&nbsp&nbsp
 				</c:forEach>

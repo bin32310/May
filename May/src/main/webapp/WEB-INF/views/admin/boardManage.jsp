@@ -23,6 +23,7 @@ table td .tb_view{
 		<h1> /admin/boardManage.jsp</h1>
 		<h1> 글 관리 페이지</h1>
 -->
+
 <br><hr><br><br>
 	<div class="board_section">
 		<c:if test="${!empty us_id && !us_id.equals('admin')}">
@@ -82,7 +83,20 @@ table td .tb_view{
 				
 				<c:forEach var="i" begin="${pageVO.startPage }" end="${pageVO.endPage }" step="1">
 					&nbsp&nbsp
-					<li ${pageVO.cri.page == i? 'class="active"':'' }><a href="boardManage?page=${i }">${i }</a></li>
+					<li 
+						<c:if test="${pageVO.cri.page eq i}">
+							class="page_active"
+						</c:if>
+					>
+						<c:if test="${pageVO.cri.page ne i}">
+						<a href="boardManage?page=${i }">
+								${i }
+							</a>
+						</c:if>
+						<c:if test="${pageVO.cri.page eq i}">
+								${i }
+						</c:if>
+					</li>
 					&nbsp&nbsp
 				</c:forEach>
 				
@@ -95,5 +109,6 @@ table td .tb_view{
 	</div>
 
 <%@ include file="../include/footer.jsp" %>
+
 </body>
 </html>
