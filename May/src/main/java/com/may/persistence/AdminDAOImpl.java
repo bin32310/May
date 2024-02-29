@@ -55,6 +55,18 @@ public class AdminDAOImpl {
 		return sqlSession.selectOne(NAMESPACE + ".boardCount");
 	}
 	
+	// 미답변 글 목록 조회
+	public List<BoardVO> noBoardList(Criteria cri) throws Exception {
+		logger.debug("noBoardList(Criteria cri) 호출");
+		return sqlSession.selectList(NAMESPACE + ".noBoardList", cri);
+	}
+	
+	// 미답변 글 수 조회
+	public int noBoardCount() throws Exception {
+		logger.debug("noBoardCount() 호출");
+		return sqlSession.selectOne(NAMESPACE + ".noBoardCount");
+	}
+	
 	// re_seq 확인
 	public Integer boReplySeq(Integer re_ref) {
 		logger.debug("boReplySeq(Integer re_ref) 호출");

@@ -72,19 +72,32 @@ table th, table td{
 			<div class="board_clearfix"><!-- 페이지 번호 -->
 				<ul class="pagination pagination-sm no-margin pull-right">
 					<c:if test="${pageVO.prev == true }">
-						<li><a href="userMyBoard?page=${pageVO.startPage-1 }">«</a></li>
+						<li><a href="/user/userMyBoard?page=${pageVO.startPage-1 }">«</a></li>
 						&nbsp
 					</c:if>
 					
 					<c:forEach var="i" begin="${pageVO.startPage }" end="${pageVO.endPage }" step="1">
 						&nbsp&nbsp
-						<li ${pageVO.cri.page == i? 'class="active"':'' }><a href="userMyBoard?page=${i }">${i }</a></li>
+						<li 
+							<c:if test="${pageVO.cri.page eq i}">
+								class="page_active"
+							</c:if>
+						>
+							<c:if test="${pageVO.cri.page ne i}">
+							<a href="/user/userMyBoard?page=${i }">
+								${i }
+							</a>
+						</c:if>
+						<c:if test="${pageVO.cri.page eq i}">
+								${i }
+						</c:if>
+						</li>
 						&nbsp&nbsp
 					</c:forEach>
 					
 					<c:if test="${pageVO.next == true }">
 						&nbsp
-						<li><a href="userMyBoard?page=${pageVO.endPage+1 }">»</a></li>
+						<li><a href="/user/userMyBoard?page=${pageVO.endPage+1 }">»</a></li>
 					</c:if>
 				</ul>
 			</div><!-- 페이지 번호 끝-->
@@ -92,12 +105,6 @@ table th, table td{
 	</div>
  
 <%@ include file="../include/footer.jsp" %>
-<script type="text/javascript">
 
-$(document).ready(function(){
-	
-
-}); // document 끝 
-</script>
 </body>
 </html>

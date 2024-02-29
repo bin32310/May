@@ -62,6 +62,34 @@
 			BOARD
 	</select>
 	
+	<!-- 미답변 글 목록(글관리) -->
+ 	<select id="noBoardList" resultType="BoardVO">
+		SELECT /* noBoardList */ 
+			*
+		FROM
+			BOARD
+		WHERE
+			BO_REPLY = "no"
+			AND
+			BO_STATE = "upload"
+		ORDER BY
+			RE_REF DESC, RE_LEV, RE_SEQ
+		LIMIT
+			#{pageStart},#{pageSize} 
+	</select> 
+	
+	<!-- 미답변 글 수 조회 -->
+	<select id="noBoardCount" resultType="int">
+		SELECT /* noBoardCount */
+			COUNT(*)
+		FROM
+			BOARD
+		WHERE 
+			BO_REPLY = "no"
+			AND
+			BO_STATE = "upload"
+	</select>
+	
 	<!-- re_seq 확인 -->
 	<select id="boReplySeq" resultType="Integer">
 		SELECT /* boReplySeq */

@@ -53,6 +53,18 @@ public class AdminServiceImpl {
 		return adao.boardCount();
 	}
 	
+	// 미답변 글 목록 조회
+	public List<BoardVO> noBoardList(Criteria cri) throws Exception{
+		logger.debug("noBoardList(Criteria cri) 호출");
+		return adao.noBoardList(cri);
+	}
+	
+	// 미답변 글 수 조회
+	public int noBoardCount() throws Exception {
+		logger.debug("service : noBoardCount() 호출 ");
+		return adao.noBoardCount();
+	}
+	
 	// re_seq 확인
 	public Integer boReplySeq(Integer re_ref) {
 		logger.debug("boReplySeq(Integer re_ref) 호출 ");

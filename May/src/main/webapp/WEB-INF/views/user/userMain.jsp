@@ -81,11 +81,14 @@ table td .tb_view{
 									</c:if>
 									<c:if test="${(empty us_id) || !bl.us_id.equals(us_id) }"><!-- 내 글이 아닐땐 -->
 										<c:choose>
-											<c:when test="${bl.bo_reply.equals('re') }">
+											<c:when test="${bl.bo_reply.equals('re') && bl.bo_lock.equals('unlock') }">
 												<a href="../board/boRead?bo_num=${bl.bo_num}&pageNum=${i}" > 답변입니다.</a>
 											</c:when>
+											<c:when test="${bl.bo_reply.equals('re') && bl.bo_lock.equals('lock') }">
+												<a href="../board/boRead?bo_num=${bl.bo_num}&pageNum=${i}" > 비공개 답변입니다.</a>
+											</c:when>
 											<c:otherwise>
-												<a class="lock_board_click" > 비공개글입니다.</a>
+												<a class="lock_board_click" > 비공개 글입니다.</a>
 											</c:otherwise>
 										</c:choose>
 									</c:if>
@@ -101,7 +104,7 @@ table td .tb_view{
 		<div class="board_clearfix">
 			<ul class="pagination pagination-sm no-margin pull-right">
 				<c:if test="${pageVO.prev == true }">
-					<li><a href="userMain?page=${pageVO.startPage-1 }">«</a></li>
+					<li><a href="/user/userMain?page=${pageVO.startPage-1 }">«</a></li>
 					&nbsp
 				</c:if>
 				
@@ -113,7 +116,7 @@ table td .tb_view{
 						</c:if>
 					>
 						<c:if test="${pageVO.cri.page ne i}">
-							<a href="userMain?page=${i }">
+							<a href="/user/userMain?page=${i }">
 								${i }
 							</a>
 						</c:if>
@@ -126,7 +129,7 @@ table td .tb_view{
 				
 				<c:if test="${pageVO.next == true }">
 					&nbsp
-					<li><a href="userMain?page=${pageVO.endPage+1 }">»</a></li>
+					<li><a href="/user/userMain?page=${pageVO.endPage+1 }">»</a></li>
 				</c:if>
 			</ul>
 		</div>
