@@ -267,24 +267,39 @@ $(document).ready(function(){
 	// 수정완료 버튼 클릭 시
 	$('#updateOk').click(function(){
 		
-		$.ajax({
-			type : "post",
-			url : "/board/boUpdate",
-			data : $("#boRead_form").serialize(),
-			dataType : "JSON",
-			error: function(){
-				alert("글 수정 에러");
-			},
-			success : function(data){
-				if(data == 1){
-					alert("글 수정 성공");
-					location.reload();
-				}else{
-					alert("글 수정 실패");
-					location.reload();
-				}
-			} // success 끝	
-		}); // ajax 끝
+		var bo_title = $('#bo_title').val().length;
+		var bo_content = $('#bo_content').val().length;
+		
+		if (bo_title>= 1 && bo_content >= 1){
+			$.ajax({
+				type : "post",
+				url : "/board/boUpdate",
+				data : $("#boRead_form").serialize(),
+				dataType : "JSON",
+				error: function(){
+					alert("글 수정 에러");
+				},
+				success : function(data){
+					if(data == 1){
+						alert("글 수정 성공");
+						location.reload();
+					}else{
+						alert("글 수정 실패");
+						location.reload();
+					}
+				} // success 끝	
+			}); // ajax 끝
+		}else {
+			
+			if(bo_title == 0){
+				alert("제목을 입력해주세요.");
+				return;
+			}
+			
+			if(bo_content == 0){
+				alert("내용을 입력해주세요.");
+			}
+		}
 	}); // #modefyOk.click
 	
 	
@@ -301,7 +316,7 @@ $(document).ready(function(){
 		var bo_lock = $('#bo_lock_now').val();
 		var re_ref = $('#re_ref').val();
 		
-		if(bo_content != null & bo_content != ""){
+		if (bo_content != null & bo_content != ""){
 			$.ajax({
 				type : "post",
 				url : "/admin/boReply",

@@ -40,7 +40,7 @@
 }
 
 .join_text{
-	text-align: left; 
+	text-align: center; 
 }
 
 </style>
