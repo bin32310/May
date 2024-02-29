@@ -100,9 +100,9 @@
 		FROM
 			BOARD
 		WHERE
-			US_ID= #{us_id}
+			US_ID = #{us_id}
 			AND
-			BO_STATE ="upload"
+			BO_STATE = "upload"
 	</select>
 
 

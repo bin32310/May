@@ -22,9 +22,6 @@ public class AdminDAOImpl {
 	private static final Logger logger = LoggerFactory.getLogger(AdminDAOImpl.class);
 	
 	@Inject
-	private SqlSessionFactory sqlFactory;
-	 
-	@Inject
 	private SqlSession sqlSession;
 	
 	private static final String NAMESPACE = "com.may.mapper.AdminMapper";
@@ -35,7 +32,7 @@ public class AdminDAOImpl {
 		logger.debug("userList(Criteria cri) 호출");
 		return sqlSession.selectList(NAMESPACE + ".userList", cri);
 	}
-		
+
 	// 전체 회원 수 조회
 	public int userCount(Criteria cri) throws Exception {
 		logger.debug("userCount(Criteria cri) 호출");

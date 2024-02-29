@@ -56,7 +56,7 @@
 <%@ include file="../include/footer.jsp" %>
 <script type="text/javascript">
 $(document).ready(function(){
-	 
+	
 	
 	// 로그인 버튼 클릭 시
 	$('#login').click(function(){
@@ -87,7 +87,7 @@ $(document).ready(function(){
 	
 	
 	
-});			
+});
 
 
 
