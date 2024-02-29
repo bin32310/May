@@ -68,7 +68,7 @@ public class AdminController {
 		model.addAttribute("userList", userList);
 	}
 	
-	// 글 관리 페이지
+	// 전체 글 관리 페이지
 	@RequestMapping(value = "/boardManage", method = RequestMethod.GET)
 	public void boardManageGET(Criteria cri, Model model, HttpSession session)throws Exception {
 		logger.debug("boardManageGET()호출");
@@ -95,11 +95,39 @@ public class AdminController {
 		model.addAttribute("boardList", boardList);
 	}
 	
+	// 미답변 글 관리 페이지
+	@ResponseBody
+	@RequestMapping(value = "/noBoardList", method = RequestMethod.GET)
+	public void noBoardListGET(Criteria cri, Model model, HttpSession session)throws Exception {
+		logger.debug("noBoardListGET()호출");
+		
+		// 페이징 처리( 페이지 블럭 처리 객체 )
+		PageVO pageVO = new PageVO();
+		cri.setPageSize(10);
+		pageVO.setCri(cri);
+		pageVO.setDisplayPageNum(5);
+		pageVO.setTotalCount(aService.noBoardCount()); // 전체 글 수
+		model.addAttribute("pageVO", pageVO);
+		
+		// 페이지 이동시 받아온 페이지 번호
+		if (cri.getPage() > pageVO.getEndPage()) {
+			// 잘못된 페이지 정보 입력
+			cri.setPage(pageVO.getEndPage());
+		}
+		// session에 페이지 정보 저장
+		session.setAttribute("page", cri.getPage());
+		
+		// 전체 글 목록 불러오기
+		List<BoardVO> boardList = aService.noBoardList(cri);
+		logger.debug("test : " + boardList);
+		model.addAttribute("boardList", boardList);
+	}
+	
 	// 답변 등록
 	@ResponseBody
 	@RequestMapping(value = "/boReply", method = RequestMethod.POST)
 	public int boardManagePOST(BoardVO boardVO, HttpSession session,Model model)throws Exception {
-		logger.debug("boardManageGET()호출");
+		logger.debug("boardManagePOST()호출");
 		boardVO.setUs_id((String)session.getAttribute("us_id"));
 		
 		logger.debug("글 내용 확인 : " + boardVO);
@@ -120,6 +148,7 @@ public class AdminController {
 		};
 		return 0;
 	}
+	
 	
 	
 	

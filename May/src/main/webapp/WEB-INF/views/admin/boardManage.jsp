@@ -32,7 +32,7 @@ table td .tb_view{
 		<div id="board_list"> <!-- list_section -->
 			<h1>글 관리</h1>
 			<br>
-			<table>
+			<table id="board_list_table">
 				<tr>
 					<th class="tb_reply">답변상태</th>
 					<th class="tb_state">글상태</th>
@@ -77,7 +77,7 @@ table td .tb_view{
 		<div class="board_clearfix">
 			<ul class="pagination pagination-sm no-margin pull-right">
 				<c:if test="${pageVO.prev == true }">
-					<li><a href="boardManage?page=${pageVO.startPage-1 }">«</a></li>
+					<li><a href="/admin/boardManage?page=${pageVO.startPage-1 }">«</a></li>
 					&nbsp
 				</c:if>
 				
@@ -89,7 +89,7 @@ table td .tb_view{
 						</c:if>
 					>
 						<c:if test="${pageVO.cri.page ne i}">
-						<a href="boardManage?page=${i }">
+						<a href="/admin/boardManage?page=${i }">
 								${i }
 							</a>
 						</c:if>
@@ -102,13 +102,40 @@ table td .tb_view{
 				
 				<c:if test="${pageVO.next == true }">
 					&nbsp
-					<li><a href="boardManage?page=${pageVO.endPage+1 }">»</a></li>
+					<li><a href="/admin/boardManage?page=${pageVO.endPage+1 }">»</a></li>
 				</c:if>
 			</ul>
 		</div>
 	</div>
 
 <%@ include file="../include/footer.jsp" %>
+
+<script>
+	
+	$(document).ready(function(){
+		
+		var search_option = "all";
+		
+		$('#no_board_list').click(function(){
+			
+			$.ajax({
+				type : "get",
+				url : "/admin/noBoardList",
+				error : function() {
+					alert("미답변 글 리스트 에러");
+				},
+				success : function() {
+					alert("미답변 글 리스트 성공");
+					$('#board_list_table').dataTable().ajax.reload();
+					
+					
+				} // success 끝	
+			}); // ajax 끝
+		});
+		
+	});
+
+</script>
 
 </body>
 </html>
