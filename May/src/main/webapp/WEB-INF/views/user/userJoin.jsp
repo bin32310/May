@@ -40,9 +40,8 @@
 }
 
 .join_text{
-	text-align: center; 
+	text-align: left; 
 }
-
 
 </style>
 
@@ -54,16 +53,12 @@
 		<h1> 유저 회원가입 페이지</h1>
 --> 
 <div>
-	<br>
-	<hr>
-	<br>
-	<br>
+	<br><hr><br><br>
 	<div class="userJoin_section">
 		<div class="join_section">
 			<h1>회원가입</h1>
 			<br>
 			<form action="" id="us_join_form" name="us_join_form" method="POST">
-			
 				<h5 class = "join_text"> 아이디</h5>
 				<input type="text" id="us_id" class="login_input" name="us_id" maxlength="8" placeholder="아이디(3~8자)">
 				<p class="id_check" id="id_ok">사용 가능한 아이디입니다.</p>
@@ -90,12 +85,12 @@
 				<br><br>
 				<h5 class = "join_text"> 휴대폰 번호 </h5>
 				<input type="text" id="us_tel" class="login_input" name="us_tel" value="010" placeholder="휴대폰번호(-제외)" maxlength="11"> <br>
-					<span class="tel_check" id="tel_ok"> 사용가능한 전화번호입니다.</span>
-					<span class="tel_check" id="tel_no"> 이미 존재하는 전화번호입니다.</span><br>
+				<span class="tel_check" id="tel_ok"> 사용가능한 전화번호입니다.</span>
+				<span class="tel_check" id="tel_no"> 이미 존재하는 전화번호입니다.</span><br>
 				
-				<br> <input type="button" id="us_join_btn" class="btn_blue"
-					value="회원가입"> <input type="button" id="back"
-					class="btn_gray" value="돌아가기" onclick="backTo();">
+				<br>
+				<input type="button" id="us_join_btn" class="btn_blue" value="회원가입">
+				<input type="button" id="back" class="btn_gray" value="돌아가기" onclick="backTo();">
 			</form>
 		</div>
 	</div>

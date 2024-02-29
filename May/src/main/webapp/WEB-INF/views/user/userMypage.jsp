@@ -45,7 +45,7 @@
 </style>
 
 <c:if test="${empty us_id}">
-	${"<script>alert('로그인 해주세요.');location.href='../user/userLogin';</script>" }
+	${"<script>alert('로그인이 필요한 서비스입니다.');location.href='../user/userLogin';</script>" }
 </c:if>
 <!-- 	
 		<h1> /user/userMypage.jsp</h1>
