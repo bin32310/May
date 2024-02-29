@@ -93,6 +93,12 @@
 				<input type="button" id="back" class="btn_gray" value="돌아가기" onclick="backTo();">
 			</form>
 		</div>
+		<br>
+		<div>
+			<a href="userLogin" >로그인</a> | 
+			<a href="userFindId" >아이디찾기</a> |
+			<a href="userFindPw" >비밀번호찾기</a>
+		</div>
 	</div>
 </div>
 <%@ include file="../include/footer.jsp"%>

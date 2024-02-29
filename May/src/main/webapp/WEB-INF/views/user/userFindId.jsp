@@ -6,6 +6,16 @@
 .btn_blue{
 	text-align: center;
 }
+
+.find_id{
+	width : 50%;
+	height: 60px;
+}
+
+#findIdBtn{
+
+}
+
 </style>
 <c:if test="${!empty us_id}">
 	${"<script>alert('잘못된 접근입니다.');location.href='../user/userMain';</script>" }
@@ -19,10 +29,15 @@
 	<div>
 		<div>
 			<form action="" id="us_find_id_form" method="post">
-				<input type="text" id="us_name" name="us_name" placeholder="이름" required="required"> <br>		
-				<input type="text" id="us_tel" name="us_tel" placeholder="전화번호" required="required"> <br>  
+				<input type="text" id="us_name" class="find_id" name="us_name" placeholder="이름" required="required"> <br>		
+				<input type="text" id="us_tel" class="find_id" name="us_tel" placeholder="전화번호" required="required"> <br>  
 				<input type="button" class="btn_blue" id="findIdBtn" value="아이디 찾기">
 			</form>
+		</div>
+		<div>
+			<a href="userLogin" >로그인</a> |
+			<a href="userJoin" >회원가입</a> | 
+			<a href="userFindPw" >비밀번호찾기</a>
 		</div>
 	</div>
 	

@@ -4,6 +4,11 @@
 <%@ include file="../include/userHeader.jsp" %>  
 <style>
 
+.find_pw{
+	width : 50%;
+	height: 60px;
+}
+
 </style>
 <c:if test="${!empty us_id}">
 	${"<script>alert('잘못된 접근입니다.');location.href='../user/userMain';</script>" }
@@ -17,10 +22,15 @@
 	<div>
 		<div>
 		<form action="" id="us_find_pw_form" method="post">
-			<input type="text" id="us_id" name="us_id" maxlength="30" placeholder="아이디"> <br>		
-			<input type="text" id="us_tel" name="us_tel" maxlength="11" placeholder="(-를 제외한)전화번호"> <br> 
+			<input type="text" id="us_id" class="find_pw" name="us_id" maxlength="30" placeholder="아이디"> <br>		
+			<input type="text" id="us_tel" class="find_pw" name="us_tel" maxlength="11" placeholder="(-를 제외한)전화번호"> <br> 
 			<input type="button" class="btn_blue" id="findPwBtn" value="비밀번호 찾기" 	style="width : 130px;">
 			</form>
+		</div>
+		<div>
+			<a href="useLogin" >로그인</a> |
+			<a href="userJoin" >회원가입</a> | 
+			<a href="userFindId" >아이디찾기</a>
 		</div>
 	</div>
 	
