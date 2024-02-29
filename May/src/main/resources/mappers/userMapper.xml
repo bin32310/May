@@ -115,7 +115,7 @@
 		UPDATE /* userInfoUpdate */
 			US 
 		SET
-			US_NICKNAME=#{us_nickname} 
+			US_NICKNAME = #{us_nickname} 
 		WHERE
 			US_ID=#{us_id}
 	</update>

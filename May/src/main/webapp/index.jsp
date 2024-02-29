@@ -13,7 +13,7 @@
 
 <h1>index.jsp 페이지 입니다.</h1>
 
- 
+
 
 	<form action="">
 		<input type="button" value="회원 페이지" onclick="location.href='/user/userMain';"> <br><br>

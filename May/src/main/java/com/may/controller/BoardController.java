@@ -61,7 +61,7 @@ public class BoardController {
 	public void boReadGET(Integer bo_num,Model model, HttpSession session) throws Exception {
 		logger.debug("boReadGET(Integer bo_num)호출");
 		logger.debug(" 조회수 증가 : " + bService.boViewUp(bo_num));
-
+		
 		// 글정보
 		BoardVO boardVO = bService.boRead(bo_num);
 		model.addAttribute("boRead", boardVO);
@@ -71,7 +71,7 @@ public class BoardController {
 			session.setAttribute("writer", bService.boWriter(boardVO.getRe_ref()));
 		}
 	}
-
+	
 	// 글 삭제 POST
 	@ResponseBody
 	@RequestMapping(value = "boDelete", method = RequestMethod.POST)
@@ -102,7 +102,7 @@ public class BoardController {
 		logger.debug("모두 삭제 " );
 		return bService.boDelete(re_ref);
 	}
-
+	
 	// 글 수정 POST
 	@ResponseBody
 	@RequestMapping(value = "boUpdate", method = RequestMethod.POST)

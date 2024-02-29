@@ -28,14 +28,16 @@ public class PageVO {
 	   public void calcPageData() {
 	      endPage = (int)( Math.ceil(cri.getPage()/(double)displayPageNum)*displayPageNum );
 	      startPage = (endPage-displayPageNum)+1;   
-	      System.out.println("Math.ceil(cri.getPage() : " + Math.ceil(cri.getPage()));
-	      System.out.println("endPage : " + endPage);
-	      System.out.println("displayPageNum : " + displayPageNum);
+			
+			 System.out.println("Math.ceil(cri.getPage() : " + Math.ceil(cri.getPage()));
+			 /*
+			 * System.out.println("endPage : " + endPage);
+			 * System.out.println("displayPageNum : " + displayPageNum);
+			 */
 	      int tmpEndPage = (int)(Math.ceil(totalCount/(double)cri.getPageSize()));
-	      System.out.println("tmpEndPage : " + tmpEndPage);
+			/* System.out.println("tmpEndPage : " + tmpEndPage); */
 	      
 	      if(endPage > tmpEndPage) {
-	    	  System.out.println("if");
 	         endPage = tmpEndPage;
 	      }
 	      

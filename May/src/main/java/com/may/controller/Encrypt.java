@@ -11,8 +11,7 @@ public class Encrypt {
 	private static final Logger logger = LoggerFactory.getLogger(Encrypt.class);
 	public static void main(String[] args) {
 		
-		
-
+		// SHA-256 사용 연습
 		
 		Encrypt en = new Encrypt();
 		

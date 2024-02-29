@@ -83,8 +83,6 @@ public class UserController {
 	@RequestMapping(value = "userJoin", method = RequestMethod.POST)
 	public int userJoinPOST(UserVO userVO, String us_pw_check) throws Exception {
 		logger.debug("userJoinPOST(UserVO userVO)호출");
-		logger.debug("회원가입 정보 userVO : " + userVO);
-		logger.debug("회원가입 정보 pw_ch : " + us_pw_check);
 		
 		boolean us_id = false, us_pw = false, us_pw_ck = false, us_name = false, us_nickname = false, us_tel = false;
 		
@@ -279,16 +277,16 @@ public class UserController {
 		}
 		return 0;
 	}
-
+	
 	// 마이페이지 - 내 글 관리 페이지로 이동(userMyBoard-GET)
 	// http://localhost:8080/user/userMyBoard
 	@RequestMapping(value = "/userMyBoard", method = RequestMethod.GET)
 	public void userMyBoardGET(Criteria cri, HttpSession session, Model model) throws Exception {
 		logger.debug("userMyBoardGET()호출");
-
+		
 		UserVO userVO = new UserVO();
 		userVO.setUs_id((String) session.getAttribute("us_id"));
-
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("cri", cri);
 		map.put("userVO", userVO);
@@ -299,17 +297,17 @@ public class UserController {
 		pageVO.setTotalCount(bService.myBoardCount(userVO.getUs_id())); // 내 글 수
 		logger.debug("pageVO : " + pageVO);
 		model.addAttribute("pageVO", pageVO);
-
+		
 		// 페이지 이동시 받아온 페이지 번호
 		if (cri.getPage() > pageVO.getEndPage()) {
 			// 잘못된 페이지 정보 입력
 			cri.setPage(pageVO.getEndPage());
 		}
-
+		
 		// 내 글 목록 불러오기
 		List<BoardVO> boardList = bService.myBoardList(map);
 		model.addAttribute("boardList", boardList);
-
+		
 	}
 
 

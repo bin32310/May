@@ -38,6 +38,12 @@
 	width: 25%;
 	height: 40px;
 }
+
+.join_text{
+	text-align: center; 
+}
+
+
 </style>
 
 <c:if test="${ not empty us_id}">
@@ -57,26 +63,36 @@
 			<h1>회원가입</h1>
 			<br>
 			<form action="" id="us_join_form" name="us_join_form" method="POST">
+			
+				<h5 class = "join_text"> 아이디</h5>
 				<input type="text" id="us_id" class="login_input" name="us_id" maxlength="8" placeholder="아이디(3~8자)">
 				<p class="id_check" id="id_ok">사용 가능한 아이디입니다.</p>
 				<p class="id_check" id="id_no">사용 불가능한 아이디입니다.</p>
-
+				<br class="id_br"> <br class="id_br"> <br class="id_br">
+				
+				<h5 class = "join_text"> 비밀번호</h5>
 				<input type="password" id="us_pw" class="login_input" name="us_pw" maxlength="8" placeholder="비밀번호(3~8자)"> <br>
-				<span class="pw_check" id="pw_no"> 3자 이상 입력해주세요.</span> 
+				<span class="pw_check" id="pw_no"> 3자 이상 입력해주세요.</span>
 				
 				<input type="password" id="us_pw_check" class="login_input" name="us_pw_check" maxlength="8" placeholder="비밀번호 확인"> <br>
 				<span class="pw_check" id="pwCk_no"> 비밀번호와 다릅니다.</span>
 				
+				<br><br>
+				<h5 class = "join_text"> 이름(실명)</h5>
 				<input type="text" id="us_name" class="login_input" name="us_name" placeholder="이름(실명)" maxlength="10"> <br>
-				<span class="name_check" id="name_no"> 이름(실명)을 입력해주세요.</span>
+				<span class="name_check" id="name_no"> 이름을 입력해주세요.</span>
 				
+				<br><br>
+				<h5 class = "join_text"> 닉네임 </h5>
 				<input type="text" id="us_nickname" class="login_input" name="us_nickname" placeholder="닉네임(1~8자)" maxlength="8"> <br>
 				<span class="nick_check" id="nickname_no"> 닉네임을 입력해주세요.</span>
 				
+				<br><br>
+				<h5 class = "join_text"> 휴대폰 번호 </h5>
 				<input type="text" id="us_tel" class="login_input" name="us_tel" value="010" placeholder="휴대폰번호(-제외)" maxlength="11"> <br>
 					<span class="tel_check" id="tel_ok"> 사용가능한 전화번호입니다.</span>
 					<span class="tel_check" id="tel_no"> 이미 존재하는 전화번호입니다.</span><br>
-					
+				
 				<br> <input type="button" id="us_join_btn" class="btn_blue"
 					value="회원가입"> <input type="button" id="back"
 					class="btn_gray" value="돌아가기" onclick="backTo();">
@@ -90,7 +106,7 @@
 
 		//유효성 검사 통과 여부
 		var id_ok = false;
-		var pw_ok = false;                       
+		var pw_ok = false; 
 		var pw_check_ok = false;
 		var name_ok = false;
 		var nickname_ok = false;
@@ -164,10 +180,12 @@
 			if (us_id != null && us_id_reg_check.test(us_id) ){ // 압력문자 체크
 				$('#id_ok').css("display", "none");
 				$('#id_no').css("display", "none");
+				$('.id_br').css("display", "none");
 			}else{
 				$('#id_ok').css("display", "none");
 				$('#id_no').text('영문, 숫자만 입력 가능합니다.');
 				$('#id_no').css("display", "block");
+				$('.id_br').css("display", "none");
 				id_ok = false;
 				return;
 			}
@@ -187,11 +205,13 @@
 						if (data == "가능") { // 사용가능한 아이디
 							$('#id_ok').css("display", "block");
 							$('#id_no').css("display", "none");
+							$('.id_br').css("display", "none");
 							id_ok = true;
 						} else { // 사용불가능한 아이디
 							$('#id_ok').css("display", "none");
 							$('#id_no').text('사용할 수 없는 아이디입니다.');
 							$('#id_no').css("display", "block");
+							$('.id_br').css("display", "none");
 							id_ok = false;
 						}
 					} // success 끝	
@@ -215,7 +235,7 @@
 				$('#tel_no').css("display", "none");
 			}else{
 				$('#tel_ok').css("display", "none");
-				$('#tel_no').text('숫자만 입력 가능합니다.');
+				$('#tel_no').text('전화번호를 확인해주세요.');
 				$('#tel_no').css("display", "block");
 				tel_ok = false;
 				return;
