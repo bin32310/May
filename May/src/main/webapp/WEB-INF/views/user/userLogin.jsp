@@ -49,7 +49,7 @@
 			<div>
 				<a href="userJoin" >회원가입</a> | 
 				<a href="userFindId" >아이디찾기</a> |
-				<a href="../user/userFindPw" >비밀번호찾기</a>
+				<a href="userFindPw" >비밀번호찾기</a>
 			</div>
 		</div>
 	</div>

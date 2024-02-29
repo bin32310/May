@@ -279,7 +279,6 @@ public class UserController {
 	}
 	
 	// 마이페이지 - 내 글 관리 페이지로 이동(userMyBoard-GET)
-	// http://localhost:8080/user/userMyBoard
 	@RequestMapping(value = "/userMyBoard", method = RequestMethod.GET)
 	public void userMyBoardGET(Criteria cri, HttpSession session, Model model) throws Exception {
 		logger.debug("userMyBoardGET()호출");
