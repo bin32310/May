@@ -12,9 +12,6 @@
 	height: 60px;
 }
 
-#findIdBtn{
-
-}
 
 </style>
 <c:if test="${!empty us_id}">
@@ -31,7 +28,7 @@
 			<form action="" id="us_find_id_form" method="post">
 				<input type="text" id="us_name" class="find_id" name="us_name" placeholder="이름" required="required"> <br>		
 				<input type="text" id="us_tel" class="find_id" name="us_tel" placeholder="전화번호" required="required"> <br>  
-				<input type="button" class="btn_blue" id="findIdBtn" value="아이디 찾기">
+				<input type="button" class="btn_blue" id="findIdBtn" value="아이디 찾기" style="width : 120px;">
 			</form>
 		</div>
 		<div>

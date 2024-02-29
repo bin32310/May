@@ -24,7 +24,7 @@
 		<form action="" id="us_find_pw_form" method="post">
 			<input type="text" id="us_id" class="find_pw" name="us_id" maxlength="30" placeholder="아이디"> <br>		
 			<input type="text" id="us_tel" class="find_pw" name="us_tel" maxlength="11" placeholder="(-를 제외한)전화번호"> <br> 
-			<input type="button" class="btn_blue" id="findPwBtn" value="비밀번호 찾기" 	style="width : 130px;">
+			<input type="button" class="btn_blue" id="findPwBtn" value="비밀번호 찾기" style="width : 130px;">
 			</form>
 		</div>
 		<div>
